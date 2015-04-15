@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\websites\Deiofiber</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="App_Code/CommonClass.cs">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="App_LocalResources/SearchTextPatternResource.resx">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/bootstrap.min.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/cmxform.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/cmxformTemplate.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/core.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/jquery-ui.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/jquery.fancybox.css">
+      <publishTime>04/15/2015 21:39:55</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/PrintArea.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/reset.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/screen.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/css/stylesheet.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/bg.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/blank.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/checked.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/cmxform-divider.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/cmxform-fieldset.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/cyan-dot.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/fancybox_loading%402x.gif">
+      <publishTime>04/15/2015 21:39:55</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/fancybox_loading.gif">
+      <publishTime>04/15/2015 21:39:55</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/fancybox_overlay.png">
+      <publishTime>04/15/2015 21:39:56</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/fancybox_sprite%402x.png">
+      <publishTime>04/15/2015 21:39:56</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/fancybox_sprite.png">
+      <publishTime>04/15/2015 21:39:56</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/footer.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/grey-dot.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/grey-height-100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/grey-height-80.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/grey-height-95.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/grey-height-98.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/header.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/icon-user-default.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/loading.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/off.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/printer-blue.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/tick-blue.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/tick-orange.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="App_Themes/Theme1/image/unchecked.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="bin/Deiofiber.dll">
+      <publishTime>04/15/2015 23:33:59</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>04/15/2015 21:50:30</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>04/15/2015 21:50:30</publishTime>
+    </File>
+    <File Include="Deiofiber.edmx.diagram">
+      <publishTime>04/15/2015 23:27:50</publishTime>
+    </File>
+    <File Include="FormAccountManagement.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormAccountUpdate.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormAction.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormActivityLog.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormBadContractReport.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormCloseContract.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormCommonListSetting.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormContractHistoryManagement.aspx">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="FormContractHistoryUpdate.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormContractManagement.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormContractUpdate.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormDailyIncomeOutcome.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormDailyIncomeOutcomeUpdate.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormIncomeOutcomeSummary.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormInOutUpdate.aspx">
+      <publishTime>04/15/2015 21:44:50</publishTime>
+    </File>
+    <File Include="FormLogin.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormStoreDetail.aspx">
+      <publishTime>04/15/2015 22:36:54</publishTime>
+    </File>
+    <File Include="FormStoreManagement.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormTest.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="FormWarning.aspx">
+      <publishTime>04/15/2015 21:44:48</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>04/15/2015 21:24:16</publishTime>
+    </File>
+    <File Include="images/animated-overlay.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_diagonals-thick_18_b81900_40x40.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_diagonals-thick_20_666666_40x40.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_flat_10_000000_40x100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_glass_100_f6f6f6_1x400.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_glass_100_fdf5ce_1x400.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_gloss-wave_35_f6a828_500x100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_highlight-soft_100_eeeeee_1x100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-bg_highlight-soft_75_ffe45c_1x100.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_222222_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_228ef1_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_2e83ff_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_454545_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_888888_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_ef8c08_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_ffd27a_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="images/ui-icons_ffffff_256x240.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="MasterPage.Master">
+      <publishTime>04/15/2015 21:44:49</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>04/15/2015 21:50:39</publishTime>
+    </File>
+    <File Include="script/bootstrap.min.js">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/blank.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/fancybox_loading%402x.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/fancybox_loading.gif">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/fancybox_overlay.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/fancybox_sprite%402x.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/fancybox_sprite.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/helpers/fancybox_buttons.png">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/helpers/jquery.fancybox-buttons.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/helpers/jquery.fancybox-buttons.js">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/helpers/jquery.fancybox-media.js">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/helpers/jquery.fancybox-thumbs.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/helpers/jquery.fancybox-thumbs.js">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/jquery.fancybox.css">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/jquery.fancybox.js">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/fancybox/jquery.fancybox.pack.js">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/jquery-1.10.2.min.js">
+      <publishTime>04/15/2015 21:41:08</publishTime>
+    </File>
+    <File Include="script/jquery-ui.js">
+      <publishTime>04/15/2015 21:41:09</publishTime>
+    </File>
+    <File Include="script/jquery.fancybox.js">
+      <publishTime>04/15/2015 21:41:09</publishTime>
+    </File>
+    <File Include="script/jquery.price_format.1.8.min.js">
+      <publishTime>04/15/2015 21:41:09</publishTime>
+    </File>
+    <File Include="script/jquery.PrintArea.js">
+      <publishTime>04/15/2015 21:41:09</publishTime>
+    </File>
+    <File Include="script/jquery.validate.js">
+      <publishTime>04/15/2015 21:41:09</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/15/2015 23:34:00</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Deiofiber.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Hệ thống quản lý cho thuê - TSolution</title>
+    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="\script\fancybox\jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\PrintArea.css" />
+
+    <script src="script/jquery-1.10.2.min.js"></script>
+    <script src="script/jquery-ui.js"></script>
+    <script src="script/jquery.validate.js"></script>
+    <script src="script/fancybox/jquery.fancybox.js"></script>
+    <script src="script/jquery.price_format.1.8.min.js"></script>
+    <script src="script/jquery.PrintArea.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="background-image: url('App_Themes/Theme1/image/grey-height-98.png'); background-repeat: repeat-x;">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="MainScriptManager" runat="server" />
+        <div id="header">
+            <div style="float: left">
+                <img src="App_Themes/Theme1/image/off.png" />
+            </div>
+            <div style="float: left">
+                <h3>Hệ thống quản lý cho thuê hàng</h3>
+            </div>
+        </div>
+        <div id="center" style="clear: both;">
+            <div id="leftcenter">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active disabled text-center"><a href="#">CHỨC NĂNG</a></li>
+                    <li class="color-info">
+                        <asp:HyperLink ID="hplStoreManagement" Text="Quản lý cửa hàng" runat="server" CssClass="color-text-white" NavigateUrl="FormStoreManagement.aspx"></asp:HyperLink></li>
+                    <li class="color-success">
+                        <asp:HyperLink ID="hplContractManagement" Text="Quản lý hợp đồng" runat="server" CssClass="color-text-white" NavigateUrl="FormContractManagement.aspx"></asp:HyperLink></li>
+                    <li class="color-danger">
+                        <asp:HyperLink ID="hplContractHistoryManagement" Text="Hợp đồng cũ" runat="server" CssClass="color-text-white" NavigateUrl="FormContractHistoryManagement.aspx"></asp:HyperLink></li>
+                    <li class="color-warning">
+                        <asp:HyperLink ID="hplDailyIncomeOutcome" Text="Chi tiết hàng ngày" runat="server" CssClass="color-text-white" NavigateUrl="FormDailyIncomeOutcome.aspx"></asp:HyperLink></li>
+                    <li class="color-info">
+                        <asp:HyperLink ID="hplIncomeOutcomeSummary" Text="Tổng hợp thu chi" runat="server" CssClass="color-text-white" NavigateUrl="FormIncomeOutcomeSummary.aspx"></asp:HyperLink></li>
+                    <li class="color-success">
+                        <asp:HyperLink ID="hplWarning" Text="Thông báo" runat="server" CssClass="color-text-white" NavigateUrl="FormWarning.aspx"></asp:HyperLink></li>
+                    <li class="color-danger">
+                        <asp:HyperLink ID="hplActivityLog" Text="Nhật ký hoạt động" runat="server" CssClass="color-text-white" NavigateUrl="FormActivityLog.aspx"></asp:HyperLink></li>
+                    <li class="color-warning">
+                        <asp:HyperLink ID="hplAccountManagement" Text="Quản lý tài khoản" runat="server" CssClass="color-text-white" NavigateUrl="FormAccountManagement.aspx"></asp:HyperLink></li>
+                    <li class="color-info">
+                        <asp:HyperLink ID="hplCommonListSetting" Text="Cài đặt danh mục" runat="server" CssClass="color-text-white" NavigateUrl="FormCommonListSetting.aspx"></asp:HyperLink></li>
+                    <li class="color-success">
+                        <asp:HyperLink ID="hplPendingContract" Text="Hợp đồng xấu" runat="server" CssClass="color-text-white" NavigateUrl="FormBadContractReport.aspx"></asp:HyperLink></li>
+                </ul>
+            </div>
+            <div id="rightcenter">
+                <table class="table table-striped table-hover ">
+                    <tbody>
+                        <tr>
+                            <td><strong>Tên cửa hàng:
+                                <asp:Label ID="lblStoreName" runat="server"></asp:Label></strong></td>
+                            <td class="text-right"><strong>
+                                <asp:Label ID="txtUserFullName" runat="server" CssClass="text-warning"> </asp:Label></strong>
+                                <asp:Button ID="btnLogout" runat="server" Text="Đăng xuất" CssClass="btn btn-primary" OnClick="btnLogout_Click" /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chọn xem</strong>
+                                <asp:DropDownList ID="ddlStore" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlStore_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                            </td>
+
+                            <td><strong>Số dư hiện tại</strong>
+                                <asp:Label ID="lblTotalValue" runat="server" CssClass="form-control text-right"></asp:Label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="footer" style="height: 80px; background-image: url('App_Themes/Theme1/image/grey-height-98.png'); background-repeat: repeat-x;">
+            <div style="padding-top: 10px; margin-top: 45px;">
+                <h5 class="text-center">Hotline: 090.904.2666</h5>
+            </div>
+            <div class="no-margin">
+                <h5 class="text-center">Copyright © 2014 TSolution.</h5>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

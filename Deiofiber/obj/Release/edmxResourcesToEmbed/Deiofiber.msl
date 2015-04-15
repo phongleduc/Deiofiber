@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DeiofiberModelStoreContainer" CdmEntityContainer="DeiofiberEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="DeiofiberModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ACC" ColumnName="ACC" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="PERMISSION_ID" ColumnName="PERMISSION_ID" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+          <ScalarProperty Name="REGISTER_DATE" ColumnName="REGISTER_DATE" />
+          <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountPermissions">
+      <EntityTypeMapping TypeName="DeiofiberModel.AccountPermission">
+        <MappingFragment StoreEntitySet="AccountPermission">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="DeiofiberModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contracts">
+      <EntityTypeMapping TypeName="DeiofiberModel.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+          <ScalarProperty Name="EXTEND_END_DATE" ColumnName="EXTEND_END_DATE" />
+          <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+          <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+          <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+          <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+          <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+          <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+          <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+          <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+          <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+          <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+          <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+          <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+          <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+          <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+          <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+          <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+          <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+          <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+          <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractHistories">
+      <EntityTypeMapping TypeName="DeiofiberModel.ContractHistory">
+        <MappingFragment StoreEntitySet="ContractHistory">
+          <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+          <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+          <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+          <ScalarProperty Name="EXTEND_END_DATE" ColumnName="EXTEND_END_DATE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+          <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+          <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+          <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+          <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+          <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+          <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+          <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+          <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+          <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+          <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+          <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+          <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+          <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+          <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+          <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+          <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+          <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+          <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="DeiofiberModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="LICENSE_NO" ColumnName="LICENSE_NO" />
+          <ScalarProperty Name="LICENSE_RANGE_DATE" ColumnName="LICENSE_RANGE_DATE" />
+          <ScalarProperty Name="LICENSE_RANGE_PLACE" ColumnName="LICENSE_RANGE_PLACE" />
+          <ScalarProperty Name="PERMANENT_RESIDENCE" ColumnName="PERMANENT_RESIDENCE" />
+          <ScalarProperty Name="CURRENT_RESIDENCE" ColumnName="CURRENT_RESIDENCE" />
+          <ScalarProperty Name="BIRTH_DAY" ColumnName="BIRTH_DAY" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InOuts">
+      <EntityTypeMapping TypeName="DeiofiberModel.InOut">
+        <MappingFragment StoreEntitySet="InOut">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IN_AMOUNT" ColumnName="IN_AMOUNT" />
+          <ScalarProperty Name="OUT_AMOUNT" ColumnName="OUT_AMOUNT" />
+          <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+          <ScalarProperty Name="PERIOD_ID" ColumnName="PERIOD_ID" />
+          <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+          <ScalarProperty Name="PERIOD_DATE" ColumnName="PERIOD_DATE" />
+          <ScalarProperty Name="MORE_INFO" ColumnName="MORE_INFO" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="INOUT_TYPE_ID" ColumnName="INOUT_TYPE_ID" />
+          <ScalarProperty Name="INOUT_DATE" ColumnName="INOUT_DATE" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InOutTypes">
+      <EntityTypeMapping TypeName="DeiofiberModel.InOutType">
+        <MappingFragment StoreEntitySet="InOutType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="IS_INCOME" ColumnName="IS_INCOME" />
+          <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+          <ScalarProperty Name="IS_CONTRACT" ColumnName="IS_CONTRACT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="DeiofiberModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LOG_MSG" ColumnName="LOG_MSG" />
+          <ScalarProperty Name="ACCOUNT" ColumnName="ACCOUNT" />
+          <ScalarProperty Name="STORE" ColumnName="STORE" />
+          <ScalarProperty Name="LOG_DATE" ColumnName="LOG_DATE" />
+          <ScalarProperty Name="LOG_ACTION" ColumnName="LOG_ACTION" />
+          <ScalarProperty Name="IS_CRASH" ColumnName="IS_CRASH" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayPeriods">
+      <EntityTypeMapping TypeName="DeiofiberModel.PayPeriod">
+        <MappingFragment StoreEntitySet="PayPeriod">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+          <ScalarProperty Name="PAY_DATE" ColumnName="PAY_DATE" />
+          <ScalarProperty Name="AMOUNT_PER_PERIOD" ColumnName="AMOUNT_PER_PERIOD" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACTUAL_PAY" ColumnName="ACTUAL_PAY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RentTypes">
+      <EntityTypeMapping TypeName="DeiofiberModel.RentType">
+        <MappingFragment StoreEntitySet="RentType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ISINCOME" ColumnName="ISINCOME" />
+          <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+          <ScalarProperty Name="IS_CONTRACT" ColumnName="IS_CONTRACT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stores">
+      <EntityTypeMapping TypeName="DeiofiberModel.Store">
+        <MappingFragment StoreEntitySet="Store">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="FAX" ColumnName="FAX" />
+          <ScalarProperty Name="START_CAPITAL" ColumnName="START_CAPITAL" />
+          <ScalarProperty Name="CURRENT_CAPITAL" ColumnName="CURRENT_CAPITAL" />
+          <ScalarProperty Name="APPLY_DATE" ColumnName="APPLY_DATE" />
+          <ScalarProperty Name="REVENUE_BEFORE_APPLY" ColumnName="REVENUE_BEFORE_APPLY" />
+          <ScalarProperty Name="TOTAL_COST_BEFORE" ColumnName="TOTAL_COST_BEFORE" />
+          <ScalarProperty Name="TOTAL_INVESMENT_BEFORE" ColumnName="TOTAL_INVESMENT_BEFORE" />
+          <ScalarProperty Name="REGISTER_DATE" ColumnName="REGISTER_DATE" />
+          <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreFees">
+      <EntityTypeMapping TypeName="DeiofiberModel.StoreFee">
+        <MappingFragment StoreEntitySet="StoreFee">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FEE_PERCENT" ColumnName="FEE_PERCENT" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTRACT_FULL_VW">
+      <EntityTypeMapping TypeName="DeiofiberModel.CONTRACT_FULL_VW">
+        <MappingFragment StoreEntitySet="CONTRACT_FULL_VW">
+          <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+          <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+          <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+          <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+          <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+          <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+          <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+          <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+          <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+          <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+          <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+          <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+          <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+          <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
+          <ScalarProperty Name="LICENSE_NO" ColumnName="LICENSE_NO" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="LICENSE_RANGE_DATE" ColumnName="LICENSE_RANGE_DATE" />
+          <ScalarProperty Name="LICENSE_RANGE_PLACE" ColumnName="LICENSE_RANGE_PLACE" />
+          <ScalarProperty Name="PERMANENT_RESIDENCE" ColumnName="PERMANENT_RESIDENCE" />
+          <ScalarProperty Name="CURRENT_RESIDENCE" ColumnName="CURRENT_RESIDENCE" />
+          <ScalarProperty Name="BIRTH_DAY" ColumnName="BIRTH_DAY" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+          <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+          <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CUS_CITY_ID" ColumnName="CUS_CITY_ID" />
+          <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+          <ScalarProperty Name="RENT_TYPE_NAME" ColumnName="RENT_TYPE_NAME" />
+          <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+          <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+          <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+          <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTRACT_HISTORY_FULL_VW">
+      <EntityTypeMapping TypeName="DeiofiberModel.CONTRACT_HISTORY_FULL_VW">
+        <MappingFragment StoreEntitySet="CONTRACT_HISTORY_FULL_VW">
+          <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+          <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+          <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+          <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+          <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+          <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+          <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+          <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+          <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+          <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+          <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+          <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+          <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+          <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+          <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+          <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+          <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+          <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+          <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+          <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+          <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+          <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
+          <ScalarProperty Name="LICENSE_NO" ColumnName="LICENSE_NO" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CUSTOMER_CITY_ID" ColumnName="CUSTOMER_CITY_ID" />
+          <ScalarProperty Name="LICENSE_RANGE_DATE" ColumnName="LICENSE_RANGE_DATE" />
+          <ScalarProperty Name="LICENSE_RANGE_PLACE" ColumnName="LICENSE_RANGE_PLACE" />
+          <ScalarProperty Name="PERMANENT_RESIDENCE" ColumnName="PERMANENT_RESIDENCE" />
+          <ScalarProperty Name="CURRENT_RESIDENCE" ColumnName="CURRENT_RESIDENCE" />
+          <ScalarProperty Name="BIRTH_DAY" ColumnName="BIRTH_DAY" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="RENT_TYPE_NAME" ColumnName="RENT_TYPE_NAME" />
+          <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INOUT_FULL_VW">
+      <EntityTypeMapping TypeName="DeiofiberModel.INOUT_FULL_VW">
+        <MappingFragment StoreEntitySet="INOUT_FULL_VW">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IN_AMOUNT" ColumnName="IN_AMOUNT" />
+          <ScalarProperty Name="OUT_AMOUNT" ColumnName="OUT_AMOUNT" />
+          <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+          <ScalarProperty Name="PERIOD_ID" ColumnName="PERIOD_ID" />
+          <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+          <ScalarProperty Name="PERIOD_DATE" ColumnName="PERIOD_DATE" />
+          <ScalarProperty Name="MORE_INFO" ColumnName="MORE_INFO" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+          <ScalarProperty Name="RENT_TYPE_NAME" ColumnName="RENT_TYPE_NAME" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+          <ScalarProperty Name="ISINCOME" ColumnName="ISINCOME" />
+          <ScalarProperty Name="IS_CONTRACT" ColumnName="IS_CONTRACT" />
+          <ScalarProperty Name="RENT_TYPE_ACTIVE" ColumnName="RENT_TYPE_ACTIVE" />
+          <ScalarProperty Name="INOUT_TYPE_NAME" ColumnName="INOUT_TYPE_NAME" />
+          <ScalarProperty Name="INOUT_TYPE_ID" ColumnName="INOUT_TYPE_ID" />
+          <ScalarProperty Name="INOUT_DATE" ColumnName="INOUT_DATE" />
+          <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STORE_FULL_VW">
+      <EntityTypeMapping TypeName="DeiofiberModel.STORE_FULL_VW">
+        <MappingFragment StoreEntitySet="STORE_FULL_VW">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+          <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+          <ScalarProperty Name="FAX" ColumnName="FAX" />
+          <ScalarProperty Name="START_CAPITAL" ColumnName="START_CAPITAL" />
+          <ScalarProperty Name="CURRENT_CAPITAL" ColumnName="CURRENT_CAPITAL" />
+          <ScalarProperty Name="APPLY_DATE" ColumnName="APPLY_DATE" />
+          <ScalarProperty Name="REVENUE_BEFORE_APPLY" ColumnName="REVENUE_BEFORE_APPLY" />
+          <ScalarProperty Name="TOTAL_COST_BEFORE" ColumnName="TOTAL_COST_BEFORE" />
+          <ScalarProperty Name="TOTAL_INVESMENT_BEFORE" ColumnName="TOTAL_INVESMENT_BEFORE" />
+          <ScalarProperty Name="REGISTER_DATE" ColumnName="REGISTER_DATE" />
+          <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

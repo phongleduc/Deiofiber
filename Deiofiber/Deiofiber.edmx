@@ -1,0 +1,1570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DeiofiberModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACC" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PERMISSION_ID" Type="int" Nullable="false" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CITY_ID" Type="int" Nullable="false" />
+          <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="250" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AccountPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+          <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RENT_DATE" Type="date" Nullable="false" />
+          <Property Name="END_DATE" Type="date" Nullable="false" />
+          <Property Name="EXTEND_END_DATE" Type="date" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+          <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+          <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+          <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+          <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+          <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+          <Property Name="CONTRACT_NO" Type="varchar" MaxLength="13" StoreGeneratedPattern="Computed" />
+          <Property Name="PHOTO_1" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_2" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_3" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_4" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_5" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="varchar" MaxLength="300" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ContractHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+          <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RENT_DATE" Type="date" Nullable="false" />
+          <Property Name="END_DATE" Type="date" Nullable="false" />
+          <Property Name="EXTEND_END_DATE" Type="date" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+          <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+          <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+          <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+          <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+          <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+          <Property Name="CONTRACT_NO" Type="nvarchar" MaxLength="20" />
+          <Property Name="PHOTO_1" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_2" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_3" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_4" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_5" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="nvarchar" MaxLength="300" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="LICENSE_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LICENSE_RANGE_DATE" Type="datetime" />
+          <Property Name="LICENSE_RANGE_PLACE" Type="nvarchar" MaxLength="300" />
+          <Property Name="PERMANENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+          <Property Name="CURRENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+          <Property Name="BIRTH_DAY" Type="datetime" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="30" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO" Type="image" />
+          <Property Name="CITY_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="InOut">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IN_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OUT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+          <Property Name="PERIOD_ID" Type="int" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="PERIOD_DATE" Type="date" Nullable="false" />
+          <Property Name="MORE_INFO" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="INOUT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="INOUT_DATE" Type="date" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="InOutType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IS_INCOME" Type="bit" Nullable="false" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
+          <Property Name="IS_CONTRACT" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOG_MSG" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ACCOUNT" Type="nvarchar" MaxLength="50" />
+          <Property Name="STORE" Type="nvarchar" MaxLength="250" />
+          <Property Name="LOG_DATE" Type="datetime" Nullable="false" />
+          <Property Name="LOG_ACTION" Type="nvarchar" MaxLength="150" />
+          <Property Name="IS_CRASH" Type="bit" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+          <Property Name="STORE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="PayPeriod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+          <Property Name="PAY_DATE" Type="date" Nullable="false" />
+          <Property Name="AMOUNT_PER_PERIOD" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="STATUS" Type="bit" Nullable="false" />
+          <Property Name="ACTUAL_PAY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="ISINCOME" Type="bit" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
+          <Property Name="IS_CONTRACT" Type="bit" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CITY_ID" Type="int" Nullable="false" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="FAX" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="START_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CURRENT_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="APPLY_DATE" Type="date" Nullable="false" />
+          <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_COST_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_INVESMENT_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreFee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FEE_PERCENT" Type="int" Nullable="false" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.CONTRACT_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CONTRACT_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="RENT_TYPE_ID" />
+            <PropertyRef Name="STORE_ID" />
+            <PropertyRef Name="FEE_PER_DAY" />
+            <PropertyRef Name="CONTRACT_AMOUNT" />
+            <PropertyRef Name="RENT_DATE" />
+            <PropertyRef Name="END_DATE" />
+            <PropertyRef Name="CUSTOMER_ID" />
+            <PropertyRef Name="ITEM_LICENSE_NO" />
+            <PropertyRef Name="CONTRACT_STATUS" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="LICENSE_NO" />
+            <PropertyRef Name="ADDRESS" />
+            <PropertyRef Name="STORE_NAME" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+          <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RENT_DATE" Type="date" Nullable="false" />
+          <Property Name="END_DATE" Type="date" Nullable="false" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+          <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+          <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+          <Property Name="PHOTO_1" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_2" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_3" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_4" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="varchar" MaxLength="300" />
+          <Property Name="PHOTO_5" Type="varchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="varchar" MaxLength="300" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+          <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+          <Property Name="CUSTOMER_NAME" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="LICENSE_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="30" />
+          <Property Name="LICENSE_RANGE_DATE" Type="datetime" />
+          <Property Name="LICENSE_RANGE_PLACE" Type="nvarchar" MaxLength="300" />
+          <Property Name="PERMANENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+          <Property Name="CURRENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+          <Property Name="BIRTH_DAY" Type="datetime" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PHOTO" Type="image" />
+          <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+          <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="CUS_CITY_ID" Type="int" />
+          <Property Name="STORE_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="RENT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+          <Property Name="CONTRACT_NO" Type="varchar" MaxLength="13" />
+          <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATED_DATE" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.CONTRACT_HISTORY_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CONTRACT_HISTORY_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CONTRACT_ID" />
+            <PropertyRef Name="RENT_TYPE_ID" />
+            <PropertyRef Name="STORE_ID" />
+            <PropertyRef Name="CONTRACT_AMOUNT" />
+            <PropertyRef Name="RENT_DATE" />
+            <PropertyRef Name="END_DATE" />
+            <PropertyRef Name="ITEM_LICENSE_NO" />
+            <PropertyRef Name="CUSTOMER_ID" />
+            <PropertyRef Name="CONTRACT_STATUS" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="LICENSE_NO" />
+            <PropertyRef Name="ADDRESS" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RENT_DATE" Type="date" Nullable="false" />
+          <Property Name="END_DATE" Type="date" Nullable="false" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+          <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+          <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+          <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+          <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+          <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="CONTRACT_NO" Type="nvarchar" MaxLength="20" />
+          <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_1" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_2" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_3" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_4" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="nvarchar" MaxLength="300" />
+          <Property Name="PHOTO_5" Type="nvarchar" MaxLength="300" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="nvarchar" MaxLength="300" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATED_DATE" Type="datetime" />
+          <Property Name="CUSTOMER_NAME" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="LICENSE_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="30" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="CUSTOMER_CITY_ID" Type="int" />
+          <Property Name="LICENSE_RANGE_DATE" Type="datetime" />
+          <Property Name="LICENSE_RANGE_PLACE" Type="nvarchar" MaxLength="300" />
+          <Property Name="PERMANENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+          <Property Name="CURRENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+          <Property Name="BIRTH_DAY" Type="datetime" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PHOTO" Type="image" />
+          <Property Name="RENT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.INOUT_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INOUT_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IN_AMOUNT" />
+            <PropertyRef Name="OUT_AMOUNT" />
+            <PropertyRef Name="CONTRACT_ID" />
+            <PropertyRef Name="PERIOD_ID" />
+            <PropertyRef Name="RENT_TYPE_ID" />
+            <PropertyRef Name="PERIOD_DATE" />
+            <PropertyRef Name="MORE_INFO" />
+            <PropertyRef Name="STORE_ID" />
+            <PropertyRef Name="SEARCH_TEXT" />
+            <PropertyRef Name="STORE_NAME" />
+            <PropertyRef Name="INOUT_TYPE_ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IN_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OUT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+          <Property Name="PERIOD_ID" Type="int" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="PERIOD_DATE" Type="date" Nullable="false" />
+          <Property Name="MORE_INFO" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="STORE_ID" Type="int" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="STORE_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="RENT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATED_DATE" Type="datetime" />
+          <Property Name="ISINCOME" Type="bit" />
+          <Property Name="IS_CONTRACT" Type="bit" />
+          <Property Name="RENT_TYPE_ACTIVE" Type="bit" />
+          <Property Name="INOUT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="INOUT_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="INOUT_DATE" Type="date" />
+          <Property Name="CONTRACT_NO" Type="varchar" MaxLength="13" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="STORE_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="NAME" />
+            <PropertyRef Name="ADDRESS" />
+            <PropertyRef Name="CITY_ID" />
+            <PropertyRef Name="PHONE" />
+            <PropertyRef Name="FAX" />
+            <PropertyRef Name="START_CAPITAL" />
+            <PropertyRef Name="CURRENT_CAPITAL" />
+            <PropertyRef Name="APPLY_DATE" />
+            <PropertyRef Name="REVENUE_BEFORE_APPLY" />
+            <PropertyRef Name="TOTAL_COST_BEFORE" />
+            <PropertyRef Name="TOTAL_INVESMENT_BEFORE" />
+            <PropertyRef Name="REGISTER_DATE" />
+            <PropertyRef Name="ACTIVE" />
+            <PropertyRef Name="NOTE" />
+            <PropertyRef Name="SEARCH_TEXT" />
+            <PropertyRef Name="CITY" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CITY_ID" Type="int" Nullable="false" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="FAX" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="START_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CURRENT_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="APPLY_DATE" Type="date" Nullable="false" />
+          <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_COST_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_INVESMENT_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
+          <Property Name="ACTIVE" Type="bit" Nullable="false" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CITY" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DeiofiberModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountPermission" EntityType="Self.AccountPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractHistory" EntityType="Self.ContractHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InOut" EntityType="Self.InOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InOutType" EntityType="Self.InOutType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayPeriod" EntityType="Self.PayPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentType" EntityType="Self.RentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreFee" EntityType="Self.StoreFee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTRACT_FULL_VW" EntityType="Self.CONTRACT_FULL_VW" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CONTRACT_FULL_VW].[ID] AS [ID], 
+    [CONTRACT_FULL_VW].[RENT_TYPE_ID] AS [RENT_TYPE_ID], 
+    [CONTRACT_FULL_VW].[STORE_ID] AS [STORE_ID], 
+    [CONTRACT_FULL_VW].[FEE_PER_DAY] AS [FEE_PER_DAY], 
+    [CONTRACT_FULL_VW].[CONTRACT_AMOUNT] AS [CONTRACT_AMOUNT], 
+    [CONTRACT_FULL_VW].[RENT_DATE] AS [RENT_DATE], 
+    [CONTRACT_FULL_VW].[END_DATE] AS [END_DATE], 
+    [CONTRACT_FULL_VW].[NOTE] AS [NOTE], 
+    [CONTRACT_FULL_VW].[REFERENCE_NAME] AS [REFERENCE_NAME], 
+    [CONTRACT_FULL_VW].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+    [CONTRACT_FULL_VW].[ITEM_TYPE] AS [ITEM_TYPE], 
+    [CONTRACT_FULL_VW].[ITEM_LICENSE_NO] AS [ITEM_LICENSE_NO], 
+    [CONTRACT_FULL_VW].[SERIAL_1] AS [SERIAL_1], 
+    [CONTRACT_FULL_VW].[SERIAL_2] AS [SERIAL_2], 
+    [CONTRACT_FULL_VW].[DETAIL] AS [DETAIL], 
+    [CONTRACT_FULL_VW].[PHOTO_1] AS [PHOTO_1], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_1] AS [THUMBNAIL_PHOTO_1], 
+    [CONTRACT_FULL_VW].[PHOTO_2] AS [PHOTO_2], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_2] AS [THUMBNAIL_PHOTO_2], 
+    [CONTRACT_FULL_VW].[PHOTO_3] AS [PHOTO_3], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_3] AS [THUMBNAIL_PHOTO_3], 
+    [CONTRACT_FULL_VW].[PHOTO_4] AS [PHOTO_4], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_4] AS [THUMBNAIL_PHOTO_4], 
+    [CONTRACT_FULL_VW].[PHOTO_5] AS [PHOTO_5], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_5] AS [THUMBNAIL_PHOTO_5], 
+    [CONTRACT_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [CONTRACT_FULL_VW].[CONTRACT_STATUS] AS [CONTRACT_STATUS], 
+    [CONTRACT_FULL_VW].[CUSTOMER_NAME] AS [CUSTOMER_NAME], 
+    [CONTRACT_FULL_VW].[LICENSE_NO] AS [LICENSE_NO], 
+    [CONTRACT_FULL_VW].[PHONE] AS [PHONE], 
+    [CONTRACT_FULL_VW].[LICENSE_RANGE_DATE] AS [LICENSE_RANGE_DATE], 
+    [CONTRACT_FULL_VW].[LICENSE_RANGE_PLACE] AS [LICENSE_RANGE_PLACE], 
+    [CONTRACT_FULL_VW].[PERMANENT_RESIDENCE] AS [PERMANENT_RESIDENCE], 
+    [CONTRACT_FULL_VW].[CURRENT_RESIDENCE] AS [CURRENT_RESIDENCE], 
+    [CONTRACT_FULL_VW].[BIRTH_DAY] AS [BIRTH_DAY], 
+    [CONTRACT_FULL_VW].[EMAIL] AS [EMAIL], 
+    [CONTRACT_FULL_VW].[PHOTO] AS [PHOTO], 
+    [CONTRACT_FULL_VW].[REFERENCE_PHONE] AS [REFERENCE_PHONE], 
+    [CONTRACT_FULL_VW].[SCHOOL_NAME] AS [SCHOOL_NAME], 
+    [CONTRACT_FULL_VW].[CLASS_NAME] AS [CLASS_NAME], 
+    [CONTRACT_FULL_VW].[ADDRESS] AS [ADDRESS], 
+    [CONTRACT_FULL_VW].[CUS_CITY_ID] AS [CUS_CITY_ID], 
+    [CONTRACT_FULL_VW].[STORE_NAME] AS [STORE_NAME], 
+    [CONTRACT_FULL_VW].[RENT_TYPE_NAME] AS [RENT_TYPE_NAME], 
+    [CONTRACT_FULL_VW].[CLOSE_CONTRACT_DATE] AS [CLOSE_CONTRACT_DATE], 
+    [CONTRACT_FULL_VW].[CONTRACT_NO] AS [CONTRACT_NO], 
+    [CONTRACT_FULL_VW].[IMPLEMENTER] AS [IMPLEMENTER], 
+    [CONTRACT_FULL_VW].[BACK_TO_DOCUMENTS] AS [BACK_TO_DOCUMENTS], 
+    [CONTRACT_FULL_VW].[CREATED_BY] AS [CREATED_BY], 
+    [CONTRACT_FULL_VW].[CREATED_DATE] AS [CREATED_DATE], 
+    [CONTRACT_FULL_VW].[UPDATED_BY] AS [UPDATED_BY], 
+    [CONTRACT_FULL_VW].[UPDATED_DATE] AS [UPDATED_DATE]
+    FROM [dbo].[CONTRACT_FULL_VW] AS [CONTRACT_FULL_VW]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CONTRACT_HISTORY_FULL_VW" EntityType="Self.CONTRACT_HISTORY_FULL_VW" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CONTRACT_HISTORY_FULL_VW].[ID] AS [ID], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_ID] AS [CONTRACT_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[RENT_TYPE_ID] AS [RENT_TYPE_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[FEE_PER_DAY] AS [FEE_PER_DAY], 
+    [CONTRACT_HISTORY_FULL_VW].[STORE_ID] AS [STORE_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_AMOUNT] AS [CONTRACT_AMOUNT], 
+    [CONTRACT_HISTORY_FULL_VW].[RENT_DATE] AS [RENT_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[END_DATE] AS [END_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[NOTE] AS [NOTE], 
+    [CONTRACT_HISTORY_FULL_VW].[REFERENCE_NAME] AS [REFERENCE_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[ITEM_TYPE] AS [ITEM_TYPE], 
+    [CONTRACT_HISTORY_FULL_VW].[ITEM_LICENSE_NO] AS [ITEM_LICENSE_NO], 
+    [CONTRACT_HISTORY_FULL_VW].[SERIAL_1] AS [SERIAL_1], 
+    [CONTRACT_HISTORY_FULL_VW].[SERIAL_2] AS [SERIAL_2], 
+    [CONTRACT_HISTORY_FULL_VW].[DETAIL] AS [DETAIL], 
+    [CONTRACT_HISTORY_FULL_VW].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_STATUS] AS [CONTRACT_STATUS], 
+    [CONTRACT_HISTORY_FULL_VW].[REFERENCE_PHONE] AS [REFERENCE_PHONE], 
+    [CONTRACT_HISTORY_FULL_VW].[SCHOOL_NAME] AS [SCHOOL_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[CLASS_NAME] AS [CLASS_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_NO] AS [CONTRACT_NO], 
+    [CONTRACT_HISTORY_FULL_VW].[IMPLEMENTER] AS [IMPLEMENTER], 
+    [CONTRACT_HISTORY_FULL_VW].[BACK_TO_DOCUMENTS] AS [BACK_TO_DOCUMENTS], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_1] AS [PHOTO_1], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_1] AS [THUMBNAIL_PHOTO_1], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_2] AS [PHOTO_2], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_2] AS [THUMBNAIL_PHOTO_2], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_3] AS [PHOTO_3], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_3] AS [THUMBNAIL_PHOTO_3], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_4] AS [PHOTO_4], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_4] AS [THUMBNAIL_PHOTO_4], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_5] AS [PHOTO_5], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_5] AS [THUMBNAIL_PHOTO_5], 
+    [CONTRACT_HISTORY_FULL_VW].[CREATED_BY] AS [CREATED_BY], 
+    [CONTRACT_HISTORY_FULL_VW].[CREATED_DATE] AS [CREATED_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[UPDATED_BY] AS [UPDATED_BY], 
+    [CONTRACT_HISTORY_FULL_VW].[UPDATED_DATE] AS [UPDATED_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[CUSTOMER_NAME] AS [CUSTOMER_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[LICENSE_NO] AS [LICENSE_NO], 
+    [CONTRACT_HISTORY_FULL_VW].[PHONE] AS [PHONE], 
+    [CONTRACT_HISTORY_FULL_VW].[ADDRESS] AS [ADDRESS], 
+    [CONTRACT_HISTORY_FULL_VW].[CUSTOMER_CITY_ID] AS [CUSTOMER_CITY_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[LICENSE_RANGE_DATE] AS [LICENSE_RANGE_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[LICENSE_RANGE_PLACE] AS [LICENSE_RANGE_PLACE], 
+    [CONTRACT_HISTORY_FULL_VW].[PERMANENT_RESIDENCE] AS [PERMANENT_RESIDENCE], 
+    [CONTRACT_HISTORY_FULL_VW].[CURRENT_RESIDENCE] AS [CURRENT_RESIDENCE], 
+    [CONTRACT_HISTORY_FULL_VW].[BIRTH_DAY] AS [BIRTH_DAY], 
+    [CONTRACT_HISTORY_FULL_VW].[EMAIL] AS [EMAIL], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO] AS [PHOTO], 
+    [CONTRACT_HISTORY_FULL_VW].[RENT_TYPE_NAME] AS [RENT_TYPE_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[CLOSE_CONTRACT_DATE] AS [CLOSE_CONTRACT_DATE]
+    FROM [dbo].[CONTRACT_HISTORY_FULL_VW] AS [CONTRACT_HISTORY_FULL_VW]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INOUT_FULL_VW" EntityType="Self.INOUT_FULL_VW" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INOUT_FULL_VW].[ID] AS [ID], 
+    [INOUT_FULL_VW].[IN_AMOUNT] AS [IN_AMOUNT], 
+    [INOUT_FULL_VW].[OUT_AMOUNT] AS [OUT_AMOUNT], 
+    [INOUT_FULL_VW].[CONTRACT_ID] AS [CONTRACT_ID], 
+    [INOUT_FULL_VW].[PERIOD_ID] AS [PERIOD_ID], 
+    [INOUT_FULL_VW].[RENT_TYPE_ID] AS [RENT_TYPE_ID], 
+    [INOUT_FULL_VW].[PERIOD_DATE] AS [PERIOD_DATE], 
+    [INOUT_FULL_VW].[MORE_INFO] AS [MORE_INFO], 
+    [INOUT_FULL_VW].[STORE_ID] AS [STORE_ID], 
+    [INOUT_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [INOUT_FULL_VW].[STORE_NAME] AS [STORE_NAME], 
+    [INOUT_FULL_VW].[RENT_TYPE_NAME] AS [RENT_TYPE_NAME], 
+    [INOUT_FULL_VW].[CREATED_BY] AS [CREATED_BY], 
+    [INOUT_FULL_VW].[CREATED_DATE] AS [CREATED_DATE], 
+    [INOUT_FULL_VW].[UPDATED_BY] AS [UPDATED_BY], 
+    [INOUT_FULL_VW].[UPDATED_DATE] AS [UPDATED_DATE], 
+    [INOUT_FULL_VW].[ISINCOME] AS [ISINCOME], 
+    [INOUT_FULL_VW].[IS_CONTRACT] AS [IS_CONTRACT], 
+    [INOUT_FULL_VW].[RENT_TYPE_ACTIVE] AS [RENT_TYPE_ACTIVE], 
+    [INOUT_FULL_VW].[INOUT_TYPE_NAME] AS [INOUT_TYPE_NAME], 
+    [INOUT_FULL_VW].[INOUT_TYPE_ID] AS [INOUT_TYPE_ID], 
+    [INOUT_FULL_VW].[INOUT_DATE] AS [INOUT_DATE], 
+    [INOUT_FULL_VW].[CONTRACT_NO] AS [CONTRACT_NO]
+    FROM [dbo].[INOUT_FULL_VW] AS [INOUT_FULL_VW]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="STORE_FULL_VW" EntityType="Self.STORE_FULL_VW" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [STORE_FULL_VW].[ID] AS [ID], 
+    [STORE_FULL_VW].[NAME] AS [NAME], 
+    [STORE_FULL_VW].[ADDRESS] AS [ADDRESS], 
+    [STORE_FULL_VW].[CITY_ID] AS [CITY_ID], 
+    [STORE_FULL_VW].[PHONE] AS [PHONE], 
+    [STORE_FULL_VW].[FAX] AS [FAX], 
+    [STORE_FULL_VW].[START_CAPITAL] AS [START_CAPITAL], 
+    [STORE_FULL_VW].[CURRENT_CAPITAL] AS [CURRENT_CAPITAL], 
+    [STORE_FULL_VW].[APPLY_DATE] AS [APPLY_DATE], 
+    [STORE_FULL_VW].[REVENUE_BEFORE_APPLY] AS [REVENUE_BEFORE_APPLY], 
+    [STORE_FULL_VW].[TOTAL_COST_BEFORE] AS [TOTAL_COST_BEFORE], 
+    [STORE_FULL_VW].[TOTAL_INVESMENT_BEFORE] AS [TOTAL_INVESMENT_BEFORE], 
+    [STORE_FULL_VW].[REGISTER_DATE] AS [REGISTER_DATE], 
+    [STORE_FULL_VW].[ACTIVE] AS [ACTIVE], 
+    [STORE_FULL_VW].[NOTE] AS [NOTE], 
+    [STORE_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [STORE_FULL_VW].[CITY] AS [CITY]
+    FROM [dbo].[STORE_FULL_VW] AS [STORE_FULL_VW]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DeiofiberModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PERMISSION_ID" Type="Int32" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="REGISTER_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <Property Name="NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AccountPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+          <Property Name="RENT_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="END_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EXTEND_END_DATE" Type="DateTime" Precision="0" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="NOTE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="REFERENCE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIAL_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIAL_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DETAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CONTRACT_STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="ITEM_LICENSE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="REFERENCE_PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SCHOOL_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLASS_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMPLEMENTER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CONTRACT_NO" Type="String" MaxLength="13" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="FEE_PER_DAY" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ContractHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONTRACT_ID" Type="Int32" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RENT_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="END_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EXTEND_END_DATE" Type="DateTime" Precision="0" />
+          <Property Name="NOTE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="REFERENCE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_LICENSE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SERIAL_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIAL_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DETAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CONTRACT_STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="REFERENCE_PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SCHOOL_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLASS_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMPLEMENTER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CONTRACT_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="FEE_PER_DAY" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LICENSE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LICENSE_RANGE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="LICENSE_RANGE_PLACE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PERMANENT_RESIDENCE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CURRENT_RESIDENCE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTH_DAY" Type="DateTime" Precision="3" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CITY_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="InOut">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IN_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OUT_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="Int32" Nullable="false" />
+          <Property Name="PERIOD_ID" Type="Int32" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="PERIOD_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MORE_INFO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INOUT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="INOUT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="InOutType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IS_INCOME" Type="Boolean" Nullable="false" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <Property Name="IS_CONTRACT" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOG_MSG" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ACCOUNT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STORE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LOG_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LOG_ACTION" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IS_CRASH" Type="Boolean" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="STORE_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PayPeriod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONTRACT_ID" Type="Int32" Nullable="false" />
+          <Property Name="PAY_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AMOUNT_PER_PERIOD" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="ACTUAL_PAY" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ISINCOME" Type="Boolean" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <Property Name="IS_CONTRACT" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FAX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="START_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CURRENT_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="APPLY_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_COST_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_INVESMENT_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="REGISTER_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <Property Name="NOTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreFee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FEE_PERCENT" Type="Int32" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONTRACT_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="RENT_TYPE_ID" />
+            <PropertyRef Name="STORE_ID" />
+            <PropertyRef Name="CONTRACT_AMOUNT" />
+            <PropertyRef Name="RENT_DATE" />
+            <PropertyRef Name="END_DATE" />
+            <PropertyRef Name="CUSTOMER_ID" />
+            <PropertyRef Name="ITEM_LICENSE_NO" />
+            <PropertyRef Name="CONTRACT_STATUS" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="LICENSE_NO" />
+            <PropertyRef Name="ADDRESS" />
+            <PropertyRef Name="STORE_NAME" />
+            <PropertyRef Name="FEE_PER_DAY" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RENT_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="END_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NOTE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="REFERENCE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="ITEM_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_LICENSE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SERIAL_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIAL_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DETAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CONTRACT_STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="CUSTOMER_NAME" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LICENSE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LICENSE_RANGE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="LICENSE_RANGE_PLACE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PERMANENT_RESIDENCE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CURRENT_RESIDENCE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTH_DAY" Type="DateTime" Precision="3" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="REFERENCE_PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SCHOOL_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLASS_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CUS_CITY_ID" Type="Int32" />
+          <Property Name="STORE_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RENT_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="CONTRACT_NO" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="IMPLEMENTER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="FEE_PER_DAY" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="CONTRACT_HISTORY_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CONTRACT_ID" />
+            <PropertyRef Name="RENT_TYPE_ID" />
+            <PropertyRef Name="STORE_ID" />
+            <PropertyRef Name="CONTRACT_AMOUNT" />
+            <PropertyRef Name="RENT_DATE" />
+            <PropertyRef Name="END_DATE" />
+            <PropertyRef Name="ITEM_LICENSE_NO" />
+            <PropertyRef Name="CUSTOMER_ID" />
+            <PropertyRef Name="CONTRACT_STATUS" />
+            <PropertyRef Name="CUSTOMER_NAME" />
+            <PropertyRef Name="LICENSE_NO" />
+            <PropertyRef Name="ADDRESS" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="Int32" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+          <Property Name="CONTRACT_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RENT_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="END_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NOTE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="REFERENCE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_LICENSE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SERIAL_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIAL_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DETAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOMER_ID" Type="Int32" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CONTRACT_STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="REFERENCE_PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SCHOOL_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLASS_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CONTRACT_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IMPLEMENTER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BACK_TO_DOCUMENTS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_3" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_4" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="THUMBNAIL_PHOTO_5" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CUSTOMER_NAME" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LICENSE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CUSTOMER_CITY_ID" Type="Int32" />
+          <Property Name="LICENSE_RANGE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="LICENSE_RANGE_PLACE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PERMANENT_RESIDENCE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CURRENT_RESIDENCE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTH_DAY" Type="DateTime" Precision="3" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="RENT_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLOSE_CONTRACT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="FEE_PER_DAY" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="INOUT_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IN_AMOUNT" />
+            <PropertyRef Name="OUT_AMOUNT" />
+            <PropertyRef Name="CONTRACT_ID" />
+            <PropertyRef Name="PERIOD_ID" />
+            <PropertyRef Name="RENT_TYPE_ID" />
+            <PropertyRef Name="PERIOD_DATE" />
+            <PropertyRef Name="MORE_INFO" />
+            <PropertyRef Name="STORE_ID" />
+            <PropertyRef Name="SEARCH_TEXT" />
+            <PropertyRef Name="STORE_NAME" />
+            <PropertyRef Name="INOUT_TYPE_ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="IN_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OUT_AMOUNT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CONTRACT_ID" Type="Int32" Nullable="false" />
+          <Property Name="PERIOD_ID" Type="Int32" Nullable="false" />
+          <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="PERIOD_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MORE_INFO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STORE_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RENT_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="ISINCOME" Type="Boolean" />
+          <Property Name="IS_CONTRACT" Type="Boolean" />
+          <Property Name="RENT_TYPE_ACTIVE" Type="Boolean" />
+          <Property Name="INOUT_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="INOUT_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="INOUT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="CONTRACT_NO" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="STORE_FULL_VW">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="NAME" />
+            <PropertyRef Name="ADDRESS" />
+            <PropertyRef Name="CITY_ID" />
+            <PropertyRef Name="PHONE" />
+            <PropertyRef Name="FAX" />
+            <PropertyRef Name="START_CAPITAL" />
+            <PropertyRef Name="CURRENT_CAPITAL" />
+            <PropertyRef Name="APPLY_DATE" />
+            <PropertyRef Name="REVENUE_BEFORE_APPLY" />
+            <PropertyRef Name="TOTAL_COST_BEFORE" />
+            <PropertyRef Name="TOTAL_INVESMENT_BEFORE" />
+            <PropertyRef Name="REGISTER_DATE" />
+            <PropertyRef Name="ACTIVE" />
+            <PropertyRef Name="NOTE" />
+            <PropertyRef Name="SEARCH_TEXT" />
+            <PropertyRef Name="CITY" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FAX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="START_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CURRENT_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="APPLY_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_COST_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_INVESMENT_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="REGISTER_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
+          <Property Name="NOTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CITY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DeiofiberEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountPermissions" EntityType="Self.AccountPermission" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="ContractHistories" EntityType="Self.ContractHistory" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="InOuts" EntityType="Self.InOut" />
+          <EntitySet Name="InOutTypes" EntityType="Self.InOutType" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="PayPeriods" EntityType="Self.PayPeriod" />
+          <EntitySet Name="RentTypes" EntityType="Self.RentType" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <EntitySet Name="StoreFees" EntityType="Self.StoreFee" />
+          <EntitySet Name="CONTRACT_FULL_VW" EntityType="Self.CONTRACT_FULL_VW" />
+          <EntitySet Name="CONTRACT_HISTORY_FULL_VW" EntityType="Self.CONTRACT_HISTORY_FULL_VW" />
+          <EntitySet Name="INOUT_FULL_VW" EntityType="Self.INOUT_FULL_VW" />
+          <EntitySet Name="STORE_FULL_VW" EntityType="Self.STORE_FULL_VW" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DeiofiberModelStoreContainer" CdmEntityContainer="DeiofiberEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DeiofiberModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACC" ColumnName="ACC" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="PERMISSION_ID" ColumnName="PERMISSION_ID" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+                <ScalarProperty Name="REGISTER_DATE" ColumnName="REGISTER_DATE" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountPermissions">
+            <EntityTypeMapping TypeName="DeiofiberModel.AccountPermission">
+              <MappingFragment StoreEntitySet="AccountPermission">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="DeiofiberModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="DeiofiberModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+                <ScalarProperty Name="EXTEND_END_DATE" ColumnName="EXTEND_END_DATE" />
+                <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+                <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+                <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+                <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+                <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+                <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+                <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+                <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+                <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+                <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+                <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+                <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+                <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+                <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+                <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+                <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+                <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractHistories">
+            <EntityTypeMapping TypeName="DeiofiberModel.ContractHistory">
+              <MappingFragment StoreEntitySet="ContractHistory">
+                <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+                <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+                <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+                <ScalarProperty Name="EXTEND_END_DATE" ColumnName="EXTEND_END_DATE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+                <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+                <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+                <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+                <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+                <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+                <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+                <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+                <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+                <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+                <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+                <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+                <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+                <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+                <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+                <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+                <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DeiofiberModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="LICENSE_NO" ColumnName="LICENSE_NO" />
+                <ScalarProperty Name="LICENSE_RANGE_DATE" ColumnName="LICENSE_RANGE_DATE" />
+                <ScalarProperty Name="LICENSE_RANGE_PLACE" ColumnName="LICENSE_RANGE_PLACE" />
+                <ScalarProperty Name="PERMANENT_RESIDENCE" ColumnName="PERMANENT_RESIDENCE" />
+                <ScalarProperty Name="CURRENT_RESIDENCE" ColumnName="CURRENT_RESIDENCE" />
+                <ScalarProperty Name="BIRTH_DAY" ColumnName="BIRTH_DAY" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InOuts">
+            <EntityTypeMapping TypeName="DeiofiberModel.InOut">
+              <MappingFragment StoreEntitySet="InOut">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IN_AMOUNT" ColumnName="IN_AMOUNT" />
+                <ScalarProperty Name="OUT_AMOUNT" ColumnName="OUT_AMOUNT" />
+                <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+                <ScalarProperty Name="PERIOD_ID" ColumnName="PERIOD_ID" />
+                <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+                <ScalarProperty Name="PERIOD_DATE" ColumnName="PERIOD_DATE" />
+                <ScalarProperty Name="MORE_INFO" ColumnName="MORE_INFO" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="INOUT_TYPE_ID" ColumnName="INOUT_TYPE_ID" />
+                <ScalarProperty Name="INOUT_DATE" ColumnName="INOUT_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InOutTypes">
+            <EntityTypeMapping TypeName="DeiofiberModel.InOutType">
+              <MappingFragment StoreEntitySet="InOutType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="IS_INCOME" ColumnName="IS_INCOME" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="IS_CONTRACT" ColumnName="IS_CONTRACT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="DeiofiberModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LOG_MSG" ColumnName="LOG_MSG" />
+                <ScalarProperty Name="ACCOUNT" ColumnName="ACCOUNT" />
+                <ScalarProperty Name="STORE" ColumnName="STORE" />
+                <ScalarProperty Name="LOG_DATE" ColumnName="LOG_DATE" />
+                <ScalarProperty Name="LOG_ACTION" ColumnName="LOG_ACTION" />
+                <ScalarProperty Name="IS_CRASH" ColumnName="IS_CRASH" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayPeriods">
+            <EntityTypeMapping TypeName="DeiofiberModel.PayPeriod">
+              <MappingFragment StoreEntitySet="PayPeriod">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+                <ScalarProperty Name="PAY_DATE" ColumnName="PAY_DATE" />
+                <ScalarProperty Name="AMOUNT_PER_PERIOD" ColumnName="AMOUNT_PER_PERIOD" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="ACTUAL_PAY" ColumnName="ACTUAL_PAY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentTypes">
+            <EntityTypeMapping TypeName="DeiofiberModel.RentType">
+              <MappingFragment StoreEntitySet="RentType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ISINCOME" ColumnName="ISINCOME" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="IS_CONTRACT" ColumnName="IS_CONTRACT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="DeiofiberModel.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="START_CAPITAL" ColumnName="START_CAPITAL" />
+                <ScalarProperty Name="CURRENT_CAPITAL" ColumnName="CURRENT_CAPITAL" />
+                <ScalarProperty Name="APPLY_DATE" ColumnName="APPLY_DATE" />
+                <ScalarProperty Name="REVENUE_BEFORE_APPLY" ColumnName="REVENUE_BEFORE_APPLY" />
+                <ScalarProperty Name="TOTAL_COST_BEFORE" ColumnName="TOTAL_COST_BEFORE" />
+                <ScalarProperty Name="TOTAL_INVESMENT_BEFORE" ColumnName="TOTAL_INVESMENT_BEFORE" />
+                <ScalarProperty Name="REGISTER_DATE" ColumnName="REGISTER_DATE" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreFees">
+            <EntityTypeMapping TypeName="DeiofiberModel.StoreFee">
+              <MappingFragment StoreEntitySet="StoreFee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FEE_PERCENT" ColumnName="FEE_PERCENT" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTRACT_FULL_VW">
+            <EntityTypeMapping TypeName="DeiofiberModel.CONTRACT_FULL_VW">
+              <MappingFragment StoreEntitySet="CONTRACT_FULL_VW">
+                <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+                <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+                <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+                <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+                <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+                <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+                <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+                <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+                <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+                <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+                <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
+                <ScalarProperty Name="LICENSE_NO" ColumnName="LICENSE_NO" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="LICENSE_RANGE_DATE" ColumnName="LICENSE_RANGE_DATE" />
+                <ScalarProperty Name="LICENSE_RANGE_PLACE" ColumnName="LICENSE_RANGE_PLACE" />
+                <ScalarProperty Name="PERMANENT_RESIDENCE" ColumnName="PERMANENT_RESIDENCE" />
+                <ScalarProperty Name="CURRENT_RESIDENCE" ColumnName="CURRENT_RESIDENCE" />
+                <ScalarProperty Name="BIRTH_DAY" ColumnName="BIRTH_DAY" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+                <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+                <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+                <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CUS_CITY_ID" ColumnName="CUS_CITY_ID" />
+                <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+                <ScalarProperty Name="RENT_TYPE_NAME" ColumnName="RENT_TYPE_NAME" />
+                <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+                <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+                <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+                <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTRACT_HISTORY_FULL_VW">
+            <EntityTypeMapping TypeName="DeiofiberModel.CONTRACT_HISTORY_FULL_VW">
+              <MappingFragment StoreEntitySet="CONTRACT_HISTORY_FULL_VW">
+                <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+                <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="CONTRACT_AMOUNT" ColumnName="CONTRACT_AMOUNT" />
+                <ScalarProperty Name="RENT_DATE" ColumnName="RENT_DATE" />
+                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="REFERENCE_NAME" ColumnName="REFERENCE_NAME" />
+                <ScalarProperty Name="ITEM_TYPE" ColumnName="ITEM_TYPE" />
+                <ScalarProperty Name="ITEM_LICENSE_NO" ColumnName="ITEM_LICENSE_NO" />
+                <ScalarProperty Name="SERIAL_1" ColumnName="SERIAL_1" />
+                <ScalarProperty Name="SERIAL_2" ColumnName="SERIAL_2" />
+                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="CONTRACT_STATUS" ColumnName="CONTRACT_STATUS" />
+                <ScalarProperty Name="REFERENCE_PHONE" ColumnName="REFERENCE_PHONE" />
+                <ScalarProperty Name="SCHOOL_NAME" ColumnName="SCHOOL_NAME" />
+                <ScalarProperty Name="CLASS_NAME" ColumnName="CLASS_NAME" />
+                <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+                <ScalarProperty Name="IMPLEMENTER" ColumnName="IMPLEMENTER" />
+                <ScalarProperty Name="BACK_TO_DOCUMENTS" ColumnName="BACK_TO_DOCUMENTS" />
+                <ScalarProperty Name="PHOTO_1" ColumnName="PHOTO_1" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_1" ColumnName="THUMBNAIL_PHOTO_1" />
+                <ScalarProperty Name="PHOTO_2" ColumnName="PHOTO_2" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_2" ColumnName="THUMBNAIL_PHOTO_2" />
+                <ScalarProperty Name="PHOTO_3" ColumnName="PHOTO_3" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_3" ColumnName="THUMBNAIL_PHOTO_3" />
+                <ScalarProperty Name="PHOTO_4" ColumnName="PHOTO_4" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_4" ColumnName="THUMBNAIL_PHOTO_4" />
+                <ScalarProperty Name="PHOTO_5" ColumnName="PHOTO_5" />
+                <ScalarProperty Name="THUMBNAIL_PHOTO_5" ColumnName="THUMBNAIL_PHOTO_5" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="CUSTOMER_NAME" ColumnName="CUSTOMER_NAME" />
+                <ScalarProperty Name="LICENSE_NO" ColumnName="LICENSE_NO" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CUSTOMER_CITY_ID" ColumnName="CUSTOMER_CITY_ID" />
+                <ScalarProperty Name="LICENSE_RANGE_DATE" ColumnName="LICENSE_RANGE_DATE" />
+                <ScalarProperty Name="LICENSE_RANGE_PLACE" ColumnName="LICENSE_RANGE_PLACE" />
+                <ScalarProperty Name="PERMANENT_RESIDENCE" ColumnName="PERMANENT_RESIDENCE" />
+                <ScalarProperty Name="CURRENT_RESIDENCE" ColumnName="CURRENT_RESIDENCE" />
+                <ScalarProperty Name="BIRTH_DAY" ColumnName="BIRTH_DAY" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+                <ScalarProperty Name="RENT_TYPE_NAME" ColumnName="RENT_TYPE_NAME" />
+                <ScalarProperty Name="CLOSE_CONTRACT_DATE" ColumnName="CLOSE_CONTRACT_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INOUT_FULL_VW">
+            <EntityTypeMapping TypeName="DeiofiberModel.INOUT_FULL_VW">
+              <MappingFragment StoreEntitySet="INOUT_FULL_VW">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IN_AMOUNT" ColumnName="IN_AMOUNT" />
+                <ScalarProperty Name="OUT_AMOUNT" ColumnName="OUT_AMOUNT" />
+                <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+                <ScalarProperty Name="PERIOD_ID" ColumnName="PERIOD_ID" />
+                <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
+                <ScalarProperty Name="PERIOD_DATE" ColumnName="PERIOD_DATE" />
+                <ScalarProperty Name="MORE_INFO" ColumnName="MORE_INFO" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+                <ScalarProperty Name="RENT_TYPE_NAME" ColumnName="RENT_TYPE_NAME" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="ISINCOME" ColumnName="ISINCOME" />
+                <ScalarProperty Name="IS_CONTRACT" ColumnName="IS_CONTRACT" />
+                <ScalarProperty Name="RENT_TYPE_ACTIVE" ColumnName="RENT_TYPE_ACTIVE" />
+                <ScalarProperty Name="INOUT_TYPE_NAME" ColumnName="INOUT_TYPE_NAME" />
+                <ScalarProperty Name="INOUT_TYPE_ID" ColumnName="INOUT_TYPE_ID" />
+                <ScalarProperty Name="INOUT_DATE" ColumnName="INOUT_DATE" />
+                <ScalarProperty Name="CONTRACT_NO" ColumnName="CONTRACT_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STORE_FULL_VW">
+            <EntityTypeMapping TypeName="DeiofiberModel.STORE_FULL_VW">
+              <MappingFragment StoreEntitySet="STORE_FULL_VW">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="START_CAPITAL" ColumnName="START_CAPITAL" />
+                <ScalarProperty Name="CURRENT_CAPITAL" ColumnName="CURRENT_CAPITAL" />
+                <ScalarProperty Name="APPLY_DATE" ColumnName="APPLY_DATE" />
+                <ScalarProperty Name="REVENUE_BEFORE_APPLY" ColumnName="REVENUE_BEFORE_APPLY" />
+                <ScalarProperty Name="TOTAL_COST_BEFORE" ColumnName="TOTAL_COST_BEFORE" />
+                <ScalarProperty Name="TOTAL_INVESMENT_BEFORE" ColumnName="TOTAL_INVESMENT_BEFORE" />
+                <ScalarProperty Name="REGISTER_DATE" ColumnName="REGISTER_DATE" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="SEARCH_TEXT" ColumnName="SEARCH_TEXT" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DeiofiberModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ACC" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PASSWORD" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PERMISSION_ID" Type="int" Nullable="false" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="CITY_ID" Type="int" Nullable="false" />
+    <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
+    <Property Name="ACTIVE" Type="bit" Nullable="false" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="250" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AccountPermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+    <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="RENT_DATE" Type="date" Nullable="false" />
+    <Property Name="END_DATE" Type="date" Nullable="false" />
+    <Property Name="EXTEND_END_DATE" Type="date" />
+    <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+    <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+    <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+    <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+    <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+    <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="13" StoreGeneratedPattern="Computed" />
+    <Property Name="PHOTO_1" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_1" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_2" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_2" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_3" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_3" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_4" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_4" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_5" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_5" Type="varchar" MaxLength="300" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ContractHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+    <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+    <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="RENT_DATE" Type="date" Nullable="false" />
+    <Property Name="END_DATE" Type="date" Nullable="false" />
+    <Property Name="EXTEND_END_DATE" Type="date" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+    <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+    <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+    <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+    <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+    <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+    <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+    <Property Name="CONTRACT_NO" Type="nvarchar" MaxLength="20" />
+    <Property Name="PHOTO_1" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_1" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_2" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_2" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_3" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_3" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_4" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_4" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_5" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_5" Type="nvarchar" MaxLength="300" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="LICENSE_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LICENSE_RANGE_DATE" Type="datetime" />
+    <Property Name="LICENSE_RANGE_PLACE" Type="nvarchar" MaxLength="300" />
+    <Property Name="PERMANENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+    <Property Name="CURRENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+    <Property Name="BIRTH_DAY" Type="datetime" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO" Type="image" />
+    <Property Name="CITY_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="InOut">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IN_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="OUT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+    <Property Name="PERIOD_ID" Type="int" Nullable="false" />
+    <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="PERIOD_DATE" Type="date" Nullable="false" />
+    <Property Name="MORE_INFO" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="INOUT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="INOUT_DATE" Type="date" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="InOutType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IS_INCOME" Type="bit" Nullable="false" />
+    <Property Name="ACTIVE" Type="bit" Nullable="false" />
+    <Property Name="IS_CONTRACT" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LOG_MSG" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ACCOUNT" Type="nvarchar" MaxLength="50" />
+    <Property Name="STORE" Type="nvarchar" MaxLength="250" />
+    <Property Name="LOG_DATE" Type="datetime" Nullable="false" />
+    <Property Name="LOG_ACTION" Type="nvarchar" MaxLength="150" />
+    <Property Name="IS_CRASH" Type="bit" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+    <Property Name="STORE_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="PayPeriod">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+    <Property Name="PAY_DATE" Type="date" Nullable="false" />
+    <Property Name="AMOUNT_PER_PERIOD" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="STATUS" Type="bit" Nullable="false" />
+    <Property Name="ACTUAL_PAY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RentType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="ISINCOME" Type="bit" />
+    <Property Name="ACTIVE" Type="bit" Nullable="false" />
+    <Property Name="IS_CONTRACT" Type="bit" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="CITY_ID" Type="int" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="FAX" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="START_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CURRENT_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="APPLY_DATE" Type="date" Nullable="false" />
+    <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TOTAL_COST_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TOTAL_INVESMENT_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
+    <Property Name="ACTIVE" Type="bit" Nullable="false" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StoreFee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FEE_PERCENT" Type="int" Nullable="false" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.CONTRACT_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CONTRACT_FULL_VW">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="RENT_TYPE_ID" />
+      <PropertyRef Name="STORE_ID" />
+      <PropertyRef Name="FEE_PER_DAY" />
+      <PropertyRef Name="CONTRACT_AMOUNT" />
+      <PropertyRef Name="RENT_DATE" />
+      <PropertyRef Name="END_DATE" />
+      <PropertyRef Name="CUSTOMER_ID" />
+      <PropertyRef Name="ITEM_LICENSE_NO" />
+      <PropertyRef Name="CONTRACT_STATUS" />
+      <PropertyRef Name="CUSTOMER_NAME" />
+      <PropertyRef Name="LICENSE_NO" />
+      <PropertyRef Name="ADDRESS" />
+      <PropertyRef Name="STORE_NAME" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+    <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="RENT_DATE" Type="date" Nullable="false" />
+    <Property Name="END_DATE" Type="date" Nullable="false" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+    <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+    <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+    <Property Name="PHOTO_1" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_1" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_2" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_2" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_3" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_3" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_4" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_4" Type="varchar" MaxLength="300" />
+    <Property Name="PHOTO_5" Type="varchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_5" Type="varchar" MaxLength="300" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+    <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+    <Property Name="CUSTOMER_NAME" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="LICENSE_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="LICENSE_RANGE_DATE" Type="datetime" />
+    <Property Name="LICENSE_RANGE_PLACE" Type="nvarchar" MaxLength="300" />
+    <Property Name="PERMANENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+    <Property Name="CURRENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+    <Property Name="BIRTH_DAY" Type="datetime" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="PHOTO" Type="image" />
+    <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="CUS_CITY_ID" Type="int" />
+    <Property Name="STORE_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="RENT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="13" />
+    <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+    <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.CONTRACT_HISTORY_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CONTRACT_HISTORY_FULL_VW">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="CONTRACT_ID" />
+      <PropertyRef Name="RENT_TYPE_ID" />
+      <PropertyRef Name="STORE_ID" />
+      <PropertyRef Name="CONTRACT_AMOUNT" />
+      <PropertyRef Name="RENT_DATE" />
+      <PropertyRef Name="END_DATE" />
+      <PropertyRef Name="ITEM_LICENSE_NO" />
+      <PropertyRef Name="CUSTOMER_ID" />
+      <PropertyRef Name="CONTRACT_STATUS" />
+      <PropertyRef Name="CUSTOMER_NAME" />
+      <PropertyRef Name="LICENSE_NO" />
+      <PropertyRef Name="ADDRESS" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+    <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="FEE_PER_DAY" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+    <Property Name="CONTRACT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="RENT_DATE" Type="date" Nullable="false" />
+    <Property Name="END_DATE" Type="date" Nullable="false" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="500" />
+    <Property Name="REFERENCE_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="ITEM_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="ITEM_LICENSE_NO" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SERIAL_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="SERIAL_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="DETAIL" Type="nvarchar" MaxLength="250" />
+    <Property Name="CUSTOMER_ID" Type="int" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+    <Property Name="CONTRACT_STATUS" Type="bit" Nullable="false" />
+    <Property Name="REFERENCE_PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="SCHOOL_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CLASS_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="CONTRACT_NO" Type="nvarchar" MaxLength="20" />
+    <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
+    <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_1" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_1" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_2" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_2" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_3" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_3" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_4" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_4" Type="nvarchar" MaxLength="300" />
+    <Property Name="PHOTO_5" Type="nvarchar" MaxLength="300" />
+    <Property Name="THUMBNAIL_PHOTO_5" Type="nvarchar" MaxLength="300" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+    <Property Name="CUSTOMER_NAME" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="LICENSE_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="CUSTOMER_CITY_ID" Type="int" />
+    <Property Name="LICENSE_RANGE_DATE" Type="datetime" />
+    <Property Name="LICENSE_RANGE_PLACE" Type="nvarchar" MaxLength="300" />
+    <Property Name="PERMANENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+    <Property Name="CURRENT_RESIDENCE" Type="nvarchar" MaxLength="300" />
+    <Property Name="BIRTH_DAY" Type="datetime" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="PHOTO" Type="image" />
+    <Property Name="RENT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CLOSE_CONTRACT_DATE" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.INOUT_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="INOUT_FULL_VW">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="IN_AMOUNT" />
+      <PropertyRef Name="OUT_AMOUNT" />
+      <PropertyRef Name="CONTRACT_ID" />
+      <PropertyRef Name="PERIOD_ID" />
+      <PropertyRef Name="RENT_TYPE_ID" />
+      <PropertyRef Name="PERIOD_DATE" />
+      <PropertyRef Name="MORE_INFO" />
+      <PropertyRef Name="STORE_ID" />
+      <PropertyRef Name="SEARCH_TEXT" />
+      <PropertyRef Name="STORE_NAME" />
+      <PropertyRef Name="INOUT_TYPE_ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="IN_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="OUT_AMOUNT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CONTRACT_ID" Type="int" Nullable="false" />
+    <Property Name="PERIOD_ID" Type="int" Nullable="false" />
+    <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="PERIOD_DATE" Type="date" Nullable="false" />
+    <Property Name="MORE_INFO" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="STORE_ID" Type="int" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="STORE_NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="RENT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+    <Property Name="ISINCOME" Type="bit" />
+    <Property Name="IS_CONTRACT" Type="bit" />
+    <Property Name="RENT_TYPE_ACTIVE" Type="bit" />
+    <Property Name="INOUT_TYPE_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="INOUT_TYPE_ID" Type="int" Nullable="false" />
+    <Property Name="INOUT_DATE" Type="date" />
+    <Property Name="CONTRACT_NO" Type="varchar" MaxLength="13" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="STORE_FULL_VW">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="ADDRESS" />
+      <PropertyRef Name="CITY_ID" />
+      <PropertyRef Name="PHONE" />
+      <PropertyRef Name="FAX" />
+      <PropertyRef Name="START_CAPITAL" />
+      <PropertyRef Name="CURRENT_CAPITAL" />
+      <PropertyRef Name="APPLY_DATE" />
+      <PropertyRef Name="REVENUE_BEFORE_APPLY" />
+      <PropertyRef Name="TOTAL_COST_BEFORE" />
+      <PropertyRef Name="TOTAL_INVESMENT_BEFORE" />
+      <PropertyRef Name="REGISTER_DATE" />
+      <PropertyRef Name="ACTIVE" />
+      <PropertyRef Name="NOTE" />
+      <PropertyRef Name="SEARCH_TEXT" />
+      <PropertyRef Name="CITY" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="CITY_ID" Type="int" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="FAX" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="START_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CURRENT_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="APPLY_DATE" Type="date" Nullable="false" />
+    <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TOTAL_COST_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TOTAL_INVESMENT_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
+    <Property Name="ACTIVE" Type="bit" Nullable="false" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="CITY" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="DeiofiberModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccountPermission" EntityType="Self.AccountPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractHistory" EntityType="Self.ContractHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InOut" EntityType="Self.InOut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InOutType" EntityType="Self.InOutType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayPeriod" EntityType="Self.PayPeriod" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RentType" EntityType="Self.RentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StoreFee" EntityType="Self.StoreFee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CONTRACT_FULL_VW" EntityType="Self.CONTRACT_FULL_VW" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CONTRACT_FULL_VW].[ID] AS [ID], 
+    [CONTRACT_FULL_VW].[RENT_TYPE_ID] AS [RENT_TYPE_ID], 
+    [CONTRACT_FULL_VW].[STORE_ID] AS [STORE_ID], 
+    [CONTRACT_FULL_VW].[FEE_PER_DAY] AS [FEE_PER_DAY], 
+    [CONTRACT_FULL_VW].[CONTRACT_AMOUNT] AS [CONTRACT_AMOUNT], 
+    [CONTRACT_FULL_VW].[RENT_DATE] AS [RENT_DATE], 
+    [CONTRACT_FULL_VW].[END_DATE] AS [END_DATE], 
+    [CONTRACT_FULL_VW].[NOTE] AS [NOTE], 
+    [CONTRACT_FULL_VW].[REFERENCE_NAME] AS [REFERENCE_NAME], 
+    [CONTRACT_FULL_VW].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+    [CONTRACT_FULL_VW].[ITEM_TYPE] AS [ITEM_TYPE], 
+    [CONTRACT_FULL_VW].[ITEM_LICENSE_NO] AS [ITEM_LICENSE_NO], 
+    [CONTRACT_FULL_VW].[SERIAL_1] AS [SERIAL_1], 
+    [CONTRACT_FULL_VW].[SERIAL_2] AS [SERIAL_2], 
+    [CONTRACT_FULL_VW].[DETAIL] AS [DETAIL], 
+    [CONTRACT_FULL_VW].[PHOTO_1] AS [PHOTO_1], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_1] AS [THUMBNAIL_PHOTO_1], 
+    [CONTRACT_FULL_VW].[PHOTO_2] AS [PHOTO_2], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_2] AS [THUMBNAIL_PHOTO_2], 
+    [CONTRACT_FULL_VW].[PHOTO_3] AS [PHOTO_3], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_3] AS [THUMBNAIL_PHOTO_3], 
+    [CONTRACT_FULL_VW].[PHOTO_4] AS [PHOTO_4], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_4] AS [THUMBNAIL_PHOTO_4], 
+    [CONTRACT_FULL_VW].[PHOTO_5] AS [PHOTO_5], 
+    [CONTRACT_FULL_VW].[THUMBNAIL_PHOTO_5] AS [THUMBNAIL_PHOTO_5], 
+    [CONTRACT_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [CONTRACT_FULL_VW].[CONTRACT_STATUS] AS [CONTRACT_STATUS], 
+    [CONTRACT_FULL_VW].[CUSTOMER_NAME] AS [CUSTOMER_NAME], 
+    [CONTRACT_FULL_VW].[LICENSE_NO] AS [LICENSE_NO], 
+    [CONTRACT_FULL_VW].[PHONE] AS [PHONE], 
+    [CONTRACT_FULL_VW].[LICENSE_RANGE_DATE] AS [LICENSE_RANGE_DATE], 
+    [CONTRACT_FULL_VW].[LICENSE_RANGE_PLACE] AS [LICENSE_RANGE_PLACE], 
+    [CONTRACT_FULL_VW].[PERMANENT_RESIDENCE] AS [PERMANENT_RESIDENCE], 
+    [CONTRACT_FULL_VW].[CURRENT_RESIDENCE] AS [CURRENT_RESIDENCE], 
+    [CONTRACT_FULL_VW].[BIRTH_DAY] AS [BIRTH_DAY], 
+    [CONTRACT_FULL_VW].[EMAIL] AS [EMAIL], 
+    [CONTRACT_FULL_VW].[PHOTO] AS [PHOTO], 
+    [CONTRACT_FULL_VW].[REFERENCE_PHONE] AS [REFERENCE_PHONE], 
+    [CONTRACT_FULL_VW].[SCHOOL_NAME] AS [SCHOOL_NAME], 
+    [CONTRACT_FULL_VW].[CLASS_NAME] AS [CLASS_NAME], 
+    [CONTRACT_FULL_VW].[ADDRESS] AS [ADDRESS], 
+    [CONTRACT_FULL_VW].[CUS_CITY_ID] AS [CUS_CITY_ID], 
+    [CONTRACT_FULL_VW].[STORE_NAME] AS [STORE_NAME], 
+    [CONTRACT_FULL_VW].[RENT_TYPE_NAME] AS [RENT_TYPE_NAME], 
+    [CONTRACT_FULL_VW].[CLOSE_CONTRACT_DATE] AS [CLOSE_CONTRACT_DATE], 
+    [CONTRACT_FULL_VW].[CONTRACT_NO] AS [CONTRACT_NO], 
+    [CONTRACT_FULL_VW].[IMPLEMENTER] AS [IMPLEMENTER], 
+    [CONTRACT_FULL_VW].[BACK_TO_DOCUMENTS] AS [BACK_TO_DOCUMENTS], 
+    [CONTRACT_FULL_VW].[CREATED_BY] AS [CREATED_BY], 
+    [CONTRACT_FULL_VW].[CREATED_DATE] AS [CREATED_DATE], 
+    [CONTRACT_FULL_VW].[UPDATED_BY] AS [UPDATED_BY], 
+    [CONTRACT_FULL_VW].[UPDATED_DATE] AS [UPDATED_DATE]
+    FROM [dbo].[CONTRACT_FULL_VW] AS [CONTRACT_FULL_VW]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CONTRACT_HISTORY_FULL_VW" EntityType="Self.CONTRACT_HISTORY_FULL_VW" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CONTRACT_HISTORY_FULL_VW].[ID] AS [ID], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_ID] AS [CONTRACT_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[RENT_TYPE_ID] AS [RENT_TYPE_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[FEE_PER_DAY] AS [FEE_PER_DAY], 
+    [CONTRACT_HISTORY_FULL_VW].[STORE_ID] AS [STORE_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_AMOUNT] AS [CONTRACT_AMOUNT], 
+    [CONTRACT_HISTORY_FULL_VW].[RENT_DATE] AS [RENT_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[END_DATE] AS [END_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[NOTE] AS [NOTE], 
+    [CONTRACT_HISTORY_FULL_VW].[REFERENCE_NAME] AS [REFERENCE_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[ITEM_TYPE] AS [ITEM_TYPE], 
+    [CONTRACT_HISTORY_FULL_VW].[ITEM_LICENSE_NO] AS [ITEM_LICENSE_NO], 
+    [CONTRACT_HISTORY_FULL_VW].[SERIAL_1] AS [SERIAL_1], 
+    [CONTRACT_HISTORY_FULL_VW].[SERIAL_2] AS [SERIAL_2], 
+    [CONTRACT_HISTORY_FULL_VW].[DETAIL] AS [DETAIL], 
+    [CONTRACT_HISTORY_FULL_VW].[CUSTOMER_ID] AS [CUSTOMER_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_STATUS] AS [CONTRACT_STATUS], 
+    [CONTRACT_HISTORY_FULL_VW].[REFERENCE_PHONE] AS [REFERENCE_PHONE], 
+    [CONTRACT_HISTORY_FULL_VW].[SCHOOL_NAME] AS [SCHOOL_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[CLASS_NAME] AS [CLASS_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[CONTRACT_NO] AS [CONTRACT_NO], 
+    [CONTRACT_HISTORY_FULL_VW].[IMPLEMENTER] AS [IMPLEMENTER], 
+    [CONTRACT_HISTORY_FULL_VW].[BACK_TO_DOCUMENTS] AS [BACK_TO_DOCUMENTS], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_1] AS [PHOTO_1], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_1] AS [THUMBNAIL_PHOTO_1], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_2] AS [PHOTO_2], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_2] AS [THUMBNAIL_PHOTO_2], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_3] AS [PHOTO_3], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_3] AS [THUMBNAIL_PHOTO_3], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_4] AS [PHOTO_4], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_4] AS [THUMBNAIL_PHOTO_4], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO_5] AS [PHOTO_5], 
+    [CONTRACT_HISTORY_FULL_VW].[THUMBNAIL_PHOTO_5] AS [THUMBNAIL_PHOTO_5], 
+    [CONTRACT_HISTORY_FULL_VW].[CREATED_BY] AS [CREATED_BY], 
+    [CONTRACT_HISTORY_FULL_VW].[CREATED_DATE] AS [CREATED_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[UPDATED_BY] AS [UPDATED_BY], 
+    [CONTRACT_HISTORY_FULL_VW].[UPDATED_DATE] AS [UPDATED_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[CUSTOMER_NAME] AS [CUSTOMER_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[LICENSE_NO] AS [LICENSE_NO], 
+    [CONTRACT_HISTORY_FULL_VW].[PHONE] AS [PHONE], 
+    [CONTRACT_HISTORY_FULL_VW].[ADDRESS] AS [ADDRESS], 
+    [CONTRACT_HISTORY_FULL_VW].[CUSTOMER_CITY_ID] AS [CUSTOMER_CITY_ID], 
+    [CONTRACT_HISTORY_FULL_VW].[LICENSE_RANGE_DATE] AS [LICENSE_RANGE_DATE], 
+    [CONTRACT_HISTORY_FULL_VW].[LICENSE_RANGE_PLACE] AS [LICENSE_RANGE_PLACE], 
+    [CONTRACT_HISTORY_FULL_VW].[PERMANENT_RESIDENCE] AS [PERMANENT_RESIDENCE], 
+    [CONTRACT_HISTORY_FULL_VW].[CURRENT_RESIDENCE] AS [CURRENT_RESIDENCE], 
+    [CONTRACT_HISTORY_FULL_VW].[BIRTH_DAY] AS [BIRTH_DAY], 
+    [CONTRACT_HISTORY_FULL_VW].[EMAIL] AS [EMAIL], 
+    [CONTRACT_HISTORY_FULL_VW].[PHOTO] AS [PHOTO], 
+    [CONTRACT_HISTORY_FULL_VW].[RENT_TYPE_NAME] AS [RENT_TYPE_NAME], 
+    [CONTRACT_HISTORY_FULL_VW].[CLOSE_CONTRACT_DATE] AS [CLOSE_CONTRACT_DATE]
+    FROM [dbo].[CONTRACT_HISTORY_FULL_VW] AS [CONTRACT_HISTORY_FULL_VW]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="INOUT_FULL_VW" EntityType="Self.INOUT_FULL_VW" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [INOUT_FULL_VW].[ID] AS [ID], 
+    [INOUT_FULL_VW].[IN_AMOUNT] AS [IN_AMOUNT], 
+    [INOUT_FULL_VW].[OUT_AMOUNT] AS [OUT_AMOUNT], 
+    [INOUT_FULL_VW].[CONTRACT_ID] AS [CONTRACT_ID], 
+    [INOUT_FULL_VW].[PERIOD_ID] AS [PERIOD_ID], 
+    [INOUT_FULL_VW].[RENT_TYPE_ID] AS [RENT_TYPE_ID], 
+    [INOUT_FULL_VW].[PERIOD_DATE] AS [PERIOD_DATE], 
+    [INOUT_FULL_VW].[MORE_INFO] AS [MORE_INFO], 
+    [INOUT_FULL_VW].[STORE_ID] AS [STORE_ID], 
+    [INOUT_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [INOUT_FULL_VW].[STORE_NAME] AS [STORE_NAME], 
+    [INOUT_FULL_VW].[RENT_TYPE_NAME] AS [RENT_TYPE_NAME], 
+    [INOUT_FULL_VW].[CREATED_BY] AS [CREATED_BY], 
+    [INOUT_FULL_VW].[CREATED_DATE] AS [CREATED_DATE], 
+    [INOUT_FULL_VW].[UPDATED_BY] AS [UPDATED_BY], 
+    [INOUT_FULL_VW].[UPDATED_DATE] AS [UPDATED_DATE], 
+    [INOUT_FULL_VW].[ISINCOME] AS [ISINCOME], 
+    [INOUT_FULL_VW].[IS_CONTRACT] AS [IS_CONTRACT], 
+    [INOUT_FULL_VW].[RENT_TYPE_ACTIVE] AS [RENT_TYPE_ACTIVE], 
+    [INOUT_FULL_VW].[INOUT_TYPE_NAME] AS [INOUT_TYPE_NAME], 
+    [INOUT_FULL_VW].[INOUT_TYPE_ID] AS [INOUT_TYPE_ID], 
+    [INOUT_FULL_VW].[INOUT_DATE] AS [INOUT_DATE], 
+    [INOUT_FULL_VW].[CONTRACT_NO] AS [CONTRACT_NO]
+    FROM [dbo].[INOUT_FULL_VW] AS [INOUT_FULL_VW]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="STORE_FULL_VW" EntityType="Self.STORE_FULL_VW" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [STORE_FULL_VW].[ID] AS [ID], 
+    [STORE_FULL_VW].[NAME] AS [NAME], 
+    [STORE_FULL_VW].[ADDRESS] AS [ADDRESS], 
+    [STORE_FULL_VW].[CITY_ID] AS [CITY_ID], 
+    [STORE_FULL_VW].[PHONE] AS [PHONE], 
+    [STORE_FULL_VW].[FAX] AS [FAX], 
+    [STORE_FULL_VW].[START_CAPITAL] AS [START_CAPITAL], 
+    [STORE_FULL_VW].[CURRENT_CAPITAL] AS [CURRENT_CAPITAL], 
+    [STORE_FULL_VW].[APPLY_DATE] AS [APPLY_DATE], 
+    [STORE_FULL_VW].[REVENUE_BEFORE_APPLY] AS [REVENUE_BEFORE_APPLY], 
+    [STORE_FULL_VW].[TOTAL_COST_BEFORE] AS [TOTAL_COST_BEFORE], 
+    [STORE_FULL_VW].[TOTAL_INVESMENT_BEFORE] AS [TOTAL_INVESMENT_BEFORE], 
+    [STORE_FULL_VW].[REGISTER_DATE] AS [REGISTER_DATE], 
+    [STORE_FULL_VW].[ACTIVE] AS [ACTIVE], 
+    [STORE_FULL_VW].[NOTE] AS [NOTE], 
+    [STORE_FULL_VW].[SEARCH_TEXT] AS [SEARCH_TEXT], 
+    [STORE_FULL_VW].[CITY] AS [CITY]
+    FROM [dbo].[STORE_FULL_VW] AS [STORE_FULL_VW]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
