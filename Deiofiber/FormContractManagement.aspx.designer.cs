@@ -76,13 +76,13 @@ namespace Deiofiber {
         protected global::System.Web.UI.WebControls.Label lblTotalFeeContract;
         
         /// <summary>
-        /// lblRentOther control.
+        /// lblRentStudent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRentOther;
+        protected global::System.Web.UI.WebControls.Label lblRentStudent;
         
         /// <summary>
         /// lblTotalMoneyOfNotFinishContract control.
@@ -92,6 +92,15 @@ namespace Deiofiber {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalMoneyOfNotFinishContract;
+        
+        /// <summary>
+        /// lblRentLoan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRentLoan;
         
         /// <summary>
         /// rptContract control.

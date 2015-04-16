@@ -69,10 +69,16 @@ namespace Deiofiber
                     switch (con.RENT_TYPE_ID)
                     {
                         case 1:
-                            closedContractName = "Thanh lý thuê xe";
+                            closedContractName = "Thanh lý thuê ô tô, xe máy";
                             break;
                         case 2:
-                            closedContractName = "Thanh lý thuê thiết bị";
+                            closedContractName = "Thanh lý thuê điện thoại, máy tính";
+                            break;
+                        case 3:
+                            closedContractName = "Thanh lý sinh viên thuê";
+                            break;
+                        case 4:
+                            closedContractName = "Thanh lý vay vốn";
                             break;
                         default:
                             closedContractName = "Thanh lý thuê khác";
@@ -107,20 +113,26 @@ namespace Deiofiber
                         {
                             InOut io2 = new InOut();
 
-                            string feeName = string.Empty;
-                            switch (con.RENT_TYPE_NAME)
+                            int inoutTypeId = 0;
+                            switch (con.RENT_TYPE_ID)
                             {
-                                case "Cho thuê xe":
-                                    feeName = "Phí thuê xe";
+                                case 1:
+                                    inoutTypeId = 14;
                                     break;
-                                case "Cho thuê thiết bị văn phòng":
-                                    feeName = "Phí thuê thiết bị";
+                                case 2:
+                                    inoutTypeId = 15;
                                     break;
-                                case "Cho thuê mặt hàng khác":
-                                    feeName = "Phí khác";
+                                case 3:
+                                    inoutTypeId = 25;
+                                    break;
+                                case 4:
+                                    inoutTypeId = 26;
+                                    break;
+                                default:
+                                    inoutTypeId = 23;
                                     break;
                             }
-                            item = db.InOutTypes.First(s => s.NAME == feeName);
+                            item = db.InOutTypes.First(s => s.ID == inoutTypeId);
 
                             io2.INOUT_TYPE_ID = item.ID;
                             io2.RENT_TYPE_ID = con.RENT_TYPE_ID;
@@ -130,7 +142,7 @@ namespace Deiofiber
                             io2.MORE_INFO = txtMoreInfo.Text;
                             io2.PERIOD_DATE = DateTime.Now;
                             io2.STORE_ID = con.STORE_ID;
-                            io2.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, feeName, txtMoreInfo.Text.Trim());
+                            io2.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, item.NAME, txtMoreInfo.Text.Trim());
                             io2.INOUT_DATE = DateTime.Now;
                             io2.CREATED_BY = Session["username"].ToString();
                             io2.CREATED_DATE = DateTime.Now;

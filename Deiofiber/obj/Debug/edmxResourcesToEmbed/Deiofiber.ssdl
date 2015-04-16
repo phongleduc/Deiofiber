@@ -154,9 +154,9 @@
     <Property Name="PERIOD_ID" Type="int" Nullable="false" />
     <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
     <Property Name="PERIOD_DATE" Type="date" Nullable="false" />
-    <Property Name="MORE_INFO" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="MORE_INFO" Type="nvarchar" MaxLength="150" />
     <Property Name="STORE_ID" Type="int" Nullable="false" />
-    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
     <Property Name="INOUT_TYPE_ID" Type="int" Nullable="false" />
     <Property Name="INOUT_DATE" Type="date" />
     <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
@@ -215,20 +215,24 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NAME" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="ADDRESS" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="500" />
     <Property Name="CITY_ID" Type="int" Nullable="false" />
-    <Property Name="PHONE" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="FAX" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAX" Type="nvarchar" MaxLength="30" />
     <Property Name="START_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="CURRENT_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="APPLY_DATE" Type="date" Nullable="false" />
-    <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" />
     <Property Name="TOTAL_COST_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="TOTAL_INVESMENT_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
     <Property Name="ACTIVE" Type="bit" Nullable="false" />
-    <Property Name="NOTE" Type="nvarchar" MaxLength="1000" Nullable="false" />
-    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="NOTE" Type="nvarchar" MaxLength="1000" />
+    <Property Name="SEARCH_TEXT" Type="nvarchar" MaxLength="500" />
+    <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREATED_DATE" Type="datetime" />
+    <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
   </EntityType>
   <EntityType Name="StoreFee">
     <Key>

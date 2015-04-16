@@ -170,13 +170,15 @@ namespace Deiofiber
         {
             int DeiofiberNo = CheckAdminPermission() ? GetNoDeiofiberContractAdmin() : GetNoDeiofiberContract();
             int rentequipNo = CheckAdminPermission() ? GetNoRentOfficeEquipContractAdmin() : GetNoRentOfficeEquipContract();
-            int rentotherNo = CheckAdminPermission() ? GetNoRentOtherContractAdmin() : GetNoRentOtherContract();
+            int rentStudentNo = CheckAdminPermission() ? GetNoRentStudentContractAdmin() : GetNoRentStudentContract();
+            int rentLoanNo = CheckAdminPermission() ? GetNoRentLoanContractAdmin() : GetNoRentLoanContract();
             int notFinishContract = CheckAdminPermission() ? GetNoOfNotFinishedContractAdmin() : GetNoOfNotFinishedContract();
             decimal totalmoneynotfinishContract = CheckAdminPermission() ? GetAmountOfNotFinishedContractAdmin() : GetAmountOfNotFinishedContract();
 
             lblDeiofiberNo.Text = DeiofiberNo == 0 ? "0" : string.Format("{0:0,0}", DeiofiberNo);
             lblRentOfficeEquip.Text = rentequipNo == 0 ? "0" : string.Format("{0:0,0}", rentequipNo);
-            lblRentOther.Text = rentotherNo == 0 ? "0" : string.Format("{0:0,0}", rentotherNo);
+            lblRentStudent.Text = rentStudentNo == 0 ? "0" : string.Format("{0:0,0}", rentStudentNo);
+            lblRentLoan.Text = rentLoanNo == 0 ? "0" : string.Format("{0:0,0}", rentLoanNo);
             lblNotFinishedContract.Text = notFinishContract == 0 ? "0" : string.Format("{0:0,0}", notFinishContract);
             lblTotalMoneyOfNotFinishContract.Text = totalmoneynotfinishContract == 0 ? "0" : string.Format("{0:0,0}", totalmoneynotfinishContract);
             lblTotalFeeContract.Text = TotalFeeBike + TotalFeeEquip + TotalFeeOther == 0 ? "0" : string.Format("{0:0,0}", TotalFeeBike + TotalFeeEquip + TotalFeeOther);
@@ -304,14 +306,14 @@ namespace Deiofiber
             return no;
         }
 
-        private int GetNoRentOtherContract()
+        private int GetNoRentStudentContract()
         {
             int storeid = Convert.ToInt32(Session["store_id"]);
             int no = 0;
             using (var db = new DeiofiberEntities())
             {
                 var item = (from itm in db.Contracts
-                            where itm.RENT_TYPE_ID == 3 // Other
+                            where itm.RENT_TYPE_ID == 3 // Student
                             && itm.STORE_ID == storeid && itm.CONTRACT_STATUS == true
                             select itm).ToList();
 
@@ -325,7 +327,7 @@ namespace Deiofiber
             return no;
         }
 
-        private int GetNoRentOtherContractAdmin()
+        private int GetNoRentStudentContractAdmin()
         {
             int no = 0;
             int storeid = Helper.parseInt(drpStore.SelectedValue);
@@ -334,7 +336,7 @@ namespace Deiofiber
                 if (storeid != 0)
                 {
                     var item = (from itm in db.Contracts
-                                where itm.RENT_TYPE_ID == 3 && itm.CONTRACT_STATUS == true && itm.STORE_ID == storeid// Other
+                                where itm.RENT_TYPE_ID == 3 && itm.CONTRACT_STATUS == true && itm.STORE_ID == storeid// Student
                                 select itm).ToList();
 
                     if (item != null && item.Any())
@@ -346,7 +348,63 @@ namespace Deiofiber
                 else
                 {
                     var item = (from itm in db.Contracts
-                                where itm.RENT_TYPE_ID == 3 && itm.CONTRACT_STATUS == true // Other
+                                where itm.RENT_TYPE_ID == 3 && itm.CONTRACT_STATUS == true // Student
+                                select itm).ToList();
+
+                    if (item != null && item.Any())
+                    {
+                        no = Convert.ToInt32(item.Count());
+                        TotalFeeOther = item.Select(c => c.FEE_PER_DAY).DefaultIfEmpty(0).Sum();
+                    }
+                }
+            }
+
+            return no;
+        }
+
+        private int GetNoRentLoanContract()
+        {
+            int storeid = Convert.ToInt32(Session["store_id"]);
+            int no = 0;
+            using (var db = new DeiofiberEntities())
+            {
+                var item = (from itm in db.Contracts
+                            where itm.RENT_TYPE_ID == 4 // Loan
+                            && itm.STORE_ID == storeid && itm.CONTRACT_STATUS == true
+                            select itm).ToList();
+
+                if (item != null && item.Any())
+                {
+                    no = Convert.ToInt32(item.Count());
+                    TotalFeeOther = item.Select(c => c.FEE_PER_DAY).DefaultIfEmpty(0).Sum();
+                }
+            }
+
+            return no;
+        }
+
+        private int GetNoRentLoanContractAdmin()
+        {
+            int no = 0;
+            int storeid = Helper.parseInt(drpStore.SelectedValue);
+            using (var db = new DeiofiberEntities())
+            {
+                if (storeid != 0)
+                {
+                    var item = (from itm in db.Contracts
+                                where itm.RENT_TYPE_ID == 4 && itm.CONTRACT_STATUS == true && itm.STORE_ID == storeid// Loan
+                                select itm).ToList();
+
+                    if (item != null && item.Any())
+                    {
+                        no = Convert.ToInt32(item.Count());
+                        TotalFeeOther = item.Select(c => c.FEE_PER_DAY).DefaultIfEmpty(0).Sum();
+                    }
+                }
+                else
+                {
+                    var item = (from itm in db.Contracts
+                                where itm.RENT_TYPE_ID == 4 && itm.CONTRACT_STATUS == true // Loan
                                 select itm).ToList();
 
                     if (item != null && item.Any())

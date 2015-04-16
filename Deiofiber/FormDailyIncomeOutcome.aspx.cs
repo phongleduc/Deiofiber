@@ -109,10 +109,16 @@ namespace Deiofiber
                         switch (data.RENT_TYPE_ID)
                         {
                             case 1:
-                                data.INOUT_TYPE_NAME = "Trả lại phí thừa thuê xe";
+                                data.INOUT_TYPE_NAME = "Trả lại phí thừa thuê ô tô, xe máy";
                                 break;
                             case 2:
-                                data.INOUT_TYPE_NAME = "Trả lại phí thừa thuê thiết bị";
+                                data.INOUT_TYPE_NAME = "Trả lại phí thừa thuê điện thoại, máy tính";
+                                break;
+                            case 3:
+                                data.INOUT_TYPE_NAME = "Trả lại phí sinh viên thuê";
+                                break;
+                            case 4:
+                                data.INOUT_TYPE_NAME = "Trả lại phí thừa vay vốn";
                                 break;
                             default:
                                 data.INOUT_TYPE_NAME = "Trả lại phí thừa thuê khác";
@@ -123,10 +129,16 @@ namespace Deiofiber
                         switch (data.RENT_TYPE_ID)
                         {
                             case 1:
-                                data.INOUT_TYPE_NAME = "Thanh lý thuê xe";
+                                data.INOUT_TYPE_NAME = "Thanh lý thuê ô tô, xe máy";
                                 break;
                             case 2:
-                                data.INOUT_TYPE_NAME = "Thanh lý thuê thiết bị";
+                                data.INOUT_TYPE_NAME = "Thanh lý thuê điện thoại, máy tính";
+                                break;
+                            case 3:
+                                data.INOUT_TYPE_NAME = "Thanh lý sinh viên thuê";
+                                break;
+                            case 4:
+                                data.INOUT_TYPE_NAME = "Thanh lý vay vốn";
                                 break;
                             default:
                                 data.INOUT_TYPE_NAME = "Thanh lý thuê khác";

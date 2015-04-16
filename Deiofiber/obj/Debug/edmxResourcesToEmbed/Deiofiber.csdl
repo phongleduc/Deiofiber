@@ -154,9 +154,9 @@
     <Property Name="PERIOD_ID" Type="Int32" Nullable="false" />
     <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
     <Property Name="PERIOD_DATE" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="MORE_INFO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MORE_INFO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="STORE_ID" Type="Int32" Nullable="false" />
-    <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="INOUT_TYPE_ID" Type="Int32" Nullable="false" />
     <Property Name="INOUT_DATE" Type="DateTime" Precision="0" />
     <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -215,20 +215,24 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ADDRESS" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="CITY_ID" Type="Int32" Nullable="false" />
-    <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="FAX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="FAX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="START_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="CURRENT_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="APPLY_DATE" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="TOTAL_COST_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="TOTAL_INVESMENT_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="REGISTER_DATE" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
-    <Property Name="NOTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NOTE" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="SEARCH_TEXT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+    <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="StoreFee">
     <Key>

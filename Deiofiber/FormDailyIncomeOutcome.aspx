@@ -48,7 +48,7 @@
                 <td><%# Eval("MORE_INFO") %></td>
                 <td class="text-center">
                     <asp:HyperLink ID="hplViewContract" runat="server" Text='<%# Eval("CONTRACT_ID").ToString() == "-1" ? "" : string.Format("HĐ Số: {0}", Eval("CONTRACT_NO")) %>' NavigateUrl='<%# Eval("CONTRACT_ID").ToString() == "-1" ? "#" : Eval("CONTRACT_ID","FormContractUpdate.aspx?ID={0}") %>'></asp:HyperLink></td>
-                <td class="text-center"><%# Eval("UPDATED_BY") %></td>
+                <td class="text-center"><%# Eval("CREATED_BY") %></td>
             </tr>
         </ItemTemplate>
         <FooterTemplate>

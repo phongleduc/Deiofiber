@@ -44,139 +44,67 @@ namespace Deiofiber
                             var contract = db.Contracts.Where(c => c.ID == contractId && c.CONTRACT_STATUS == true).FirstOrDefault();
                             if (contract != null)
                             {
-                                DateTime endDate = contract.END_DATE;
-                                DateTime extendEndDate = contract.EXTEND_END_DATE == null ? contract.END_DATE.AddDays(-10) : contract.EXTEND_END_DATE.Value;
+                                IsNewContract = false;
+                                ContractID = id;
+                                List<CONTRACT_FULL_VW> lst;
+                                int contractid = Convert.ToInt32(id);
 
-                                int overDate = DateTime.Now.Subtract(extendEndDate).Days;
-                                if (overDate > 0)
+                                Store stor = new Store();
+                                stor = db.Stores.FirstOrDefault(s => s.ID == storeId);
+
+                                var st = from s in db.CONTRACT_FULL_VW
+                                         where s.ID == contractid
+                                         select s;
+
+                                lst = st.ToList<CONTRACT_FULL_VW>();
+                                bool bAdmin = CheckAdminPermission();
+                                if (bAdmin)
                                 {
-                                    PayPeriod pp1;
-                                    PayPeriod pp2;
-                                    PayPeriod pp3;
-
-                                    int percentDate = overDate / 30;
-                                    int multipleFee = Convert.ToInt32(Decimal.Floor(contract.CONTRACT_AMOUNT / 100000));
-
-                                    DateTime endDateUpdated = extendEndDate.AddDays(30 * (percentDate + 1));
-                                    contract.EXTEND_END_DATE = endDateUpdated;
-                                    db.SaveChanges();
-
-                                    PayPeriod payPeriod = db.PayPeriods.Where(c => c.CONTRACT_ID == contractId).OrderByDescending(c => c.PAY_DATE).FirstOrDefault();
-                                    decimal increateFeeCar = payPeriod.AMOUNT_PER_PERIOD + (multipleFee * 50 * 10);
-                                    decimal increateFeeEquip = payPeriod.AMOUNT_PER_PERIOD + (multipleFee * 100 * 10);
-                                    decimal increateFeeOther = payPeriod.AMOUNT_PER_PERIOD;
-
-                                    for (int i = 0; i <= percentDate; i++)
-                                    {
-
-                                        pp1 = new PayPeriod();
-                                        pp1.CONTRACT_ID = contractId;
-                                        pp1.PAY_DATE = payPeriod.PAY_DATE.AddDays(10);
-                                        switch (contract.RENT_TYPE_ID)
-                                        {
-                                            case 1:
-                                                pp1.AMOUNT_PER_PERIOD = increateFeeCar;
-                                                break;
-                                            case 2:
-                                                pp1.AMOUNT_PER_PERIOD = increateFeeEquip;
-                                                break;
-                                            default:
-                                                pp1.AMOUNT_PER_PERIOD = increateFeeOther;
-                                                break;
-                                        }
-                                        pp1.STATUS = true;
-                                        pp1.ACTUAL_PAY = 0;
-
-                                        pp2 = new PayPeriod();
-                                        pp2.CONTRACT_ID = contractId;
-                                        pp2.PAY_DATE = pp1.PAY_DATE.AddDays(10);
-                                        pp2.AMOUNT_PER_PERIOD = pp1.AMOUNT_PER_PERIOD;
-                                        pp2.STATUS = true;
-                                        pp2.ACTUAL_PAY = 0;
-
-                                        pp3 = new PayPeriod();
-                                        pp3.CONTRACT_ID = contractId;
-                                        pp3.PAY_DATE = pp2.PAY_DATE.AddDays(10);
-                                        pp3.AMOUNT_PER_PERIOD = pp1.AMOUNT_PER_PERIOD;
-                                        pp3.STATUS = true;
-                                        pp3.ACTUAL_PAY = 0;
-
-                                        db.PayPeriods.Add(pp1);
-                                        db.PayPeriods.Add(pp2);
-                                        db.PayPeriods.Add(pp3);
-
-                                        db.SaveChanges();
-
-                                        payPeriod = pp3;
-                                    }
+                                    storeId = lst[0].STORE_ID;
                                 }
-                            }
-
-                            IsNewContract = false;
-                            ContractID = id;
-                            List<CONTRACT_FULL_VW> lst;
-                            int contractid = Convert.ToInt32(id);
-
-                            Store stor = new Store();
-                            stor = db.Stores.FirstOrDefault(s => s.ID == storeId);
-
-                            var st = from s in db.CONTRACT_FULL_VW
-                                     where s.ID == contractid
-                                     select s;
-
-                            lst = st.ToList<CONTRACT_FULL_VW>();
-                            bool bAdmin = CheckAdminPermission();
-                            if (bAdmin)
-                            {
-                                storeId = lst[0].STORE_ID;
-                            }
-                            ddlStore.SelectedValue = storeId.ToString();
-                            if (!bAdmin)
-                            {
                                 ddlStore.SelectedValue = storeId.ToString();
-                                ddlStore.Enabled = false;
+                                if (!bAdmin)
+                                {
+                                    ddlStore.SelectedValue = storeId.ToString();
+                                    ddlStore.Enabled = false;
+                                }
+                                pnlTable.Enabled = lst[0].CONTRACT_STATUS;
+                                rptPayFeeSchedule.Visible = lst[0].CONTRACT_STATUS;
+
+                                CONTRACT_FULL_VW cntrct = lst[0];
+                                txtLicenseNumber.Text = cntrct.LICENSE_NO;
+                                txtCustomerName.Text = cntrct.CUSTOMER_NAME;
+                                if (cntrct.BIRTH_DAY.HasValue)
+                                    txtBirthDay.Text = string.Format("{0:dd/MM/yyyy}", cntrct.BIRTH_DAY);
+                                if (cntrct.LICENSE_RANGE_DATE.HasValue)
+                                    txtRangeDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.LICENSE_RANGE_DATE);
+                                txtPlaceDate.Text = cntrct.LICENSE_RANGE_PLACE;
+                                txtPhone.Text = cntrct.PHONE;
+                                txtPermanentResidence.Text = cntrct.PERMANENT_RESIDENCE;
+                                txtCurrentResidence.Text = cntrct.CURRENT_RESIDENCE;
+                                txtContractNo.Text = cntrct.CONTRACT_NO;
+                                var rentType = db.RentTypes.Where(c => c.NAME == cntrct.RENT_TYPE_NAME).FirstOrDefault();
+                                ddlRentType.SelectedValue = rentType.ID.ToString();
+                                RentTypeID = cntrct.RENT_TYPE_ID;
+                                txtAmount.Text = string.Format("{0:0,0}", cntrct.CONTRACT_AMOUNT);
+                                txtFeePerDay.Text = string.Format("{0:0,0}", cntrct.FEE_PER_DAY);
+                                txtRentDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.RENT_DATE);
+                                txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.END_DATE);
+                                txtNote.Text = cntrct.NOTE;
+
+                                txtReferencePerson.Text = cntrct.REFERENCE_NAME;
+                                txtItemName.Text = cntrct.ITEM_TYPE;
+                                txtItemLicenseNo.Text = cntrct.ITEM_LICENSE_NO;
+                                txtSerial1.Text = cntrct.SERIAL_1;
+                                txtSerial2.Text = cntrct.SERIAL_2;
+                                txtImplementer.Text = cntrct.IMPLEMENTER;
+                                txtBackDocument.Text = cntrct.BACK_TO_DOCUMENTS;
+                                txtItemDetail.Text = cntrct.DETAIL;
+
+                                txtContractNo.Enabled = ddlRentType.Enabled = txtAmount.Enabled = txtFeePerDay.Enabled = txtRentDate.Enabled = txtEndDate.Enabled = false;
+                                BuildPhotoLibrary(cntrct);
+                                LoadPayFeeSchedule();
                             }
-                            pnlTable.Enabled = lst[0].CONTRACT_STATUS;
-                            rptPayFeeSchedule.Visible = lst[0].CONTRACT_STATUS;
-
-                            CONTRACT_FULL_VW cntrct = lst[0];
-                            txtLicenseNumber.Text = cntrct.LICENSE_NO;
-                            txtCustomerName.Text = cntrct.CUSTOMER_NAME;
-                            txtBirthDay.Text = string.Format("{0:dd/MM/yyyy}", cntrct.BIRTH_DAY);
-                            txtRangeDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.LICENSE_RANGE_DATE);
-                            txtPlaceDate.Text = cntrct.LICENSE_RANGE_PLACE;
-                            txtPhone.Text = cntrct.PHONE;
-                            txtPermanentResidence.Text = cntrct.PERMANENT_RESIDENCE;
-                            txtCurrentResidence.Text = cntrct.CURRENT_RESIDENCE;
-                            txtContractNo.Text = cntrct.CONTRACT_NO;
-                            var rentType = db.RentTypes.Where(c => c.NAME == cntrct.RENT_TYPE_NAME).FirstOrDefault();
-                            ddlRentType.SelectedValue = rentType.ID.ToString();
-                            RentTypeID = cntrct.RENT_TYPE_ID;
-                            txtAmount.Text = string.Format("{0:0,0}", cntrct.CONTRACT_AMOUNT);
-                            txtFeePerDay.Text = string.Format("{0:0,0}", cntrct.FEE_PER_DAY);
-                            txtRentDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.RENT_DATE);
-                            txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.END_DATE);
-                            txtNote.Text = cntrct.NOTE;
-
-                            txtReferencePerson.Text = cntrct.REFERENCE_NAME;
-                            txtItemName.Text = cntrct.ITEM_TYPE;
-                            txtItemLicenseNo.Text = cntrct.ITEM_LICENSE_NO;
-                            txtSerial1.Text = cntrct.SERIAL_1;
-                            txtSerial2.Text = cntrct.SERIAL_2;
-                            txtImplementer.Text = cntrct.IMPLEMENTER;
-                            txtBackDocument.Text = cntrct.BACK_TO_DOCUMENTS;
-                            txtItemDetail.Text = cntrct.DETAIL;
-                            txtReferencePhone.Text = cntrct.REFERENCE_PHONE;
-                            txtSchool.Text = cntrct.SCHOOL_NAME;
-                            txtClass.Text = cntrct.CLASS_NAME;
-
-                            BuildPhotoLibrary(cntrct);
-
-                            txtLicenseNumber.Enabled = txtCustomerName.Enabled = txtBirthDay.Enabled = txtRangeDate.Enabled = txtPlaceDate.Enabled = ddlStore.Enabled = txtPhone.Enabled = txtPermanentResidence.Enabled = txtCurrentResidence.Enabled = false;
-                            txtContractNo.Enabled = ddlRentType.Enabled = txtAmount.Enabled = txtFeePerDay.Enabled = txtRentDate.Enabled = txtEndDate.Enabled = false;
-                            txtReferencePerson.Enabled = txtItemName.Enabled = txtItemLicenseNo.Enabled = txtSerial1.Enabled = txtSerial2.Enabled = txtImplementer.Enabled = txtBackDocument.Enabled = txtReferencePhone.Enabled = txtSchool.Enabled = txtClass.Enabled = false;
-
-                            LoadPayFeeSchedule();
                         }
                     }
                     else // NEW
@@ -190,17 +118,11 @@ namespace Deiofiber
                             if (storeId != 0)
                             {
                                 stor = db.Stores.FirstOrDefault(s => s.ID == storeId);
-                                //txtRentDate.Enabled = false;
-                                //txtEndDate.Enabled = false;
                                 if (!CheckAdminPermission())
                                 {
                                     ddlStore.SelectedValue = storeId.ToString();
                                     ddlStore.Enabled = false;
                                 }
-                            }
-                            else
-                            {
-
                             }
                             RentTypeID = Convert.ToInt32(ddlRentType.SelectedValue);
                             txtRentDate.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
@@ -225,8 +147,10 @@ namespace Deiofiber
                                     }
                                     txtLicenseNumber.Text = cntrct.LICENSE_NO;
                                     txtCustomerName.Text = cntrct.CUSTOMER_NAME;
-                                    txtBirthDay.Text = string.Format("{0:dd/MM/yyyy}", cntrct.BIRTH_DAY);
-                                    txtRangeDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.LICENSE_RANGE_DATE);
+                                    if (cntrct.BIRTH_DAY.HasValue)
+                                        txtBirthDay.Text = string.Format("{0:dd/MM/yyyy}", cntrct.BIRTH_DAY);
+                                    if (cntrct.LICENSE_RANGE_DATE.HasValue)
+                                        txtRangeDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.LICENSE_RANGE_DATE);
                                     txtPlaceDate.Text = cntrct.LICENSE_RANGE_PLACE;
                                     txtPhone.Text = cntrct.PHONE;
                                     txtPermanentResidence.Text = cntrct.PERMANENT_RESIDENCE;
@@ -247,9 +171,6 @@ namespace Deiofiber
                                     txtImplementer.Text = cntrct.IMPLEMENTER;
                                     txtBackDocument.Text = cntrct.BACK_TO_DOCUMENTS;
                                     txtItemDetail.Text = cntrct.DETAIL;
-                                    txtReferencePhone.Text = cntrct.REFERENCE_PHONE;
-                                    txtSchool.Text = cntrct.SCHOOL_NAME;
-                                    txtClass.Text = cntrct.CLASS_NAME;
 
                                     BuildPhotoLibrary(cntrct);
                                 }
@@ -425,33 +346,13 @@ namespace Deiofiber
             {
                 return "Bạn cần phải nhập tên khách hàng.";
             }
-            if (string.IsNullOrEmpty(txtBirthDay.Text.Trim()))
-            {
-                return "Bạn cần phải nhập ngày sinh.";
-            }
             if (string.IsNullOrEmpty(txtLicenseNumber.Text.Trim()))
             {
                 return "Bạn phải nhập số CMT.";
             }
-            if (string.IsNullOrEmpty(txtRangeDate.Text.Trim()))
-            {
-                return "Bạn phải nhập ngày cấp.";
-            }
-            if (string.IsNullOrEmpty(txtPlaceDate.Text.Trim()))
-            {
-                return "Bạn phải nhập nơi cấp.";
-            }
             if (string.IsNullOrEmpty(txtPhone.Text.Trim()))
             {
                 return "Bạn phải nhập số điện thoại.";
-            }
-            if (string.IsNullOrEmpty(txtPermanentResidence.Text.Trim()))
-            {
-                return "Bạn phải nhập hộ khẩu thường trú.";
-            }
-            if (string.IsNullOrEmpty(txtCurrentResidence.Text.Trim()))
-            {
-                return "Bạn phải nhập hiện trú tại đâu.";
             }
             if (string.IsNullOrEmpty(txtAmount.Text.Trim()))
             {
@@ -483,41 +384,14 @@ namespace Deiofiber
                 {
                     return "Bạn phải nhập biến kiểm soát.";
                 }
-                if (string.IsNullOrEmpty(txtSerial1.Text.Trim()))
-                {
-                    return "Bạn phải nhập số khung.";
-                }
-                if (string.IsNullOrEmpty(txtSerial2.Text.Trim()))
-                {
-                    return "Bạn phải nhập số máy.";
-                }
-                if (string.IsNullOrEmpty(txtImplementer.Text.Trim()))
-                {
-                    return "Bạn phải nhập người làm.";
-                }
-                if (string.IsNullOrEmpty(txtBackDocument.Text.Trim()))
-                {
-                    return "Bạn phải nhập giấy tờ để lại.";
-                }
-            }
-            else if (ddlRentType.SelectedValue == "2")
-            {
-                if (string.IsNullOrEmpty(txtReferencePerson.Text.Trim()))
-                {
-                    return "Bạn phải nhập tên người xác minh.";
-                }
-                if (string.IsNullOrEmpty(txtReferencePhone.Text.Trim()))
-                {
-                    return "Bạn phải nhập số điện thoại.";
-                }
-                if (string.IsNullOrEmpty(txtSchool.Text.Trim()))
-                {
-                    return "Bạn phải nhập tên trường.";
-                }
-                if (string.IsNullOrEmpty(txtClass.Text.Trim()))
-                {
-                    return "Bạn phải nhập tên lớp.";
-                }
+                //if (string.IsNullOrEmpty(txtSerial1.Text.Trim()))
+                //{
+                //    return "Bạn phải nhập số khung.";
+                //}
+                //if (string.IsNullOrEmpty(txtSerial2.Text.Trim()))
+                //{
+                //    return "Bạn phải nhập số máy.";
+                //}
             }
             if (Request.Files.Count > 5)
             {
@@ -554,9 +428,15 @@ namespace Deiofiber
                             }
 
                             cusItem.NAME = txtCustomerName.Text.Trim();
-                            cusItem.BIRTH_DAY = DateTime.ParseExact(txtBirthDay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            if (!string.IsNullOrEmpty(txtBirthDay.Text))
+                            {
+                                cusItem.BIRTH_DAY = DateTime.ParseExact(txtBirthDay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            }
                             cusItem.LICENSE_NO = txtLicenseNumber.Text.Trim();
-                            cusItem.LICENSE_RANGE_DATE = DateTime.ParseExact(txtRangeDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            if (!string.IsNullOrEmpty(txtRangeDate.Text))
+                            {
+                                cusItem.LICENSE_RANGE_DATE = DateTime.ParseExact(txtRangeDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            }
                             cusItem.LICENSE_RANGE_PLACE = txtPlaceDate.Text.Trim();
                             cusItem.PHONE = txtPhone.Text.Trim();
                             cusItem.PERMANENT_RESIDENCE = txtPermanentResidence.Text.Trim();
@@ -594,9 +474,6 @@ namespace Deiofiber
                         item.ITEM_LICENSE_NO = txtItemLicenseNo.Text.Trim();
                         item.SERIAL_1 = txtSerial1.Text.Trim();
                         item.SERIAL_2 = txtSerial2.Text.Trim();
-                        item.REFERENCE_PHONE = txtReferencePhone.Text.Trim();
-                        item.SCHOOL_NAME = txtSchool.Text.Trim();
-                        item.CLASS_NAME = txtClass.Text.Trim();
                         item.IMPLEMENTER = txtImplementer.Text.Trim();
                         item.BACK_TO_DOCUMENTS = txtBackDocument.Text.Trim();
                         item.DETAIL = txtItemDetail.Text.Trim();
@@ -637,14 +514,6 @@ namespace Deiofiber
                         PayPeriod pp1 = new PayPeriod();
                         pp1.CONTRACT_ID = item.ID;
                         pp1.PAY_DATE = periodTime;
-                        //if (ddlRentType.SelectedValue == "2")
-                        //{
-                        //    pp1.PAY_DATE = periodTime;
-                        //}
-                        //else
-                        //{
-                        //    pp1.PAY_DATE = periodTime.AddDays(9);
-                        //}
                         pp1.AMOUNT_PER_PERIOD = item.FEE_PER_DAY * 10;
                         pp1.STATUS = true;
                         pp1.ACTUAL_PAY = 0;
@@ -652,14 +521,6 @@ namespace Deiofiber
                         PayPeriod pp2 = new PayPeriod();
                         pp2.CONTRACT_ID = item.ID;
                         pp2.PAY_DATE = periodTime.AddDays(9);
-                        //if (ddlRentType.SelectedValue == "2")
-                        //{
-                        //    pp2.PAY_DATE = periodTime.AddDays(9);
-                        //}
-                        //else
-                        //{
-                        //    pp2.PAY_DATE = periodTime.AddDays(19);
-                        //}
                         pp2.AMOUNT_PER_PERIOD = item.FEE_PER_DAY * 10;
                         pp2.STATUS = true;
                         pp2.ACTUAL_PAY = 0;
@@ -667,14 +528,6 @@ namespace Deiofiber
                         PayPeriod pp3 = new PayPeriod();
                         pp3.CONTRACT_ID = item.ID;
                         pp3.PAY_DATE = periodTime.AddDays(19);
-                        //if (ddlRentType.SelectedValue == "2")
-                        //{
-                        //    pp3.PAY_DATE = periodTime.AddDays(19);
-                        //}
-                        //else
-                        //{
-                        //    pp3.PAY_DATE = periodTime.AddDays(29);
-                        //}
                         pp3.AMOUNT_PER_PERIOD = item.FEE_PER_DAY * 10;
                         pp3.STATUS = true;
                         pp3.ACTUAL_PAY = 0;
@@ -713,7 +566,10 @@ namespace Deiofiber
                                 io.INOUT_TYPE_ID = 22;
                                 break;
                             case "3":
-                                io.INOUT_TYPE_ID = 23;
+                                io.INOUT_TYPE_ID = 25;
+                                break;
+                            case "4":
+                                io.INOUT_TYPE_ID = 26;
                                 break;
                             default:
                                 List<InOutType> lstiot = new List<InOutType>();
@@ -747,15 +603,52 @@ namespace Deiofiber
                         {
                             var item = db.Contracts.FirstOrDefault(itm => itm.ID == contractId);
 
-                            item.NOTE = txtNote.Text.Trim();
+                            item.NOTE = txtNote.Text;
+                            item.REFERENCE_NAME = txtReferencePerson.Text.Trim();
+                            item.ITEM_TYPE = txtItemName.Text.Trim();
+                            item.ITEM_LICENSE_NO = txtItemLicenseNo.Text.Trim();
+                            item.SERIAL_1 = txtSerial1.Text.Trim();
+                            item.SERIAL_2 = txtSerial2.Text.Trim();
+                            item.IMPLEMENTER = txtImplementer.Text.Trim();
+                            item.BACK_TO_DOCUMENTS = txtBackDocument.Text.Trim();
                             item.DETAIL = txtItemDetail.Text.Trim();
+                            item.CONTRACT_STATUS = true;
+                            item.CONTRACT_AMOUNT = Convert.ToDecimal(txtAmount.Text.Replace(",", string.Empty));
                             item.UPDATED_BY = Session["username"].ToString();
                             item.UPDATED_DATE = DateTime.Now;
+                            if (ddlStore.Enabled == true)
+                                item.STORE_ID = Convert.ToInt32(ddlStore.SelectedValue);
+                            else
+                                item.STORE_ID = Convert.ToInt32(Session["store_id"]);
+                            item.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}",
+                                                            txtCustomerName.Text.Trim(),
+                                                            txtBirthDay.Text.Trim(),
+                                                            txtLicenseNumber.Text.Trim(),
+                                                            txtRangeDate.Text.Trim(),
+                                                            txtPermanentResidence.Text.Trim(),
+                                                            txtCurrentResidence.Text.Trim(),
+                                                            txtPhone.Text.Trim(),
+                                                            item.CONTRACT_NO,
+                                                            item.RENT_DATE.ToString("dd/MM/yyyy"));
                             SavePhoto(item);
-                            //var cusItem = db.Customers.FirstOrDefault(c => c.ID == item.CUSTOMER_ID);
-                            //if (fileUploadUserPhoto.HasFile)
-                            //    cusItem.PHOTO = ImageHelper.CreateThumbnail(fileUploadUserPhoto.FileBytes, 128, 128);
-
+                            var cusItem = db.Customers.FirstOrDefault(c => c.ID == item.CUSTOMER_ID);
+                            if (cusItem != null)
+                            {
+                                cusItem.NAME = txtCustomerName.Text.Trim();
+                                if (!string.IsNullOrEmpty(txtBirthDay.Text))
+                                {
+                                    cusItem.BIRTH_DAY = DateTime.ParseExact(txtBirthDay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                }
+                                cusItem.LICENSE_NO = txtLicenseNumber.Text.Trim();
+                                if (!string.IsNullOrEmpty(txtRangeDate.Text))
+                                {
+                                    cusItem.LICENSE_RANGE_DATE = DateTime.ParseExact(txtRangeDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                }
+                                cusItem.LICENSE_RANGE_PLACE = txtPlaceDate.Text.Trim();
+                                cusItem.PHONE = txtPhone.Text.Trim();
+                                cusItem.PERMANENT_RESIDENCE = txtPermanentResidence.Text.Trim();
+                                cusItem.CURRENT_RESIDENCE = txtCurrentResidence.Text.Trim();
+                            }
                             db.SaveChanges();
                         }
 
@@ -868,19 +761,6 @@ namespace Deiofiber
                 CONTRACT_FULL_VW cntrct = db.CONTRACT_FULL_VW.Where(s => s.LICENSE_NO == licenseNo).FirstOrDefault();
                 if (cntrct != null && cntrct.CONTRACT_STATUS == true)
                 {
-                    //LoadData(licenseNo, 0);
-                    //if (storeId != 0 && storeId != cntrct.STORE_ID)
-                    //{
-                    //    foreach (RepeaterItem rptItem in rptCustomer.Items)
-                    //    {
-                    //        if (rptItem.FindControl("hplContractInfo") != null)
-                    //            ((HyperLink)rptItem.FindControl("hplContractInfo")).Enabled = false;
-
-                    //        if (rptItem.FindControl("btnChoose") != null)
-                    //            ((Button)rptItem.FindControl("btnChoose")).Enabled = false;
-                    //    }
-
-                    //}
                     return 1;
                 }
                 else
@@ -1023,35 +903,6 @@ namespace Deiofiber
                 db.SaveChanges();
             }
         }
-
-        //protected void rptCustomer_ItemCommand(object source, RepeaterCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "btnChoose")
-        //    {
-        //        int idx = e.Item.ItemIndex;
-        //        int cusid = Convert.ToInt32(((HiddenField)rptCustomer.Items[idx].FindControl("hdfCustomerID")).Value);
-        //        hdfCus.Value = cusid.ToString();
-        //        List<Customer> lst = new List<Customer>();
-        //        using (var db = new DeiofiberEntities())
-        //        {
-        //            var item = from itm in db.Customers
-        //                       where itm.ID == cusid
-        //                       select itm;
-
-        //            lst = item.ToList();
-        //        }
-
-        //        if (lst.Count > 0)
-        //        {
-        //            txtCustomerName.Text = lst[0].NAME;
-        //            txtLicenseNumber.Text = lst[0].LICENSE_NO;
-        //            txtPhone.Text = lst[0].PHONE;
-        //            txtCurrentResidence.Text = lst[0].CURRENT_RESIDENCE;
-        //        }
-
-        //    }
-        //}
-
 
         // NOT USE ANYMORE
         private void LoadStore(List<Store> lst)

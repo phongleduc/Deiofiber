@@ -40,13 +40,22 @@ namespace Deiofiber {
         protected global::System.Web.UI.WebControls.Label lblRentEquipAmount;
         
         /// <summary>
-        /// lblRentOtherAmount control.
+        /// lblRentStudentAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRentOtherAmount;
+        protected global::System.Web.UI.WebControls.Label lblRentStudentAmount;
+        
+        /// <summary>
+        /// lblLoanAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLoanAmount;
         
         /// <summary>
         /// lblRentAll control.

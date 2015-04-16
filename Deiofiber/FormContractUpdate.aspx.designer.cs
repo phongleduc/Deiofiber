@@ -301,33 +301,6 @@ namespace Deiofiber {
         protected global::System.Web.UI.WebControls.TextBox txtBackDocument;
         
         /// <summary>
-        /// txtReferencePhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReferencePhone;
-        
-        /// <summary>
-        /// txtSchool control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSchool;
-        
-        /// <summary>
-        /// txtClass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtClass;
-        
-        /// <summary>
         /// fileUploadPhoto control.
         /// </summary>
         /// <remarks>

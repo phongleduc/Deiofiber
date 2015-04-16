@@ -1,6 +1,7 @@
 ﻿using Deiofiber.Common;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,6 +14,7 @@ namespace Deiofiber
     {
         int pageSize = 20;
         int storeId = 0;
+        public string SearchDate { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["store_id"] == null)
@@ -28,22 +30,18 @@ namespace Deiofiber
                 }
             }
             else
-                storeId = Helper.parseInt(Session["store_id"].ToString());
-
-            if (!IsPostBack)
             {
-                LoadData(string.Empty, string.Empty, 0, storeId);
+                storeId = Helper.parseInt(Session["store_id"].ToString());
+            }
+            LoadData(txtDate.Text, txtSearch.Text, 0, storeId);
+
+            if (!string.IsNullOrEmpty(txtDate.Text))
+            {
+                SearchDate = Convert.ToDateTime(txtDate.Text).ToString("dd/MM/yyyy");
             }
             else
             {
-                //if (!string.IsNullOrEmpty(hfPager.Value))
-                //{
-                //    LoadData(txtDate.Text, txtSearch.Text, Convert.ToInt32(ddlPager.SelectedValue) - 1, storeId);
-                //}
-                //else
-                //{
-                    LoadData(txtDate.Text, txtSearch.Text, 0, storeId);
-                //}
+                SearchDate = DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
         }
 
@@ -53,13 +51,13 @@ namespace Deiofiber
             List<CONTRACT_FULL_VW> dataList = new List<CONTRACT_FULL_VW>();
             using (var db = new DeiofiberEntities())
             {
-                var st = db.CONTRACT_FULL_VW.Where(c =>c.CONTRACT_STATUS == true);
+                var st = db.CONTRACT_FULL_VW.Where(c => c.CONTRACT_STATUS == true);
                 if (storeId != 0)
                 {
                     st = st.Where(c => c.STORE_ID == storeId);
                 }
                 if (!string.IsNullOrEmpty(strSearch))
-                { 
+                {
                     st = st.Where(c => c.SEARCH_TEXT.Contains(strSearch));
                 }
                 st = st.OrderByDescending(c => c.ID);
@@ -92,22 +90,19 @@ namespace Deiofiber
                             paidNumberOfFee += 1;
                         }
                         c.PAYED_TIME = paidNumberOfFee;
-
-                        PayPeriod pp1 = tmpLstPeriod.Where(s => s.PAY_DATE >= DateTime.Now).FirstOrDefault();
-                        if (pp1 != null)
-                            c.FEE_PER_DAY = pp1.AMOUNT_PER_PERIOD / 10;
-
                         c.OVER_DATE = DateTime.Now.Subtract(c.RENT_DATE).Days + 1;
 
                         if (!string.IsNullOrEmpty(searchDate))
                         {
                             if (tmpLstPeriod.Any(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(searchDate)))
                             {
+                                c.FEE_PER_DAY = tmpLstPeriod.FirstOrDefault(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(searchDate)).AMOUNT_PER_PERIOD / 10;
                                 dataList.Add(c);
                             }
                         }
-                        else if (tmpLstPeriod.Any(s =>s.PAY_DATE.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd"))))
+                        else if (tmpLstPeriod.Any(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd"))))
                         {
+                            c.FEE_PER_DAY = tmpLstPeriod.FirstOrDefault(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd"))).AMOUNT_PER_PERIOD / 10;
                             dataList.Add(c);
                         }
                     }
@@ -118,7 +113,7 @@ namespace Deiofiber
                 }
             }
 
-            rptWarning.DataSource = dataList.OrderByDescending(c =>c.OVER_DATE);
+            rptWarning.DataSource = dataList.OrderByDescending(c => c.OVER_DATE);
             rptWarning.DataBind();
         }
 

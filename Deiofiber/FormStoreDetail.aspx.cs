@@ -115,7 +115,10 @@ namespace Deiofiber
                 st.ACTIVE = rdbActive.Checked;
                 st.NOTE = txtNote.Text.Trim();
                 st.SEARCH_TEXT = string.Format("{0} {1} {2}", st.NAME, st.ADDRESS, st.PHONE);
-
+                st.CREATED_BY = Session["username"].ToString();
+                st.CREATED_DATE = DateTime.Now;
+                st.UPDATED_BY = Session["username"].ToString();
+                st.UPDATED_DATE = DateTime.Now;
                 using (var rb = new DeiofiberEntities())
                 {
                     rb.Stores.Add(st);
@@ -138,7 +141,10 @@ namespace Deiofiber
                     io.INOUT_TYPE_ID = item.ID;
                     io.INOUT_DATE = DateTime.Now;
                     io.SEARCH_TEXT = string.Format("{0} {1} ngày {2}", io.MORE_INFO, io.IN_AMOUNT, io.INOUT_DATE);
-
+                    io.CREATED_BY = Session["username"].ToString();
+                    io.CREATED_DATE = DateTime.Now;
+                    io.UPDATED_BY = Session["username"].ToString();
+                    io.UPDATED_DATE = DateTime.Now;
                     rb1.InOuts.Add(io);
                     rb1.SaveChanges();
                 }
@@ -168,7 +174,8 @@ namespace Deiofiber
                 st.ACTIVE = rdbActive.Checked;
                 st.NOTE = txtNote.Text.Trim();
                 st.SEARCH_TEXT = string.Format("{0} {1} {2}", st.NAME, st.ADDRESS, st.PHONE);
-
+                st.UPDATED_BY = Session["username"].ToString();
+                st.UPDATED_DATE = DateTime.Now;
                 db.SaveChanges();
             }
 
@@ -197,7 +204,7 @@ namespace Deiofiber
             lg.STORE = strStoreName;
             lg.LOG_ACTION = action;
             lg.LOG_DATE = DateTime.Now;
-            lg.LOG_MSG = string.Format("Tài khoản {0} {1}thực hiện {2} vào lúc {3}", lg.ACCOUNT, strStoreName, lg.LOG_ACTION, lg.LOG_DATE);
+            lg.LOG_MSG = string.Format("Tài khoản {0} {1} thực hiện {2} vào lúc {3}", lg.ACCOUNT, strStoreName, lg.LOG_ACTION, lg.LOG_DATE);
             lg.SEARCH_TEXT = lg.LOG_MSG;
 
             using (var db = new DeiofiberEntities())

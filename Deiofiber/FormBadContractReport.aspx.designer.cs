@@ -49,22 +49,40 @@ namespace Deiofiber {
         protected global::System.Web.UI.WebControls.Label lblTotalFeeEquiqContract;
         
         /// <summary>
-        /// lblRentOtherCount control.
+        /// lblRentStudentCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRentOtherCount;
+        protected global::System.Web.UI.WebControls.Label lblRentStudentCount;
         
         /// <summary>
-        /// lblTotalFeeOtherContract control.
+        /// lblTotalFeeStudentContract control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalFeeOtherContract;
+        protected global::System.Web.UI.WebControls.Label lblTotalFeeStudentContract;
+        
+        /// <summary>
+        /// lblRentLoanCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRentLoanCount;
+        
+        /// <summary>
+        /// lblTotalFeeLoanContract control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalFeeLoanContract;
         
         /// <summary>
         /// lblNumberOfBadContract control.

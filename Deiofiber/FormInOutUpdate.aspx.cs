@@ -54,16 +54,22 @@ namespace Deiofiber
                 {
                     var item = db.CONTRACT_FULL_VW.FirstOrDefault(itm => itm.ID == pp.CONTRACT_ID);
                     int inoutType = 0;
-                    switch (item.RENT_TYPE_NAME)
+                    switch (item.RENT_TYPE_ID)
                     {
-                        case "Cho thuê xe":
+                        case 1:
                             inoutType = 14;
                             break;
-                        case "Cho thuê thiết bị văn phòng":
+                        case 2:
                             inoutType = 15;
                             break;
-                        case "Cho thuê mặt hàng khác":
-                            inoutType = 16;
+                        case 3:
+                            inoutType = 25;
+                            break;
+                        case 4:
+                            inoutType = 26;
+                            break;
+                        default:
+                            inoutType = 23;
                             break;
                     }
 
@@ -74,10 +80,6 @@ namespace Deiofiber
                     ddInOutType.DataValueField = "ID";
                     ddInOutType.DataBind();
                     ddInOutType.SelectedValue = inoutType.ToString();
-
-                    //txtIncome.Text = pp.ACTUAL_PAY.ToString();
-
-                    //
                 }
             }
         }
@@ -89,13 +91,6 @@ namespace Deiofiber
             {
                 var itemLst = db.InOuts.Where(s => s.PERIOD_ID == pp.ID);
                 payList = itemLst.ToList();
-
-                //PayPeriod payPeriod = db.PayPeriods.FirstOrDefault(c => c.CONTRACT_ID == pp.CONTRACT_ID && c.ID == pp.ID);
-                //if(payPeriod != null)
-                //{
-                //    payPeriod.ACTUAL_PAY = payList.Select(c => c.IN_AMOUNT).DefaultIfEmpty(0).Sum();
-                //    db.SaveChanges();
-                //}
             }
 
             rptContractInOut.DataSource = payList;
@@ -183,20 +178,6 @@ namespace Deiofiber
                         if (totalActualPay > totalPerAmount)
                             remain = totalActualPay - totalPerAmount;
                     }
-                    //else if (period_id == lstPeriod[1].ID)
-                    //{
-                    //    if (lstPeriod[0].ACTUAL_PAY > lstPeriod[0].AMOUNT_PER_PERIOD)
-                    //    {
-                    //        remain = lstPeriod[0].ACTUAL_PAY - lstPeriod[0].AMOUNT_PER_PERIOD;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    if ((lstPeriod[0].ACTUAL_PAY + lstPeriod[1].ACTUAL_PAY ) > (lstPeriod[0].AMOUNT_PER_PERIOD * 2))
-                    //    {
-                    //        remain = (lstPeriod[0].ACTUAL_PAY + lstPeriod[1].ACTUAL_PAY) - (lstPeriod[0].AMOUNT_PER_PERIOD * 2);
-                    //    }
-                    //}
                 }
 
                 if (pp.AMOUNT_PER_PERIOD - total > 0)

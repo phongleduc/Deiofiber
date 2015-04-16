@@ -5,25 +5,32 @@
     <table class="table table-striped table-hover ">
         <tbody>
             <tr>
-                <td class="text-right"><strong>Hợp đồng cho thuê xe:</strong></td>
+                <td class="text-right"><strong>Hợp đồng thuê ô tô, xe máy:</strong></td>
                 <td class="text-right">Số lượng:&nbsp;<asp:Label ID="lblDeiofiberCount" runat="server" CssClass="text-right"></asp:Label></td>
                 <td class="text-right"><strong>Tổng giá trị:&nbsp;</strong></td>
                 <td class="text-right">
                     <asp:Label ID="lblTotalFeeBikeContract" runat="server" CssClass="text-right"></asp:Label></td>
             </tr>
             <tr>
-                <td class="text-right"><strong>Hợp đồng thuê thiết bị:</strong></td>
+                <td class="text-right"><strong>Hợp đồng thuê điện thoại, máy tính:</strong></td>
                 <td class="text-right">Số lượng:&nbsp;<asp:Label ID="lblRentEquipCount" runat="server" CssClass="text-right"></asp:Label></td>
                 <td class="text-right"><strong>Tổng giá trị:&nbsp;</strong></td>
                 <td class="text-right">
                     <asp:Label ID="lblTotalFeeEquiqContract" runat="server" CssClass="text-right"></asp:Label></td>
             </tr>
             <tr>
-                <td class="text-right"><strong>Hợp đồng thuê khác:</strong></td>
-                <td class="text-right">Số lượng:&nbsp;<asp:Label ID="lblRentOtherCount" runat="server" CssClass="text-right"></asp:Label></td>
+                <td class="text-right"><strong>Hợp đồng sinh viên thuê:</strong></td>
+                <td class="text-right">Số lượng:&nbsp;<asp:Label ID="lblRentStudentCount" runat="server" CssClass="text-right"></asp:Label></td>
                 <td class="text-right"><strong>Tổng giá trị:&nbsp;</strong></td>
                 <td class="text-right">
-                    <asp:Label ID="lblTotalFeeOtherContract" runat="server" CssClass="text-right"></asp:Label></td>
+                    <asp:Label ID="lblTotalFeeStudentContract" runat="server" CssClass="text-right"></asp:Label></td>
+            </tr>
+            <tr>
+                <td class="text-right"><strong>Hợp đồng vay vốn:</strong></td>
+                <td class="text-right">Số lượng:&nbsp;<asp:Label ID="lblRentLoanCount" runat="server" CssClass="text-right"></asp:Label></td>
+                <td class="text-right"><strong>Tổng giá trị:&nbsp;</strong></td>
+                <td class="text-right">
+                    <asp:Label ID="lblTotalFeeLoanContract" runat="server" CssClass="text-right"></asp:Label></td>
             </tr>
             <tr>
                 <td class="text-right"><strong>Tổng hợp đồng khách hàng xấu:</strong></td>

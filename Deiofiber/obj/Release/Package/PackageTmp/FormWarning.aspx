@@ -41,10 +41,10 @@
         <ItemTemplate>
             <tr id='<%# string.Format("HtmlTableRow{0}", Container.ItemIndex) %>'>
                 <td><%# Container.ItemIndex + 1 %></td>
-                <td><%# Eval("CUSTOMER_NAME") %></td>
+                <td><%# Eval("CUSTOMER_NAME") %><br />(<%# Convert.ToDateTime(Eval("BIRTH_DAY")).ToString("dd/MM/yyyy") %>)</td>
                 <td><%# Eval("RENT_TYPE_NAME") %></td>
                 <td><%# Eval("PHONE") %></td>
-                <td class="text-right"><%# string.Format("{0:0,0}", Convert.ToDecimal(Eval("FEE_PER_DAY")) * 10) %></td>
+                <td class="text-right"><%# string.Format("{0:0,0}", Convert.ToDecimal(Eval("FEE_PER_DAY"))) %></td>
                 <td class="text-right"><%# Eval("PAYED_TIME") %> lần</td>
                 <td class="text-right"><%# Eval("NOTE") %></td>
                 <td class="text-center"><%# Eval("OVER_DATE") %> Ngày <br /><span style="color:red">(<%# Convert.ToDateTime(Eval("RENT_DATE")).ToString("dd/MM/yyyy") %>)</span></td>
@@ -84,9 +84,13 @@
             function printDiv() {
                 var divToPrint = $('#areaToPrint').clone();
                 divToPrint.find('table').find("tr").find("th:last, td:last").remove();
+                divToPrint.prepend($("<h3 style='text-align:center;'>" + "Ngày <%= SearchDate%>" + "</h3>"));
                 divToPrint.prepend($("<h1 style='text-align:center;'>Thông báo</h1>"));
-                divToPrint.find('table').attr('border', '1');
                 divToPrint.find('table').css('width', '100%');
+                divToPrint.find('table').css('border-collapse', 'collapse');
+                divToPrint.find('table').find("tr").css('border', '1px solid black');
+                divToPrint.find('table').find("td").css('border', '1px solid black');
+                divToPrint.find('table').find("th").css('border', '1px solid black');
                 newWin = window.open("");
                 newWin.document.write(divToPrint.html());
                 newWin.print();

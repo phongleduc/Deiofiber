@@ -224,6 +224,10 @@
     <EntitySetMapping Name="Stores">
       <EntityTypeMapping TypeName="DeiofiberModel.Store">
         <MappingFragment StoreEntitySet="Store">
+          <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
           <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />

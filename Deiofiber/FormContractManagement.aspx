@@ -17,7 +17,7 @@
     <table class="table table-striped table-hover ">
         <tbody>
             <tr>
-                <td class="text-right"><strong>Hợp đồng cho thuê xe</strong></td>
+                <td class="text-right"><strong>Hợp đồng thuê ô tô, xe máy</strong></td>
                 <td class="text-right">
                     <asp:Label ID="lblDeiofiberNo" runat="server"  CssClass="text-right"></asp:Label></td>
                 <td class="text-right"><strong>Tổng số hợp đồng chưa thanh lý</strong></td>
@@ -25,7 +25,7 @@
                     <asp:Label ID="lblNotFinishedContract" runat="server" CssClass="text-right"></asp:Label></td>
             </tr>
             <tr>
-                <td class="text-right"><strong>Hợp đồng cho thuê thiết bị</strong></td>
+                <td class="text-right"><strong>Hợp đồng thuê điện thoại, máy tính</strong></td>
                 <td class="text-right">
                     <asp:Label ID="lblRentOfficeEquip" runat="server" CssClass="text-right"></asp:Label></td>
                 <td class="text-right"><strong>Tổng phí hợp đồng/ngày</strong></td>
@@ -33,12 +33,17 @@
                     <asp:Label ID="lblTotalFeeContract" runat="server" CssClass="text-right"></asp:Label></td>
             </tr>
             <tr>
-                <td class="text-right"><strong>Hợp đồng khác</strong></td>
+                <td class="text-right"><strong>Hợp đồng cho sinh viên thuê</strong></td>
                 <td class="text-right">
-                    <asp:Label ID="lblRentOther" runat="server" CssClass="text-right"></asp:Label></td>
+                    <asp:Label ID="lblRentStudent" runat="server" CssClass="text-right"></asp:Label></td>
                 <td class="text-right"><strong>Tổng số tiền hợp đồng chưa thanh lý</strong></td>
                 <td class="text-right">
                     <asp:Label ID="lblTotalMoneyOfNotFinishContract" runat="server" CssClass="text-right"></asp:Label></td>
+            </tr>
+            <tr>
+                <td class="text-right"><strong>Hợp đồng cho vay vốn</strong></td>
+                <td class="text-right">
+                    <asp:Label ID="lblRentLoan" runat="server" CssClass="text-right"></asp:Label></td>
             </tr>
         </tbody>
     </table>

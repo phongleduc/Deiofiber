@@ -230,7 +230,7 @@
                     <td>
                         <asp:TextBox ID="txtBackDocument" runat="server" CssClass="form-control input-sm"></asp:TextBox></td>
                 </tr>
-                <tr id="trReferencePhone">
+ <%--               <tr id="trReferencePhone">
                     <td class="text-right">Số điện thoại gia đình</td>
                     <td>
                         <asp:TextBox ID="txtReferencePhone" runat="server" CssClass="form-control input-sm"></asp:TextBox></td>
@@ -244,7 +244,7 @@
                     <td class="text-right">Lớp</td>
                     <td>
                         <asp:TextBox ID="txtClass" runat="server" CssClass="form-control input-sm"></asp:TextBox></td>
-                </tr>
+                </tr>--%>
                 <tr id="trPhoto">
                     <td class="text-right">Ảnh lưu trữ</td>
                     <td>
@@ -352,14 +352,10 @@
         });
 
         function hideToRentType(rentTypeId) {
-            if (parseInt(rentTypeId) == 2) {
-                $('#trItemName, #trLicenseNo, #trSerial1, #trSerial2, #trImplementer, #trDocuments').hide();
-                $('#trReferencePhone, #trSchool, #trClass').show();
-                $('#trReferencePhone td').first().text('Số điện thoại gia đình');
-            } else {
+            if (parseInt(rentTypeId) == 1) {
                 $('#trItemName, #trLicenseNo, #trSerial1, #trSerial2, #trImplementer, #trDocuments').show();
-                $('#trReferencePhone, #trSchool, #trClass').hide();
-                $('#trReferencePhone td').first().text('Số điện thoại');
+            } else {
+                $('#trItemName, #trLicenseNo, #trSerial1, #trSerial2, #trImplementer, #trDocuments').hide();
             }
         }
 

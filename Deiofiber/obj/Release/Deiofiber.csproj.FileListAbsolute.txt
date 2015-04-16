@@ -7,3 +7,4 @@ D:\Projects\Others\Deiofiber\Deiofiber\bin\EntityFramework.xml
 D:\Projects\Others\Deiofiber\Deiofiber\bin\EntityFramework.SqlServer.xml
 D:\Projects\Others\Deiofiber\Deiofiber\obj\Release\Deiofiber.dll
 D:\Projects\Others\Deiofiber\Deiofiber\obj\Release\Deiofiber.pdb
+D:\Projects\Others\Deiofiber\Deiofiber\obj\Release\Deiofiber.csprojResolveAssemblyReference.cache

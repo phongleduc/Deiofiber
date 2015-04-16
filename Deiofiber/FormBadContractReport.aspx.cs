@@ -124,7 +124,8 @@ namespace Deiofiber
 
             decimal DeiofiberNo = 0;
             decimal rentEquipNo = 0;
-            decimal rentOtherNo = 0;
+            decimal rentStudentNo = 0;
+            decimal rentLoanNo = 0;
             decimal totalBadContract = 0;
 
             IEnumerable<CONTRACT_FULL_VW> ieDeiofiber = lstContract.Where(x => x.RENT_TYPE_ID == 1 && x.CONTRACT_STATUS == true);
@@ -139,19 +140,28 @@ namespace Deiofiber
                 rentEquipNo = ieRentEquiq.Sum(x => x.CONTRACT_AMOUNT);
             }
 
-            IEnumerable<CONTRACT_FULL_VW> ieRentOther = lstContract.Where(x => x.RENT_TYPE_ID == 3 && x.CONTRACT_STATUS == true);
+            IEnumerable<CONTRACT_FULL_VW> ieRentStudent = lstContract.Where(x => x.RENT_TYPE_ID == 3 && x.CONTRACT_STATUS == true);
             if (ieDeiofiber.Any())
             {
-                rentOtherNo = ieRentOther.Sum(x => x.CONTRACT_AMOUNT);
+                rentStudentNo = ieRentStudent.Sum(x => x.CONTRACT_AMOUNT);
+            }
+
+            IEnumerable<CONTRACT_FULL_VW> ieRentLoan = lstContract.Where(x => x.RENT_TYPE_ID == 4 && x.CONTRACT_STATUS == true);
+            if (ieDeiofiber.Any())
+            {
+                rentLoanNo = ieRentLoan.Sum(x => x.CONTRACT_AMOUNT);
             }
 
             lblDeiofiberCount.Text = ieDeiofiber.Count().ToString();
             lblRentEquipCount.Text = ieRentEquiq.Count().ToString();
-            lblRentOtherCount.Text = ieRentOther.Count().ToString();
+            lblRentStudentCount.Text = ieRentStudent.Count().ToString();
+            lblRentLoanCount.Text = ieRentLoan.Count().ToString();
 
             lblTotalFeeBikeContract.Text = DeiofiberNo == 0 ? "0" : string.Format("{0:0,0}", DeiofiberNo) + " VNĐ";
             lblTotalFeeEquiqContract.Text = DeiofiberNo == 0 ? "0" : string.Format("{0:0,0}", rentEquipNo) + " VNĐ";
-            lblTotalFeeOtherContract.Text = DeiofiberNo == 0 ? "0" : string.Format("{0:0,0}", rentOtherNo) + " VNĐ";
+            lblTotalFeeStudentContract.Text = DeiofiberNo == 0 ? "0" : string.Format("{0:0,0}", rentStudentNo) + " VNĐ";
+            lblTotalFeeLoanContract.Text = DeiofiberNo == 0 ? "0" : string.Format("{0:0,0}", rentLoanNo) + " VNĐ";
+
             totalBadContract = lstContract.Sum(x => x.CONTRACT_AMOUNT);
             lblNumberOfBadContract.Text = lstContract.Count() + "/" + lstContract.Count();
             if (lstContract.Count() > 0)

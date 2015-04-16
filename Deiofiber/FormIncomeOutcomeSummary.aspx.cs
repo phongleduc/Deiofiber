@@ -50,33 +50,6 @@ namespace Deiofiber
             {
                 if (CheckAdminPermission())
                 {
-                    //var data = (from d in db.InOuts
-                    //            group d by new
-                    //            {
-                    //                ID = d.STORE_ID,
-                    //                Year = d.INOUT_DATE.Year,
-                    //                Month = d.INOUT_DATE.Month,
-                    //                Day = d.INOUT_DATE.Day
-                    //            } into g
-                    //            select new
-                    //            {
-                    //                ID = g.Key.ID,
-                    //                Year = g.Key.Year,
-                    //                Month = g.Key.Month,
-                    //                Day = g.Key.Day,
-                    //                TotalIn = g.Sum(x => x.IN_AMOUNT),
-                    //                TotalOut = g.Sum(x => x.OUT_AMOUNT)
-                    //            }
-                    //       ).AsEnumerable()
-                    //        .Select(g => new
-                    //        {
-                    //            ID = g.ID,
-                    //            Period = g.Day + "/" + g.Month + "/" + g.Year,
-                    //            TotalIn = g.TotalIn,
-                    //            TotalOut = g.TotalOut,
-                    //            BeginAmount = 0,
-                    //            EndAmount = 0
-                    //        });
                     List<InOut> lstInOut = db.InOuts.ToList();
                     if (storeId != 0)
                     {
@@ -128,28 +101,6 @@ namespace Deiofiber
                         si.BeginAmount = 0;
                         si.EndAmount = g.Record.ToList()[0].TotalIn - g.Record.ToList()[0].TotalOut;
 
-                        //List<Contract> lstContract = GetContractFeeByDay(g.Record.ToList()[0].Period.Value, db);
-
-                        //IEnumerable<Contract> ieContract = lstContract.Where(x => x.RENT_TYPE_ID == 1);
-                        //if (ieContract.Any())
-                        //{
-                        //    si.ContractFeeCar = ieContract.Sum(x => x.CONTRACT_AMOUNT);
-                        //    //si.RentFeeCar = ieContract.Sum(x => x.FEE_PER_DAY);
-                        //}
-
-                        //ieContract = lstContract.Where(x => x.RENT_TYPE_ID == 2);
-                        //if (ieContract.Any())
-                        //{
-                        //    si.ContractFeeEquip = ieContract.Sum(x => x.CONTRACT_AMOUNT);
-                        //    //si.RentFeeEquip = ieContract.Sum(x => x.FEE_PER_DAY);
-                        //}
-
-                        //ieContract = lstContract.Where(x => x.RENT_TYPE_ID == 3);
-                        //if (ieContract.Any())
-                        //{
-                        //    si.ContractFeeOther = ieContract.Sum(x => x.CONTRACT_AMOUNT);
-                        //    //si.RentFeeOther = ieContract.Sum(x => x.FEE_PER_DAY);
-                        //}
                         var inout = g.Record.Where(x => x.InOutTypeId == 17);
                         if (inout.Any())
                         {
@@ -162,10 +113,22 @@ namespace Deiofiber
                             si.ContractFeeEquip = inout.Sum(x => x.OutAmount);
                         }
 
+                        inout = g.Record.Where(x => x.InOutTypeId == 25);
+                        if (inout.Any())
+                        {
+                            si.ContractFeeStudent = inout.Sum(x => x.OutAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 26);
+                        if (inout.Any())
+                        {
+                            si.ContractFeeLoan = inout.Sum(x => x.OutAmount);
+                        }
+
                         inout = g.Record.Where(x => x.InOutTypeId == 23);
                         if (inout.Any())
                         {
-                            si.ContractFeeOther = inout.Sum(x => x.OutAmount);
+                            si.ContractFeeStudent = inout.Sum(x => x.OutAmount);
                         }
 
                         inout = g.Record.Where(x => x.InOutTypeId == 14);
@@ -180,10 +143,16 @@ namespace Deiofiber
                             si.RentFeeEquip = inout.Sum(x => x.InAmount);
                         }
 
-                        inout = g.Record.Where(x => x.InOutTypeId == 16);
+                        inout = g.Record.Where(x => x.InOutTypeId == 28);
                         if (inout.Any())
                         {
-                            si.RentFeeOther = inout.Sum(x => x.InAmount);
+                            si.RentFeeStudent = inout.Sum(x => x.InAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 30);
+                        if (inout.Any())
+                        {
+                            si.RentFeeLoan = inout.Sum(x => x.InAmount);
                         }
 
                         inout = g.Record.Where(x => x.InOutTypeId == 10);
@@ -225,7 +194,13 @@ namespace Deiofiber
                         inout = g.Record.Where(x => x.InOutTypeId == 18 && x.RentTypeId == 3);
                         if (inout.Any())
                         {
-                            si.CloseFeeOther = inout.Sum(x => x.InAmount);
+                            si.CloseFeeStudent = inout.Sum(x => x.InAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 18 && x.RentTypeId == 4);
+                        if (inout.Any())
+                        {
+                            si.CloseFeeLoan = inout.Sum(x => x.InAmount);
                         }
 
                         inout = g.Record.Where(x => x.InOutTypeId == 19 && x.RentTypeId == 1);
@@ -243,7 +218,13 @@ namespace Deiofiber
                         inout = g.Record.Where(x => x.InOutTypeId == 19 && x.RentTypeId == 3);
                         if (inout.Any())
                         {
-                            si.RedundantFeeOther = inout.Sum(x => x.OutAmount);
+                            si.RedundantFeeStudent = inout.Sum(x => x.OutAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 19 && x.RentTypeId == 4);
+                        if (inout.Any())
+                        {
+                            si.RedundantFeeLoan = inout.Sum(x => x.OutAmount);
                         }
                         
                         lst.Add(si);
@@ -289,32 +270,6 @@ namespace Deiofiber
                 else
                 {
                     int storeid = Convert.ToInt32(Session["store_id"]);
-                    //var data = (from d in db.InOuts
-                    //            where d.STORE_ID == storeid
-                    //            group d by new
-                    //            {
-                    //                ID = d.STORE_ID,
-                    //                Year = d.INOUT_DATE.Year,
-                    //                Month = d.INOUT_DATE.Month,
-                    //                Day = d.INOUT_DATE.Day
-                    //            } into g
-                    //            select new
-                    //            {
-                    //                ID = g.Key.ID,
-                    //                Year = g.Key.Year,
-                    //                Month = g.Key.Month,
-                    //                Day = g.Key.Day,
-                    //                TotalIn = g.Sum(x => x.IN_AMOUNT),
-                    //                TotalOut = g.Sum(x => x.OUT_AMOUNT)
-                    //            }
-                    //       ).AsEnumerable()
-                    //        .Select(g => new
-                    //        {
-                    //            ID = g.ID,
-                    //            Period = g.Day + "/" + g.Month + "/" + g.Year,
-                    //            TotalIn = g.TotalIn,
-                    //            TotalOut = g.TotalOut
-                    //        });
                     var data = from d in db.InOuts
                                where d.STORE_ID == storeid
                                group d by d.INOUT_DATE into g
@@ -363,29 +318,6 @@ namespace Deiofiber
                         si.BeginAmount = 0;
                         si.EndAmount = g.Record.ToList()[0].TotalIn - g.Record.ToList()[0].TotalOut;
 
-                        //List<Contract> lstContract = GetContractFeeByDay(g.Record.ToList()[0].Period.Value, db);
-
-                        //IEnumerable<Contract> ieContract = lstContract.Where(x => x.RENT_TYPE_ID == 1);
-                        //if (ieContract.Any())
-                        //{
-                        //    si.ContractFeeCar = ieContract.Sum(x => x.CONTRACT_AMOUNT);
-                        //    //si.RentFeeCar = ieContract.Sum(x => x.FEE_PER_DAY);
-                        //}
-
-                        //ieContract = lstContract.Where(x => x.RENT_TYPE_ID == 2);
-                        //if (ieContract.Any())
-                        //{
-                        //    si.ContractFeeEquip = ieContract.Sum(x => x.CONTRACT_AMOUNT);
-                        //    //si.RentFeeEquip = ieContract.Sum(x => x.FEE_PER_DAY);
-                        //}
-
-                        //ieContract = lstContract.Where(x => x.RENT_TYPE_ID == 3);
-                        //if (ieContract.Any())
-                        //{
-                        //    si.ContractFeeOther = ieContract.Sum(x => x.CONTRACT_AMOUNT);
-                        //    //si.RentFeeOther = ieContract.Sum(x => x.FEE_PER_DAY);
-                        //}
-
                         var inout = g.Record.Where(x => x.InOutTypeId == 17);
                         if (inout.Any())
                         {
@@ -398,10 +330,22 @@ namespace Deiofiber
                             si.ContractFeeEquip = inout.Sum(x => x.OutAmount);
                         }
 
+                        inout = g.Record.Where(x => x.InOutTypeId == 25);
+                        if (inout.Any())
+                        {
+                            si.ContractFeeStudent = inout.Sum(x => x.OutAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 26);
+                        if (inout.Any())
+                        {
+                            si.ContractFeeLoan = inout.Sum(x => x.OutAmount);
+                        }
+
                         inout = g.Record.Where(x => x.InOutTypeId == 23);
                         if (inout.Any())
                         {
-                            si.ContractFeeOther = inout.Sum(x => x.OutAmount);
+                            si.ContractFeeStudent = inout.Sum(x => x.OutAmount);
                         }
 
                         inout = g.Record.Where(x => x.InOutTypeId == 14);
@@ -416,10 +360,16 @@ namespace Deiofiber
                             si.RentFeeEquip = inout.Sum(x => x.InAmount);
                         }
 
-                        inout = g.Record.Where(x => x.InOutTypeId == 16);
+                        inout = g.Record.Where(x => x.InOutTypeId == 28);
                         if (inout.Any())
                         {
-                            si.RentFeeOther = inout.Sum(x => x.InAmount);
+                            si.RentFeeStudent = inout.Sum(x => x.InAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 30);
+                        if (inout.Any())
+                        {
+                            si.RentFeeLoan = inout.Sum(x => x.InAmount);
                         }
 
                         inout = g.Record.Where(x => x.InOutTypeId == 10);
@@ -461,7 +411,13 @@ namespace Deiofiber
                         inout = g.Record.Where(x => x.InOutTypeId == 18 && x.RentTypeId == 3);
                         if (inout.Any())
                         {
-                            si.CloseFeeOther = inout.Sum(x => x.InAmount);
+                            si.CloseFeeStudent = inout.Sum(x => x.InAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 18 && x.RentTypeId == 4);
+                        if (inout.Any())
+                        {
+                            si.CloseFeeLoan = inout.Sum(x => x.InAmount);
                         }
 
                         inout = g.Record.Where(x => x.InOutTypeId == 19 && x.RentTypeId == 1);
@@ -479,7 +435,13 @@ namespace Deiofiber
                         inout = g.Record.Where(x => x.InOutTypeId == 19 && x.RentTypeId == 3);
                         if (inout.Any())
                         {
-                            si.RedundantFeeOther = inout.Sum(x => x.OutAmount);
+                            si.RedundantFeeStudent = inout.Sum(x => x.OutAmount);
+                        }
+
+                        inout = g.Record.Where(x => x.InOutTypeId == 19 && x.RentTypeId == 4);
+                        if (inout.Any())
+                        {
+                            si.RedundantFeeLoan = inout.Sum(x => x.OutAmount);
                         }
 
                         lst.Add(si);
@@ -572,23 +534,16 @@ namespace Deiofiber
                         contrList = item1.ToList();
                     }
 
-                    decimal bikeAmount = 0;
-                    decimal equipAmount = 0;
-                    decimal otherAmount = 0;
-                    foreach (CONTRACT_FULL_VW c in contrList)
-                    {
-                        if (c.RENT_TYPE_NAME == "Cho thuê xe")
-                        { bikeAmount += c.CONTRACT_AMOUNT; }
-                        if (c.RENT_TYPE_NAME == "Cho thuê thiết bị văn phòng")
-                        { equipAmount += c.CONTRACT_AMOUNT; }
-                        if (c.RENT_TYPE_NAME == "Cho thuê mặt hàng khác")
-                        { otherAmount += c.CONTRACT_AMOUNT; }
-                    }
+                    decimal bikeAmount = contrList.Where(c => c.RENT_TYPE_ID == 1).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
+                    decimal equipAmount = contrList.Where(c => c.RENT_TYPE_ID == 2).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
+                    decimal studentAmount = contrList.Where(c => c.RENT_TYPE_ID == 3).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
+                    decimal loanAmount = contrList.Where(c => c.RENT_TYPE_ID == 4).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
 
                     lblDeiofiberAmount.Text = bikeAmount == 0 ? "0" : string.Format("{0:0,0}", bikeAmount);
                     lblRentEquipAmount.Text = equipAmount == 0 ? "0" : string.Format("{0:0,0}", equipAmount);
-                    lblRentOtherAmount.Text = otherAmount == 0 ? "0" : string.Format("{0:0,0}", otherAmount);
-                    lblRentAll.Text = bikeAmount + equipAmount + otherAmount == 0 ? "0" : string.Format("{0:0,0}", (bikeAmount + equipAmount + otherAmount));
+                    lblRentStudentAmount.Text = studentAmount == 0 ? "0" : string.Format("{0:0,0}", studentAmount);
+                    lblLoanAmount.Text = loanAmount == 0 ? "0" : string.Format("{0:0,0}", loanAmount);
+                    lblRentAll.Text = bikeAmount + equipAmount + studentAmount == 0 ? "0" : string.Format("{0:0,0}", (bikeAmount + equipAmount + studentAmount + loanAmount));
 
 
                     //============================================================
@@ -645,24 +600,18 @@ namespace Deiofiber
                     var item1 = from itm1 in db.CONTRACT_FULL_VW
                                 where itm1.STORE_ID == storeid
                                 select itm1;
+
                     List<CONTRACT_FULL_VW> contrList = item1.Where(c => c.CONTRACT_STATUS == true).ToList();
-                    decimal bikeAmount = 0;
-                    decimal equipAmount = 0;
-                    decimal otherAmount = 0;
-                    foreach (CONTRACT_FULL_VW c in contrList)
-                    {
-                        if (c.RENT_TYPE_NAME == "Cho thuê xe")
-                        { bikeAmount += c.CONTRACT_AMOUNT; }
-                        if (c.RENT_TYPE_NAME == "Cho thuê thiết bị văn phòng")
-                        { equipAmount += c.CONTRACT_AMOUNT; }
-                        if (c.RENT_TYPE_NAME == "Cho thuê mặt hàng khác")
-                        { otherAmount += c.CONTRACT_AMOUNT; }
-                    }
+                    decimal bikeAmount = contrList.Where(c => c.RENT_TYPE_ID == 1).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
+                    decimal equipAmount = contrList.Where(c => c.RENT_TYPE_ID == 2).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
+                    decimal studentAmount = contrList.Where(c => c.RENT_TYPE_ID == 3).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
+                    decimal loanAmount = contrList.Where(c => c.RENT_TYPE_ID == 4).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
 
                     lblDeiofiberAmount.Text = bikeAmount == 0 ? "0" : string.Format("{0:0,0}", bikeAmount);
                     lblRentEquipAmount.Text = equipAmount == 0 ? "0" : string.Format("{0:0,0}", equipAmount);
-                    lblRentOtherAmount.Text = otherAmount == 0 ? "0" : string.Format("{0:0,0}", otherAmount);
-                    lblRentAll.Text = bikeAmount + equipAmount + otherAmount == 0 ? "0" : string.Format("{0:0,0}", (bikeAmount + equipAmount + otherAmount));
+                    lblRentStudentAmount.Text = studentAmount == 0 ? "0" : string.Format("{0:0,0}", studentAmount);
+                    lblLoanAmount.Text = loanAmount == 0 ? "0" : string.Format("{0:0,0}", loanAmount);
+                    lblRentAll.Text = bikeAmount + equipAmount + studentAmount == 0 ? "0" : string.Format("{0:0,0}", (bikeAmount + equipAmount + studentAmount + loanAmount));
 
 
                     //============================================================
@@ -857,9 +806,12 @@ namespace Deiofiber
         public decimal ContractFeeEquip { get; set; }
         public decimal RentFeeEquip { get; set; }
         public decimal CloseFeeEquip { get; set; }
-        public decimal ContractFeeOther { get; set; }
-        public decimal RentFeeOther { get; set; }
-        public decimal CloseFeeOther { get; set; }
+        public decimal ContractFeeStudent { get; set; }
+        public decimal RentFeeStudent { get; set; }
+        public decimal CloseFeeStudent { get; set; }
+        public decimal ContractFeeLoan { get; set; }
+        public decimal RentFeeLoan { get; set; }
+        public decimal CloseFeeLoan { get; set; }
         public decimal RemainEndOfDay { get; set; }
         public decimal InCapital { get; set; }
         public decimal OutCapital { get; set; }
@@ -867,7 +819,8 @@ namespace Deiofiber
         public decimal OutOther { get; set; }
         public decimal RedundantFeeCar { get; set; }
         public decimal RedundantFeeEquip { get; set; }
-        public decimal RedundantFeeOther { get; set; }
+        public decimal RedundantFeeStudent { get; set; }
+        public decimal RedundantFeeLoan { get; set; }
         
 
     }
