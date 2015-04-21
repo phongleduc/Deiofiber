@@ -69,6 +69,7 @@
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="FormPrincipalPayment.aspx" />
     <Content Include="MasterPage.Master" />
     <Content Include="packages.config" />
     <EntityDeploy Include="Deiofiber.edmx">
@@ -202,7 +203,9 @@
     <Content Include="script\jquery.price_format.1.8.min.js" />
     <Content Include="script\jquery.PrintArea.js" />
     <Content Include="script\jquery.validate.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs">
@@ -341,6 +344,13 @@
     </Compile>
     <Compile Include="FormIncomeOutcomeSummary.aspx.designer.cs">
       <DependentUpon>FormIncomeOutcomeSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrincipalPayment.aspx.cs">
+      <DependentUpon>FormPrincipalPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormPrincipalPayment.aspx.designer.cs">
+      <DependentUpon>FormPrincipalPayment.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormInOutUpdate.aspx.cs">
       <DependentUpon>FormInOutUpdate.aspx</DependentUpon>

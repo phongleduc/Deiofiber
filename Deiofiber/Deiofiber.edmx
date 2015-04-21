@@ -80,6 +80,7 @@
           <Property Name="THUMBNAIL_PHOTO_4" Type="varchar" MaxLength="300" />
           <Property Name="PHOTO_5" Type="varchar" MaxLength="300" />
           <Property Name="THUMBNAIL_PHOTO_5" Type="varchar" MaxLength="300" />
+          <Property Name="UNABLE_PAY_INTEREST" Type="bit" />
           <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
@@ -729,6 +730,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
           <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="FEE_PER_DAY" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="UNABLE_PAY_INTEREST" Type="Boolean" />
         </EntityType>
         <EntityType Name="ContractHistory">
           <Key>
@@ -1175,6 +1177,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
           <EntitySetMapping Name="Contracts">
             <EntityTypeMapping TypeName="DeiofiberModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="UNABLE_PAY_INTEREST" ColumnName="UNABLE_PAY_INTEREST" />
                 <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />

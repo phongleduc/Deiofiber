@@ -260,7 +260,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="btnSave" runat="server" Text="Lưu & thoát" CssClass="btn btn-primary" OnClick="btnSave_Click" />&nbsp;<asp:Button ID="btnFinishContract" runat="server" Text="Thanh lý HĐ" CssClass="btn btn-primary" OnClick="btnFinishContract_Click" />&nbsp;<asp:Button ID="btnCancel" runat="server" Text="Quay lại" CssClass="btn btn-primary" OnClick="btnCancel_Click" />
+                        <asp:Button ID="btnSave" runat="server" Text="Lưu & thoát" CssClass="btn btn-primary" OnClick="btnSave_Click" />&nbsp;<asp:Button ID="btnFinishContract" runat="server" Text="Thanh lý HĐ" CssClass="btn btn-primary" OnClick="btnFinishContract_Click" />&nbsp;<asp:Button ID="btnPrincipalPay" runat="server" Text="Trả gốc" CssClass="btn btn-primary" OnClick="btnPrincipalPay_Click" />&nbsp;<asp:Button ID="btnCancel" runat="server" Text="Quay lại" CssClass="btn btn-primary" OnClick="btnCancel_Click" />
                     </td>
                 </tr>
             </tbody>

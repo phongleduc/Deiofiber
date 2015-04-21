@@ -49,7 +49,7 @@ namespace Deiofiber
 
                     }
                     Response.Cookies["UserName"].Value = txtUsername.Text.Trim();
-                    Response.Cookies["Password"].Value =  CommonList.EncryptPassword(txtPassword.Text.Trim());
+                    Response.Cookies["Password"].Value = CommonList.EncryptPassword(txtPassword.Text.Trim());
 
                     WriteLog(CommonList.ACTION_LOGIN, false);
                     Response.Redirect("FormWarning.aspx", false);
@@ -122,23 +122,24 @@ namespace Deiofiber
 
         private void WriteLog(string action, bool isCrashed)
         {
-            Log lg = new Log();
-            lg.ACCOUNT = Session["username"].ToString();
-            string strStore = string.Empty;
-            string strStoreName = Session["store_name"].ToString();
-            if (strStoreName != string.Empty)
-            {
-                strStore = string.Format("cửa hàng {0} ", strStoreName);
-            }
-            lg.STORE = strStore;
-            lg.LOG_ACTION = action;
-            lg.LOG_DATE = DateTime.Now;
-            lg.IS_CRASH = isCrashed;
-            lg.LOG_MSG = string.Format("Tài khoản {0} {1}thực hiện {2} vào lúc {3}", lg.ACCOUNT, strStore, lg.LOG_ACTION, lg.LOG_DATE);
-            lg.SEARCH_TEXT = lg.LOG_MSG;
-            lg.STORE_ID = Convert.ToInt32(Session["store_id"]);
             using (var db = new DeiofiberEntities())
             {
+                Log lg = new Log();
+                lg.ACCOUNT = Session["username"].ToString();
+                string strStore = string.Empty;
+                string strStoreName = Session["store_name"].ToString();
+                if (strStoreName != string.Empty)
+                {
+                    strStore = string.Format("cửa hàng {0} ", strStoreName);
+                }
+                lg.STORE = strStore;
+                lg.LOG_ACTION = action;
+                lg.LOG_DATE = DateTime.Now;
+                lg.IS_CRASH = isCrashed;
+                lg.LOG_MSG = string.Format("Tài khoản {0} {1}thực hiện {2} vào lúc {3}", lg.ACCOUNT, strStore, lg.LOG_ACTION, lg.LOG_DATE);
+                lg.SEARCH_TEXT = lg.LOG_MSG;
+                lg.STORE_ID = Convert.ToInt32(Session["store_id"]);
+
                 db.Logs.Add(lg);
                 db.SaveChanges();
             }

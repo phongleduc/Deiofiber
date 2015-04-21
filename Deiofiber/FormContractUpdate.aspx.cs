@@ -773,6 +773,11 @@ namespace Deiofiber
             Response.Redirect("FormContractManagement.aspx");
         }
 
+        protected void btnPrincipalPay_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FormPrincipalPayment.aspx?id=" + Request.QueryString["ID"]);
+        }
+
         private void LoadPayFeeSchedule()
         {
             string id = Request.QueryString["ID"];

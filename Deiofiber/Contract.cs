@@ -53,5 +53,6 @@ namespace Deiofiber
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> UPDATED_DATE { get; set; }
         public decimal FEE_PER_DAY { get; set; }
+        public Nullable<bool> UNABLE_PAY_INTEREST { get; set; }
     }
 }
