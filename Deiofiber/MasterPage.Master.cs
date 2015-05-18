@@ -108,10 +108,20 @@ namespace Deiofiber
             finally
             {
                 Session.RemoveAll();
-                Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
+                RemoveAllCookies();
                 Response.Redirect("FormLogin.aspx");
             }
+        }
+
+        private void RemoveAllCookies()
+        {
+            HttpCookie aCookie = new HttpCookie("UserName");
+            aCookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(aCookie);
+
+            aCookie = new HttpCookie("Password");
+            aCookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(aCookie);
         }
 
         private void WriteLog(string action, bool isCrashed)
@@ -126,8 +136,7 @@ namespace Deiofiber
                     int storeid = 0;
                     if (CheckAdminPermission())
                     {
-                        DropDownList drpStore = this.Master.FindControl("ddlStore") as DropDownList;
-                        storeid = Helper.parseInt(drpStore.SelectedValue);
+                        storeid = Helper.parseInt(ddlStore.SelectedValue);
                     }
                     else
                     {

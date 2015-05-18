@@ -24,6 +24,7 @@ namespace Deiofiber
                 //List<Store> storeList = GetStoreByCity(1);
                 ddlStore.Items.Add(new ListItem("--Tất cả cửa hàng--", "0"));
                 Common.CommonList.LoadStore(ddlStore);
+                txtRegisterDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
 
                 string id = Request.QueryString["ID"];
                 if (!string.IsNullOrEmpty(id)) // Update account
@@ -70,9 +71,9 @@ namespace Deiofiber
             {
                 return "Bạn cần phải nhập tên tài khoản.";
             }
-            if (txtAccount.Text.Trim().Length < 5)
+            if (txtAccount.Text.Trim().Length < 2)
             {
-                return "Tên tài khoản phải có ít nhất 5 ký tự.";
+                return "Tên tài khoản phải có ít nhất 3 ký tự.";
             }
             if (!Regex.IsMatch(txtAccount.Text.Trim(), "^[a-zA-Z0-9]+$"))
             {

@@ -112,5 +112,91 @@ namespace Deiofiber.Common
             }
             return string.Empty;
         }
+
+        public static void AutoExtendPeriod(DeiofiberEntities db, int contractId)
+        {
+            Contract contract = db.Contracts.FirstOrDefault(c => c.ID == contractId && c.CONTRACT_STATUS == true);
+            if (contract != null)
+            {
+                var listPayPeriod = db.PayPeriods.Where(c => c.CONTRACT_ID == contract.ID).ToList();
+                PayPeriod lastPayPeriod = listPayPeriod.LastOrDefault();
+
+                DateTime extendEndDate = contract.EXTEND_END_DATE == null ? lastPayPeriod.PAY_DATE : contract.EXTEND_END_DATE.Value;
+
+                int overDate = DateTime.Today.Subtract(extendEndDate).Days;
+                if (overDate >= 0)
+                {
+                    int percentDate = overDate / 30;
+                    DateTime endDateUpdated = extendEndDate.AddDays(30 * (percentDate + 1));
+                    contract.EXTEND_END_DATE = endDateUpdated;
+
+                    for (int i = 0; i <= percentDate; i++)
+                    {
+                        if (lastPayPeriod.PAY_DATE.Subtract(contract.EXTEND_END_DATE.Value.AddDays(-10)).Days > 0)
+                        {
+                            break;
+                        }
+                        lastPayPeriod = CreateOneMorePayPeriod(db, contract, lastPayPeriod.PAY_DATE, false);
+                    }
+
+                    contract.EXTEND_END_DATE = lastPayPeriod.PAY_DATE;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public static PayPeriod CreateOneMorePayPeriod(DeiofiberEntities db, Contract contract, DateTime lastPeriodDate, bool bFirstCreated)
+        {
+            PayPeriod pp1 = new PayPeriod();
+            pp1.CONTRACT_ID = contract.ID;
+            if (bFirstCreated)
+            {
+                pp1.PAY_DATE = lastPeriodDate;
+            }
+            else
+            {
+                pp1.PAY_DATE = lastPeriodDate.AddDays(10);
+            }
+            pp1.AMOUNT_PER_PERIOD = contract.FEE_PER_DAY * 10;
+            pp1.STATUS = true;
+            pp1.ACTUAL_PAY = 0;
+
+            PayPeriod pp2 = new PayPeriod();
+            pp2.CONTRACT_ID = contract.ID;
+            if (bFirstCreated)
+                pp2.PAY_DATE = pp1.PAY_DATE.AddDays(9);
+            else
+                pp2.PAY_DATE = pp1.PAY_DATE.AddDays(10);
+            pp2.AMOUNT_PER_PERIOD = pp1.AMOUNT_PER_PERIOD;
+            pp2.STATUS = true;
+            pp2.ACTUAL_PAY = 0;
+
+            PayPeriod pp3 = new PayPeriod();
+            pp3.CONTRACT_ID = contract.ID;
+            pp3.PAY_DATE = pp2.PAY_DATE.AddDays(10);
+            pp3.AMOUNT_PER_PERIOD = pp1.AMOUNT_PER_PERIOD;
+            pp3.STATUS = true;
+            pp3.ACTUAL_PAY = 0;
+
+            db.PayPeriods.Add(pp1);
+            db.PayPeriods.Add(pp2);
+            db.PayPeriods.Add(pp3);
+
+            db.SaveChanges();
+
+            return pp3;
+        }
+
+        public static void AutoExtendContract()
+        {
+            using (var db = new DeiofiberEntities())
+            {
+                var contracts = db.Contracts.Where(c => c.CONTRACT_STATUS == true).ToList();
+                foreach (var contract in contracts)
+                {
+                    CommonList.AutoExtendPeriod(db, contract.ID);
+                }
+            }
+        }
     }
 }

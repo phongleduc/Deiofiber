@@ -74,23 +74,48 @@ namespace Deiofiber
                     c.PAYED_TIME = 0;
                     c.PAY_DATE = c.RENT_DATE;
                     c.OVER_DATE = DateTime.Now.Subtract(c.PAY_DATE).Days;
-                    c.MUST_PAY_IN_TODAY = false;
+
                     string contactId = c.ID.ToString();
-                    var tmpLstPeriod = lstPeriod.Where(s => s.CONTRACT_ID == c.ID).OrderByDescending(s => s.PAY_DATE).ToList();
+                    var tmpLstPeriod = lstPeriod.Where(s => s.CONTRACT_ID == c.ID).ToList();
                     if (tmpLstPeriod != null)
                     {
                         decimal paidAmount = tmpLstPeriod.Where(s => s.ACTUAL_PAY > 0).Select(s => s.ACTUAL_PAY).DefaultIfEmpty().Sum();
                         int paidNumberOfFee = 0;
                         foreach (PayPeriod pp in tmpLstPeriod)
                         {
-                            if (paidAmount <= 0)
+                            if (pp.AMOUNT_PER_PERIOD == 0)
+                            {
+                                c.OVER_DATE = 0;
                                 break;
-
+                            }
                             paidAmount -= pp.AMOUNT_PER_PERIOD;
-                            paidNumberOfFee += 1;
+                            if (paidAmount >= 0)
+                                paidNumberOfFee += 1;
+
+                            if (paidAmount <= 0)
+                            {
+                                if (paidAmount < 0)
+                                {
+                                    c.OVER_DATE = DateTime.Today.Subtract(pp.PAY_DATE).Days;
+                                    c.PAY_DATE = pp.PAY_DATE;
+                                }
+                                else
+                                {
+                                    if (tmpLstPeriod.Any(s => s.PAY_DATE == pp.PAY_DATE.AddDays(9)))
+                                    {
+                                        c.OVER_DATE = DateTime.Today.Subtract(pp.PAY_DATE.AddDays(9)).Days;
+                                        c.PAY_DATE = pp.PAY_DATE.AddDays(9);
+                                    }
+                                    else
+                                    {
+                                        c.OVER_DATE = DateTime.Today.Subtract(pp.PAY_DATE.AddDays(10)).Days;
+                                        c.PAY_DATE = pp.PAY_DATE.AddDays(10);
+                                    }
+                                }
+                                break;
+                            }
                         }
                         c.PAYED_TIME = paidNumberOfFee;
-                        c.OVER_DATE = DateTime.Now.Subtract(c.RENT_DATE).Days + 1;
 
                         if (!string.IsNullOrEmpty(searchDate))
                         {
@@ -100,11 +125,15 @@ namespace Deiofiber
                                 dataList.Add(c);
                             }
                         }
-                        else if (tmpLstPeriod.Any(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd"))))
+                        else
                         {
-                            c.FEE_PER_DAY = tmpLstPeriod.FirstOrDefault(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd"))).AMOUNT_PER_PERIOD / 10;
-                            dataList.Add(c);
+                            dataList.Add(c); 
                         }
+                        //else if (tmpLstPeriod.Any(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd"))))
+                        //{
+                        //    c.FEE_PER_DAY = tmpLstPeriod.FirstOrDefault(s => s.PAY_DATE.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd"))).AMOUNT_PER_PERIOD / 10;
+                        //    dataList.Add(c);
+                        //}
                     }
                 }
                 if (!string.IsNullOrEmpty(txtSearch.Text))

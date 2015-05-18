@@ -23,7 +23,7 @@ namespace Deiofiber
         public decimal START_CAPITAL { get; set; }
         public decimal CURRENT_CAPITAL { get; set; }
         public System.DateTime APPLY_DATE { get; set; }
-        public Nullable<decimal> REVENUE_BEFORE_APPLY { get; set; }
+        public decimal REVENUE_BEFORE_APPLY { get; set; }
         public decimal TOTAL_COST_BEFORE { get; set; }
         public decimal TOTAL_INVESMENT_BEFORE { get; set; }
         public System.DateTime REGISTER_DATE { get; set; }

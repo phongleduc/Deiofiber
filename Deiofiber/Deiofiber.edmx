@@ -80,7 +80,7 @@
           <Property Name="THUMBNAIL_PHOTO_4" Type="varchar" MaxLength="300" />
           <Property Name="PHOTO_5" Type="varchar" MaxLength="300" />
           <Property Name="THUMBNAIL_PHOTO_5" Type="varchar" MaxLength="300" />
-          <Property Name="UNABLE_PAY_INTEREST" Type="bit" />
+          <Property Name="UNABLE_PAY_INTEREST" Type="bit" Nullable="false" />
           <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
@@ -228,7 +228,7 @@
           <Property Name="START_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CURRENT_CAPITAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="APPLY_DATE" Type="date" Nullable="false" />
-          <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="REVENUE_BEFORE_APPLY" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TOTAL_COST_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TOTAL_INVESMENT_BEFORE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="REGISTER_DATE" Type="date" Nullable="false" />
@@ -266,6 +266,7 @@ warning 6002: The table/view 'Deiofiber.dbo.CONTRACT_FULL_VW' does not have a pr
             <PropertyRef Name="LICENSE_NO" />
             <PropertyRef Name="ADDRESS" />
             <PropertyRef Name="STORE_NAME" />
+            <PropertyRef Name="UNABLE_PAY_INTEREST" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="RENT_TYPE_ID" Type="int" Nullable="false" />
@@ -315,6 +316,7 @@ warning 6002: The table/view 'Deiofiber.dbo.CONTRACT_FULL_VW' does not have a pr
           <Property Name="CONTRACT_NO" Type="varchar" MaxLength="13" />
           <Property Name="IMPLEMENTER" Type="nvarchar" MaxLength="50" />
           <Property Name="BACK_TO_DOCUMENTS" Type="nvarchar" MaxLength="300" />
+          <Property Name="UNABLE_PAY_INTEREST" Type="bit" Nullable="false" />
           <Property Name="CREATED_BY" Type="nvarchar" MaxLength="50" />
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="50" />
@@ -536,6 +538,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
     [CONTRACT_FULL_VW].[CONTRACT_NO] AS [CONTRACT_NO], 
     [CONTRACT_FULL_VW].[IMPLEMENTER] AS [IMPLEMENTER], 
     [CONTRACT_FULL_VW].[BACK_TO_DOCUMENTS] AS [BACK_TO_DOCUMENTS], 
+    [CONTRACT_FULL_VW].[UNABLE_PAY_INTEREST] AS [UNABLE_PAY_INTEREST], 
     [CONTRACT_FULL_VW].[CREATED_BY] AS [CREATED_BY], 
     [CONTRACT_FULL_VW].[CREATED_DATE] AS [CREATED_DATE], 
     [CONTRACT_FULL_VW].[UPDATED_BY] AS [UPDATED_BY], 
@@ -730,7 +733,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
           <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="FEE_PER_DAY" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="UNABLE_PAY_INTEREST" Type="Boolean" />
+          <Property Name="UNABLE_PAY_INTEREST" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ContractHistory">
           <Key>
@@ -874,7 +877,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
           <Property Name="START_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CURRENT_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="APPLY_DATE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TOTAL_COST_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TOTAL_INVESMENT_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="REGISTER_DATE" Type="DateTime" Nullable="false" Precision="0" />
@@ -910,6 +913,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
             <PropertyRef Name="ADDRESS" />
             <PropertyRef Name="STORE_NAME" />
             <PropertyRef Name="FEE_PER_DAY" />
+            <PropertyRef Name="UNABLE_PAY_INTEREST" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
@@ -963,6 +967,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
           <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="FEE_PER_DAY" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="UNABLE_PAY_INTEREST" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="CONTRACT_HISTORY_FULL_VW">
           <Key>
@@ -1394,6 +1399,7 @@ warning 6002: The table/view 'Deiofiber.dbo.STORE_FULL_VW' does not have a prima
           <EntitySetMapping Name="CONTRACT_FULL_VW">
             <EntityTypeMapping TypeName="DeiofiberModel.CONTRACT_FULL_VW">
               <MappingFragment StoreEntitySet="CONTRACT_FULL_VW">
+                <ScalarProperty Name="UNABLE_PAY_INTEREST" ColumnName="UNABLE_PAY_INTEREST" />
                 <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />

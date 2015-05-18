@@ -34,9 +34,9 @@ namespace Deiofiber
                 LoadGeneralInfo();
 
                 if (CheckAdminPermission())
-                    LoadDataAdmin(string.Empty, Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
+                    LoadDataAdmin(Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
                 else
-                    LoadData(string.Empty, Helper.parseInt(drpRentType.SelectedValue));
+                    LoadData(Helper.parseInt(drpRentType.SelectedValue));
             }
         }
 
@@ -44,22 +44,22 @@ namespace Deiofiber
         {
             DropDownList drpStore = sender as DropDownList;
             if (CheckAdminPermission())
-                LoadDataAdmin(string.Empty, Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
+                LoadDataAdmin(Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
             else
-                LoadData(string.Empty, Helper.parseInt(drpRentType.SelectedValue));
+                LoadData(Helper.parseInt(drpRentType.SelectedValue));
 
             LoadGeneralInfo();
             //LoadData(txtSearch.Text.Trim(), Helper.parseInt(drpStore.SelectedValue), Convert.ToInt32(ddlPager.SelectedValue) - 1);
         }
 
-        private void LoadData(string strSearch, int rentType)
+        private void LoadData(int rentType)
         {
             int storeid = Helper.parseInt(Session["store_id"].ToString());
             List<CONTRACT_FULL_VW> dataList;
             using (var db = new DeiofiberEntities())
             {
                 dataList = (from s in db.CONTRACT_FULL_VW
-                            where s.SEARCH_TEXT.Contains(strSearch) && s.CONTRACT_STATUS == true && s.STORE_ID == storeid
+                            where s.CONTRACT_STATUS == true && s.STORE_ID == storeid
                             select s).OrderByDescending(c =>c.RENT_DATE).ToList();
 
                 if (dataList.Any())
@@ -68,24 +68,18 @@ namespace Deiofiber
                     {
                         dataList = dataList.Where(c => c.RENT_TYPE_ID == rentType).ToList();
                     }
-                    //int totalRecord = st.Count();
-                    //int totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : totalRecord / pageSize + 1;
-                    //List<int> pageList = new List<int>();
-                    //for (int i = 1; i <= totalPage; i++)
-                    //{
-                    //    pageList.Add(i);
-                    //}
-
-                    //ddlPager.DataSource = pageList;
-                    //ddlPager.DataBind();
-                    //if (pageList.Count > 0)
-                    //{
-                    //    ddlPager.SelectedIndex = page;
-                    //}
-
-                    //int skip = page * pageSize;
-                    //dataList = st.Skip(skip).Take(pageSize).ToList();
-
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        dataList = dataList.Where(c => c.RENT_DATE >= Convert.ToDateTime(txtStartDate.Text) && c.RENT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        dataList = dataList.Where(c => c.RENT_DATE >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        dataList = dataList.Where(c => c.RENT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
                     rptContract.DataSource = dataList;
                     rptContract.DataBind();
                 }
@@ -94,13 +88,13 @@ namespace Deiofiber
 
         }
 
-        private void LoadDataAdmin(string strSearch, int storeId, int rentType)
+        private void LoadDataAdmin(int storeId, int rentType)
         {
             List<CONTRACT_FULL_VW> dataList;
             using (var db = new DeiofiberEntities())
             {
                 dataList = (from s in db.CONTRACT_FULL_VW
-                            where s.SEARCH_TEXT.Contains(strSearch) && s.CONTRACT_STATUS == true
+                            where s.CONTRACT_STATUS == true
                             select s).OrderByDescending(c => c.RENT_DATE).ToList();
                 if (dataList.Any())
                 {
@@ -113,23 +107,19 @@ namespace Deiofiber
                     {
                         dataList = dataList.Where(c => c.RENT_TYPE_ID == rentType).ToList();
                     }
-                    //int totalRecord = st.Count();
-                    //int totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : totalRecord / pageSize + 1;
-                    //List<int> pageList = new List<int>();
-                    //for (int i = 1; i <= totalPage; i++)
-                    //{
-                    //    pageList.Add(i);
-                    //}
 
-                    //ddlPager.DataSource = pageList;
-                    //ddlPager.DataBind();
-                    //if (pageList.Count > 0)
-                    //{
-                    //    ddlPager.SelectedIndex = page;
-                    //}
-
-                    //int skip = page * pageSize;
-                    //dataList = st.Skip(skip).Take(pageSize).ToList();
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        dataList = dataList.Where(c => c.RENT_DATE >= Convert.ToDateTime(txtStartDate.Text) && c.RENT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        dataList = dataList.Where(c => c.RENT_DATE >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        dataList = dataList.Where(c => c.RENT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
 
                     rptContract.DataSource = dataList;
                     rptContract.DataBind();
@@ -145,9 +135,9 @@ namespace Deiofiber
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             if (CheckAdminPermission())
-                LoadDataAdmin(txtSearch.Text.Trim(), Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
+                LoadDataAdmin(Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
             else
-                LoadData(txtSearch.Text.Trim(), Helper.parseInt(drpRentType.SelectedValue));
+                LoadData(Helper.parseInt(drpRentType.SelectedValue));
         }
 
         //protected void ddlPager_SelectedIndexChanged(object sender, EventArgs e)
@@ -161,9 +151,9 @@ namespace Deiofiber
         protected void drpRentType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CheckAdminPermission())
-                LoadDataAdmin(txtSearch.Text.Trim(), Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
+                LoadDataAdmin(Helper.parseInt(drpStore.SelectedValue), Helper.parseInt(drpRentType.SelectedValue));
             else
-                LoadData(txtSearch.Text.Trim(), Helper.parseInt(drpRentType.SelectedValue));
+                LoadData(Helper.parseInt(drpRentType.SelectedValue));
         }
 
         private void LoadGeneralInfo()

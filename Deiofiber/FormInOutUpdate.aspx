@@ -12,6 +12,7 @@
                         <th class="text-right">Số chi</th>
                         <th class="text-center">Ngày thu/chi</th>
                         <th class="text-center">Kỳ</th>
+                        <th class="text-center">Cập nhập</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,8 +22,9 @@
                 <td class="text-center"><%# Container.ItemIndex + 1 %></td>
                 <td class="text-right"><%# string.Format("{0:0,0}", (Eval("IN_AMOUNT").ToString() == "0" ? string.Empty : Eval("IN_AMOUNT"))) %></td>
                 <td class="text-right"><%# string.Format("{0:0,0}", (Eval("OUT_AMOUNT").ToString() == "0" ? string.Empty : Eval("OUT_AMOUNT"))) %></td>
-                <td class="text-center"><%# string.Format("{0:dd/MM/yyyy}", Eval("CREATED_DATE") == null ? Eval("PERIOD_DATE") : Eval("CREATED_DATE")) %></td>
+                <td class="text-center"><%# string.Format("{0:dd/MM/yyyy}", Eval("INOUT_DATE") == null ? Eval("PERIOD_DATE") : Eval("INOUT_DATE")) %></td>
                 <td class="text-center"><%# string.Format("{0:dd/MM/yyyy}", Eval("PERIOD_DATE")) %></td>
+                <td class="text-center"><a href="FormInOutAndPeriodUpdate.aspx?id=<%# Eval("ID") + "&pid=" + Eval("PERIOD_ID")%>">Cập nhập</a></td>
             </tr>
         </ItemTemplate>
         <FooterTemplate>
@@ -46,6 +48,11 @@
                 <td>
                     <asp:Label ID="lblAmountLeft" runat="server" CssClass="text-right"></asp:Label></td>
             </tr>
+            <tr class="info">
+                <td>Tổng số phí còn thiếu:</td>
+                <td>
+                    <asp:Label ID="lblTotalAmoutLeft" runat="server" CssClass="text-right"></asp:Label></td>
+            </tr>
             </tbody>
             </table>
         </FooterTemplate>
@@ -54,7 +61,7 @@
     <table class="table table-striped table-hover" style="width: 50%; margin-left: 25%;">
         <tbody>
             <tr>
-                <td colspan="2" class="text-center">Chi tiết khoản trả phí</td>
+                <td colspan="2" class="text-center"><strong>Chi tiết khoản trả phí</strong></td>
             </tr>
             <tr>
                 <td class="text-right">Loại chi phí</td>
@@ -90,6 +97,8 @@
     </table>
     <script>
         $(document).ready(function () {
+            $('#<%=txtIncome.ClientID %>').priceFormat({ prefix: '', suffix: '', centsLimit: 0 });
+
             $('input, textarea').keypress(function (e) {
                 if (e.which == 13) {
                     $('#<%=btnSave.ClientID %>').click();

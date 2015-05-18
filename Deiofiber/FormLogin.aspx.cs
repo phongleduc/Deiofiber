@@ -29,6 +29,7 @@ namespace Deiofiber
                     }
                 }
             }
+            CommonList.AutoExtendContract();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

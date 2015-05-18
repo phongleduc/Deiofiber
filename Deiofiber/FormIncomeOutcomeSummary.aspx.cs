@@ -28,7 +28,7 @@ namespace Deiofiber
             }
             if (!IsPostBack)
             {
-                
+
                 //CommonList.LoadStore(ddlStore);
                 int permissionid = Convert.ToInt32(Session["permission"]);
                 LoadStore(permissionid);
@@ -45,7 +45,7 @@ namespace Deiofiber
         private void LoadData()
         {
             DropDownList drpStore = this.Master.FindControl("ddlStore") as DropDownList;
-            int storeId =  Helper.parseInt(drpStore.SelectedValue);
+            int storeId = Helper.parseInt(drpStore.SelectedValue);
             using (var db = new DeiofiberEntities())
             {
                 if (CheckAdminPermission())
@@ -56,40 +56,40 @@ namespace Deiofiber
                         lstInOut = lstInOut.Where(c => c.STORE_ID == storeId).ToList();
                     }
                     var data = from d in lstInOut
-                                group d by d.INOUT_DATE into g
-                                select new
-                                {
-                                    Period = g.Key,
-                                    Record = from o in g
-                                             select new
-                                             {
-                                                 ID = o.STORE_ID,
-                                                 Period = o.INOUT_DATE,
-                                                 InAmount = o.IN_AMOUNT,
-                                                 OutAmount = o.OUT_AMOUNT,
-                                                 TotalIn = g.Sum(x => x.IN_AMOUNT),
-                                                 TotalOut = g.Sum(x => x.OUT_AMOUNT),
-                                                 BeginAmount = 0,
-                                                 EndAmount = 0 ,
-                                                 ContractFeeCar = 0,
-                                                 RentFeeCar = 0,
-                                                 CloseFeeCar = 0,
-                                                 ContractFeeEquip = 0,
-                                                 RentFeeEquip = 0,
-                                                 CloseFeeEquip = 0,
-                                                 ContractFeeOther = 0,
-                                                 RentFeeOther = 0,
-                                                 CloseFeeOther = 0,
-                                                 RemainEndOfDay = 0,
-                                                 InOutTypeId = o.INOUT_TYPE_ID,
-                                                 RentTypeId = o.RENT_TYPE_ID,
-                                                 InCapital = 0,
-                                                 OutCapital = 0,
-                                                 InOther = 0,
-                                                 OutOther = 0
+                               group d by d.INOUT_DATE into g
+                               select new
+                               {
+                                   Period = g.Key,
+                                   Record = from o in g
+                                            select new
+                                            {
+                                                ID = o.STORE_ID,
+                                                Period = o.INOUT_DATE,
+                                                InAmount = o.IN_AMOUNT,
+                                                OutAmount = o.OUT_AMOUNT,
+                                                TotalIn = g.Sum(x => x.IN_AMOUNT),
+                                                TotalOut = g.Sum(x => x.OUT_AMOUNT),
+                                                BeginAmount = 0,
+                                                EndAmount = 0,
+                                                ContractFeeCar = 0,
+                                                RentFeeCar = 0,
+                                                CloseFeeCar = 0,
+                                                ContractFeeEquip = 0,
+                                                RentFeeEquip = 0,
+                                                CloseFeeEquip = 0,
+                                                ContractFeeOther = 0,
+                                                RentFeeOther = 0,
+                                                CloseFeeOther = 0,
+                                                RemainEndOfDay = 0,
+                                                InOutTypeId = o.INOUT_TYPE_ID,
+                                                RentTypeId = o.RENT_TYPE_ID,
+                                                InCapital = 0,
+                                                OutCapital = 0,
+                                                InOther = 0,
+                                                OutOther = 0
 
-                                             }
-                                };
+                                            }
+                               };
                     List<SummaryInfo> lst = new List<SummaryInfo>();
                     foreach (var g in data)
                     {
@@ -226,7 +226,7 @@ namespace Deiofiber
                         {
                             si.RedundantFeeLoan = inout.Sum(x => x.OutAmount);
                         }
-                        
+
                         lst.Add(si);
                     }
 
@@ -239,6 +239,18 @@ namespace Deiofiber
                         }
                     }
 
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        lst = lst.Where(c => c.Period >= Convert.ToDateTime(txtStartDate.Text) && c.Period <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        lst = lst.Where(c => c.Period >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        lst = lst.Where(c => c.Period <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
 
                     rptInOut.DataSource = lst.OrderByDescending(c => c.Period);
                     rptInOut.DataBind();
@@ -249,12 +261,9 @@ namespace Deiofiber
 
                     if (lst.Any())
                     {
-                        sumBegin = lst[0].BeginAmount;
-                        foreach (SummaryInfo itm in lst)
-                        {
-                            sumIn += itm.TotalIn;
-                            sumOut += itm.TotalOut;
-                        }
+                        //sumBegin = lst[0].BeginAmount;
+                        sumIn = lst.Select(c => c.TotalIn).DefaultIfEmpty().Sum();
+                        sumOut = lst.Select(c => c.TotalOut).DefaultIfEmpty().Sum();
                         sumEnd = sumIn - sumOut;
 
                         Label lblTotalIn = (Label)rptInOut.Controls[rptInOut.Controls.Count - 1].Controls[0].FindControl("lblTotalIn");
@@ -456,8 +465,20 @@ namespace Deiofiber
                         }
                     }
 
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        lst = lst.Where(c => c.Period >= Convert.ToDateTime(txtStartDate.Text) && c.Period <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        lst = lst.Where(c => c.Period >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        lst = lst.Where(c => c.Period <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
 
-                    rptInOut.DataSource = lst.OrderByDescending(c =>c.Period);
+                    rptInOut.DataSource = lst.OrderByDescending(c => c.Period);
                     rptInOut.DataBind();
                     decimal sumIn = 0;
                     decimal sumOut = 0;
@@ -465,12 +486,9 @@ namespace Deiofiber
                     decimal sumEnd = 0;
                     if (lst.Any())
                     {
-                        sumBegin = lst[0].BeginAmount;
-                        foreach (SummaryInfo itm in lst)
-                        {
-                            sumIn += itm.TotalIn;
-                            sumOut += itm.TotalOut;
-                        }
+                        //sumBegin = lst[0].BeginAmount;
+                        sumIn = lst.Select(c => c.TotalIn).DefaultIfEmpty().Sum();
+                        sumOut = lst.Select(c => c.TotalOut).DefaultIfEmpty().Sum();
                         sumEnd = sumIn - sumOut;
 
                         Label lblTotalIn = (Label)rptInOut.Controls[rptInOut.Controls.Count - 1].Controls[0].FindControl("lblTotalIn");
@@ -491,8 +509,8 @@ namespace Deiofiber
         {
             var data = from d in db.Contracts
                        where EntityFunctions.TruncateTime(d.RENT_DATE) == EntityFunctions.TruncateTime(date)
-                             select d;
-              return data.ToList();
+                       select d;
+            return data.ToList();
         }
 
         private decimal GetRentFeeByDay(int rentType, DateTime date, DeiofiberEntities db)
@@ -522,7 +540,7 @@ namespace Deiofiber
                     if (storeId != 0)
                     {
                         var item1 = from itm1 in db.CONTRACT_FULL_VW
-                                    where itm1.CONTRACT_STATUS == true && itm1.STORE_ID == storeId 
+                                    where itm1.CONTRACT_STATUS == true && itm1.STORE_ID == storeId
                                     select itm1;
                         contrList = item1.ToList();
                     }
@@ -532,6 +550,19 @@ namespace Deiofiber
                                     where itm1.CONTRACT_STATUS == true
                                     select itm1;
                         contrList = item1.ToList();
+                    }
+
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        contrList = contrList.Where(c => c.CREATED_DATE >= Convert.ToDateTime(txtStartDate.Text) && c.CREATED_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        contrList = contrList.Where(c => c.CREATED_DATE >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        contrList = contrList.Where(c => c.CREATED_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
                     }
 
                     decimal bikeAmount = contrList.Where(c => c.RENT_TYPE_ID == 1).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
@@ -563,6 +594,20 @@ namespace Deiofiber
 
                         ioList = item2.ToList();
                     }
+
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        ioList = ioList.Where(c => c.INOUT_DATE >= Convert.ToDateTime(txtStartDate.Text) && c.INOUT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        ioList = ioList.Where(c => c.INOUT_DATE >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        ioList = ioList.Where(c => c.INOUT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+
                     decimal totalIn = 0;
                     decimal totalOut = 0;
                     foreach (InOut io in ioList)
@@ -602,6 +647,19 @@ namespace Deiofiber
                                 select itm1;
 
                     List<CONTRACT_FULL_VW> contrList = item1.Where(c => c.CONTRACT_STATUS == true).ToList();
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        contrList = contrList.Where(c => c.CREATED_DATE >= Convert.ToDateTime(txtStartDate.Text) && c.CREATED_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        contrList = contrList.Where(c => c.CREATED_DATE >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        contrList = contrList.Where(c => c.CREATED_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+
                     decimal bikeAmount = contrList.Where(c => c.RENT_TYPE_ID == 1).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
                     decimal equipAmount = contrList.Where(c => c.RENT_TYPE_ID == 2).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
                     decimal studentAmount = contrList.Where(c => c.RENT_TYPE_ID == 3).Select(c => c.CONTRACT_AMOUNT).DefaultIfEmpty().Sum();
@@ -620,6 +678,20 @@ namespace Deiofiber
                                 select itm2;
 
                     List<InOut> ioList = item2.ToList();
+
+                    if (!string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        ioList = ioList.Where(c => c.INOUT_DATE >= Convert.ToDateTime(txtStartDate.Text) && c.INOUT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+                    else if (!string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        ioList = ioList.Where(c => c.INOUT_DATE >= Convert.ToDateTime(txtStartDate.Text)).ToList();
+                    }
+                    else if (string.IsNullOrEmpty(txtStartDate.Text) && !string.IsNullOrEmpty(txtEndDate.Text))
+                    {
+                        ioList = ioList.Where(c => c.INOUT_DATE <= Convert.ToDateTime(txtEndDate.Text)).ToList();
+                    }
+
                     decimal totalIn = 0;
                     decimal totalOut = 0;
                     foreach (InOut io in ioList)
@@ -646,52 +718,12 @@ namespace Deiofiber
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //int storeid = Convert.ToInt32(ddlStore.SelectedValue);
-            //DateTime dt = Convert.ToDateTime(txtViewDate.Text);
-            ////int year = Convert.ToDateTime(txtViewDate.Text).Year;
-            ////int month = Convert.ToDateTime(txtViewDate.Text).Month;
-            //using (var db = new DeiofiberEntities())
-            //{
-            //    var data = from d in db.InOuts
-            //               where d.STORE_ID == storeid && EntityFunctions.TruncateTime(d.INOUT_DATE) == EntityFunctions.TruncateTime(dt)
-            //               select d;
+            //LoadDetailData(Convert.ToInt32(ddlStore.SelectedValue), txtViewDate.Text, 0);
+        }
 
-            //    List<InOut> ioList = data.ToList();
-
-            //    decimal sumIn = 0;
-            //    decimal sumOut = 0;
-            //    foreach (InOut io in ioList)
-            //    {
-            //        sumIn += io.IN_AMOUNT;
-            //        sumOut += io.OUT_AMOUNT;
-            //    }
-            //    lblViewDate.Text = string.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(txtViewDate.Text));
-            //    lblTotalIn.Text = sumIn == 0 ? "0" : string.Format("{0:0,0}", sumIn);
-            //    lblTotalOut.Text = sumOut == 0 ? "0" : string.Format("{0:0,0}", sumOut);
-            //    lblStoreName.Text = ddlStore.SelectedItem.Text;
-
-            //    var databefore = from d in db.InOuts
-            //                     where d.STORE_ID == storeid && EntityFunctions.TruncateTime(d.INOUT_DATE) > EntityFunctions.TruncateTime(dt)
-            //                     select d;
-            //    List<InOut> beforeList = databefore.ToList();
-            //    decimal sumInBefore = 0;
-            //    decimal sumOutBefore = 0;
-            //    foreach (InOut io in ioList)
-            //    {
-            //        sumInBefore += io.IN_AMOUNT;
-            //        sumOutBefore += io.OUT_AMOUNT;
-            //    }
-            //    decimal startAmount = sumInBefore - sumOutBefore;
-            //    decimal endAmount = startAmount + sumIn - sumOut;
-            //    lblStartAmount.Text = startAmount == 0 ? "0" : string.Format("{0:0,0}", startAmount);
-            //    lblEndAmount.Text = endAmount == 0 ? "0" : string.Format("{0:0,0}", endAmount);
-            //}
-
-
-            //if (CheckAdminPermission())
+        protected void btnSearch1_Click(object sender, EventArgs e)
+        {
             LoadDetailData(Convert.ToInt32(ddlStore.SelectedValue), txtViewDate.Text, 0);
-            //else
-            //btnSearch.Enabled = false;
         }
 
         int pageSize = 20;
@@ -708,7 +740,7 @@ namespace Deiofiber
                                    where EntityFunctions.TruncateTime(c.INOUT_DATE) == EntityFunctions.TruncateTime(sDate) && c.STORE_ID == storeid
                                    select c).Count();
                 }
-                else 
+                else
                 {
                     totalRecord = (from c in db.InOuts
                                    where c.STORE_ID == storeid
@@ -821,7 +853,7 @@ namespace Deiofiber
         public decimal RedundantFeeEquip { get; set; }
         public decimal RedundantFeeStudent { get; set; }
         public decimal RedundantFeeLoan { get; set; }
-        
+
 
     }
 }

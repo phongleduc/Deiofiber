@@ -71,7 +71,7 @@ namespace Deiofiber
             {
                 return "Bạn cần phải nhập số điện thoại.";
             }
-            if (string.IsNullOrEmpty(txtStartCapital.Text.Trim()) || Helper.parseInt(txtStartCapital.Text) == 0)
+            if (string.IsNullOrEmpty(txtStartCapital.Text.Trim()) || Convert.ToDecimal(txtStartCapital.Text) == 0)
             {
                 return "Bạn cần phải nhập số vốn ban đầu.";
             }
@@ -112,6 +112,7 @@ namespace Deiofiber
                 st.PHONE = txtPhone.Text.Trim();
                 st.FAX = string.Empty;
                 st.START_CAPITAL = Convert.ToDecimal(txtStartCapital.Text);
+                st.REVENUE_BEFORE_APPLY = Convert.ToDecimal(txtStartCapital.Text);
                 st.ACTIVE = rdbActive.Checked;
                 st.NOTE = txtNote.Text.Trim();
                 st.SEARCH_TEXT = string.Format("{0} {1} {2}", st.NAME, st.ADDRESS, st.PHONE);

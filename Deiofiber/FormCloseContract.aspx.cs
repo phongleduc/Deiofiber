@@ -11,6 +11,7 @@ namespace Deiofiber
 {
     public partial class FormCloseContract : System.Web.UI.Page
     {
+        public bool UnablePayInterest { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["store_id"] == null)
@@ -23,35 +24,57 @@ namespace Deiofiber
                 using (var db = new DeiofiberEntities())
                 {
                     Contract con = db.Contracts.FirstOrDefault(c => c.ID == id);
-
-                    txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", con.END_DATE);
-                    txtAmount.Text = string.Format("{0:0,0}", con.CONTRACT_AMOUNT);
-                    txtOverDate.Text = DateTime.Now.Date.Subtract(con.END_DATE).TotalDays <= 0 ? "0" : DateTime.Now.Date.Subtract(con.END_DATE).TotalDays.ToString();
-
-                    List<PayPeriod> lstPayperiod = db.PayPeriods.Where(c => c.CONTRACT_ID == id).ToList();
-                    decimal paidAmount = lstPayperiod.Where(c => c.ACTUAL_PAY > 0).Select(c => c.ACTUAL_PAY).DefaultIfEmpty().Sum();
-                    decimal total = 0;
-
-                    for (DateTime date = con.RENT_DATE; date <= DateTime.Now; date = date.AddDays(1))
+                    if (con != null)
                     {
-                        foreach (PayPeriod pay in lstPayperiod)
+                        txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", con.END_DATE);
+                        txtAmount.Text = string.Format("{0:0,0}", con.CONTRACT_AMOUNT);
+                        txtOverDate.Text = DateTime.Now.Date.Subtract(con.END_DATE).TotalDays <= 0 ? "0" : DateTime.Now.Date.Subtract(con.END_DATE).TotalDays.ToString();
+
+                        UnablePayInterest = con.UNABLE_PAY_INTEREST;
+                        if (con.UNABLE_PAY_INTEREST)
                         {
-                            if (date <= pay.PAY_DATE.AddDays(10))
+                            txtReduceAmount.Visible = false;
+
+                            decimal paidAmount = db.InOuts.Where(c => c.CONTRACT_ID == id && c.INOUT_TYPE_ID == 31).Select(c => c.IN_AMOUNT).DefaultIfEmpty().Sum();
+                            txtPaidInterest.Text = string.Format("{0:0,0}", paidAmount);
+                            txtRemainInterest.Text = string.Format("{0:0,0}", con.CONTRACT_AMOUNT - paidAmount >= 0 ? con.CONTRACT_AMOUNT - paidAmount: 0 );
+                        }
+                        else
+                        {
+                            List<PayPeriod> lstPayperiod = db.PayPeriods.Where(c => c.CONTRACT_ID == id).ToList();
+                            decimal paidAmount = lstPayperiod.Where(c => c.ACTUAL_PAY > 0).Select(c => c.ACTUAL_PAY).DefaultIfEmpty().Sum();
+                            decimal total = 0;
+
+                            for (DateTime date = con.RENT_DATE; date <= DateTime.Now; date = date.AddDays(1))
                             {
-                                total += pay.AMOUNT_PER_PERIOD / 10;
-                                break;
+                                foreach (PayPeriod pay in lstPayperiod)
+                                {
+                                    if (date <= pay.PAY_DATE.AddDays(10))
+                                    {
+                                        total += pay.AMOUNT_PER_PERIOD / 10;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            decimal overAmount = 0;
+                            if (DateTime.Today.Subtract(con.END_DATE).Days > 0)
+                            {
+                                overAmount = con.FEE_PER_DAY * DateTime.Today.Subtract(con.END_DATE).Days;
+                            }
+                            total += overAmount;
+
+                            if (total - paidAmount < 0)
+                            {
+                                txtRealIncome.Text = "0";
+                                txtReduceAmount.Text = string.Format("{0:0,0}", paidAmount - total);
+                            }
+                            else
+                            {
+                                txtRealIncome.Text = string.Format("{0:0,0}", total - paidAmount);
+                                txtReduceAmount.Text = "0";
                             }
                         }
-                    }
-                    if (total - paidAmount < 0)
-                    {
-                        txtRealIncome.Text = "0";
-                        txtReduceAmount.Text = string.Format("{0:0,0}", paidAmount - total);
-                    }
-                    else
-                    {
-                        txtRealIncome.Text = string.Format("{0:0,0}", total - paidAmount);
-                        txtReduceAmount.Text = "0";
                     }
                 }
             }
@@ -84,101 +107,131 @@ namespace Deiofiber
                             closedContractName = "Thanh lý thuê khác";
                             break;
                     }
-                    // INOUT --> IN amount
-                    InOut io1 = new InOut();
-                    io1.IN_AMOUNT = con.CONTRACT_AMOUNT;
-                    io1.OUT_AMOUNT = 0;
-                    io1.CONTRACT_ID = con.ID;
-                    io1.PERIOD_ID = -1;
-                    io1.PERIOD_DATE = new DateTime(1, 1, 1);
-                    io1.RENT_TYPE_ID = con.RENT_TYPE_ID;
-
-                    var item = db.InOutTypes.FirstOrDefault(s => s.NAME == "Thanh lý");
-                    io1.INOUT_TYPE_ID = item.ID;
-                    io1.MORE_INFO = txtMoreInfo.Text.Trim();
-                    io1.STORE_ID = con.STORE_ID;
-                    io1.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, closedContractName, txtMoreInfo.Text.Trim());
-                    io1.INOUT_DATE = DateTime.Now;
-                    io1.CREATED_BY = Session["username"].ToString();
-                    io1.CREATED_DATE = DateTime.Now;
-                    io1.UPDATED_BY = Session["username"].ToString();
-                    io1.UPDATED_DATE = DateTime.Now;
-                    db.InOuts.Add(io1);
-
-                    // IN --> Rent Fee
-                    if (!string.IsNullOrEmpty(txtRealIncome.Text))
+                    if (!con.UNABLE_PAY_INTEREST)
                     {
-                        decimal realInAmount = Convert.ToDecimal(txtRealIncome.Text.Replace(",", string.Empty));
-                        if (realInAmount > 0)
+                        // INOUT --> IN amount
+                        InOut io1 = new InOut();
+                        io1.IN_AMOUNT = con.CONTRACT_AMOUNT;
+                        io1.OUT_AMOUNT = 0;
+                        io1.CONTRACT_ID = con.ID;
+                        io1.PERIOD_ID = -1;
+                        io1.PERIOD_DATE = new DateTime(1, 1, 1);
+                        io1.RENT_TYPE_ID = con.RENT_TYPE_ID;
+
+                        var item = db.InOutTypes.FirstOrDefault(s => s.NAME == "Thanh lý");
+                        io1.INOUT_TYPE_ID = item.ID;
+                        io1.MORE_INFO = txtMoreInfo.Text.Trim();
+                        io1.STORE_ID = con.STORE_ID;
+                        io1.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, closedContractName, txtMoreInfo.Text.Trim());
+                        io1.INOUT_DATE = DateTime.Now;
+                        io1.CREATED_BY = Session["username"].ToString();
+                        io1.CREATED_DATE = DateTime.Now;
+                        io1.UPDATED_BY = Session["username"].ToString();
+                        io1.UPDATED_DATE = DateTime.Now;
+                        db.InOuts.Add(io1);
+
+                        // IN --> Rent Fee
+                        if (!string.IsNullOrEmpty(txtRealIncome.Text))
                         {
-                            InOut io2 = new InOut();
-
-                            int inoutTypeId = 0;
-                            switch (con.RENT_TYPE_ID)
+                            decimal realInAmount = Convert.ToDecimal(txtRealIncome.Text.Replace(",", string.Empty));
+                            if (realInAmount > 0)
                             {
-                                case 1:
-                                    inoutTypeId = 14;
-                                    break;
-                                case 2:
-                                    inoutTypeId = 15;
-                                    break;
-                                case 3:
-                                    inoutTypeId = 25;
-                                    break;
-                                case 4:
-                                    inoutTypeId = 26;
-                                    break;
-                                default:
-                                    inoutTypeId = 23;
-                                    break;
-                            }
-                            item = db.InOutTypes.First(s => s.ID == inoutTypeId);
+                                InOut io2 = new InOut();
 
-                            io2.INOUT_TYPE_ID = item.ID;
-                            io2.RENT_TYPE_ID = con.RENT_TYPE_ID;
-                            io2.CONTRACT_ID = con.ID;
-                            io2.IN_AMOUNT = realInAmount;
-                            io2.OUT_AMOUNT = 0;
-                            io2.MORE_INFO = txtMoreInfo.Text;
-                            io2.PERIOD_DATE = DateTime.Now;
-                            io2.STORE_ID = con.STORE_ID;
-                            io2.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, item.NAME, txtMoreInfo.Text.Trim());
-                            io2.INOUT_DATE = DateTime.Now;
-                            io2.CREATED_BY = Session["username"].ToString();
-                            io2.CREATED_DATE = DateTime.Now;
-                            io2.UPDATED_BY = Session["username"].ToString();
-                            io2.UPDATED_DATE = DateTime.Now;
-                            db.InOuts.Add(io2);
+                                int inoutTypeId = 0;
+                                switch (con.RENT_TYPE_ID)
+                                {
+                                    case 1:
+                                        inoutTypeId = 14;
+                                        break;
+                                    case 2:
+                                        inoutTypeId = 15;
+                                        break;
+                                    case 3:
+                                        inoutTypeId = 28;
+                                        break;
+                                    case 4:
+                                        inoutTypeId = 30;
+                                        break;
+                                    default:
+                                        inoutTypeId = 16;
+                                        break;
+                                }
+                                item = db.InOutTypes.First(s => s.ID == inoutTypeId);
+
+                                io2.INOUT_TYPE_ID = item.ID;
+                                io2.RENT_TYPE_ID = con.RENT_TYPE_ID;
+                                io2.CONTRACT_ID = con.ID;
+                                io2.IN_AMOUNT = realInAmount;
+                                io2.OUT_AMOUNT = 0;
+                                io2.MORE_INFO = txtMoreInfo.Text;
+                                io2.PERIOD_DATE = DateTime.Now;
+                                io2.STORE_ID = con.STORE_ID;
+                                io2.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, item.NAME, txtMoreInfo.Text.Trim());
+                                io2.INOUT_DATE = DateTime.Now;
+                                io2.CREATED_BY = Session["username"].ToString();
+                                io2.CREATED_DATE = DateTime.Now;
+                                io2.UPDATED_BY = Session["username"].ToString();
+                                io2.UPDATED_DATE = DateTime.Now;
+                                db.InOuts.Add(io2);
+                            }
+                        }
+
+
+                        //Out --> Return redundant fee if the client comes before deadline date.
+                        if (!string.IsNullOrEmpty(txtReduceAmount.Text))
+                        {
+                            decimal reduceAmount = Convert.ToDecimal(txtReduceAmount.Text.Replace(",", string.Empty));
+                            if (reduceAmount > 0)
+                            {
+                                InOut io3 = new InOut();
+                                item = db.InOutTypes.FirstOrDefault(s => s.NAME == "Trả lại phí thừa");
+
+                                io3.INOUT_TYPE_ID = item.ID;
+                                io3.RENT_TYPE_ID = con.RENT_TYPE_ID;
+                                io3.CONTRACT_ID = con.ID;
+                                io3.IN_AMOUNT = 0;
+                                io3.OUT_AMOUNT = reduceAmount;
+                                io3.RENT_TYPE_ID = con.RENT_TYPE_ID;
+                                io3.MORE_INFO = txtMoreInfo.Text.Trim();
+                                io3.PERIOD_DATE = DateTime.Now;
+                                io3.STORE_ID = con.STORE_ID;
+                                io3.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, "Trả lại phí thừa", txtMoreInfo.Text.Trim());
+                                io3.INOUT_DATE = DateTime.Now;
+                                io3.CREATED_BY = Session["username"].ToString();
+                                io3.CREATED_DATE = DateTime.Now;
+                                io3.UPDATED_BY = Session["username"].ToString();
+                                io3.UPDATED_DATE = DateTime.Now;
+
+                                db.InOuts.Add(io3);
+                            }
                         }
                     }
-
-
-                    //Out --> Return redundant fee if the client comes before deadline date.
-                    if (!string.IsNullOrEmpty(txtReduceAmount.Text))
+                    else
                     {
-                        decimal reduceAmount = Convert.ToDecimal(txtReduceAmount.Text.Replace(",", string.Empty));
-                        if (reduceAmount > 0)
+                        if (!string.IsNullOrEmpty(txtRemainInterest.Text))
                         {
-                            InOut io3 = new InOut();
-                            item = db.InOutTypes.FirstOrDefault(s => s.NAME == "Trả lại phí thừa");
+                            decimal remainInterest = Convert.ToDecimal(txtRemainInterest.Text.Replace(",", string.Empty));
+                            // INOUT --> IN amount
+                            InOut io1 = new InOut();
+                            io1.IN_AMOUNT = remainInterest;
+                            io1.OUT_AMOUNT = 0;
+                            io1.CONTRACT_ID = con.ID;
+                            io1.PERIOD_ID = -1;
+                            io1.PERIOD_DATE = new DateTime(1, 1, 1);
+                            io1.RENT_TYPE_ID = con.RENT_TYPE_ID;
 
-                            io3.INOUT_TYPE_ID = item.ID;
-                            io3.RENT_TYPE_ID = con.RENT_TYPE_ID;
-                            io3.CONTRACT_ID = con.ID;
-                            io3.IN_AMOUNT = 0;
-                            io3.OUT_AMOUNT = reduceAmount;
-                            io3.RENT_TYPE_ID = con.RENT_TYPE_ID;
-                            io3.MORE_INFO = txtMoreInfo.Text.Trim();
-                            io3.PERIOD_DATE = DateTime.Now;
-                            io3.STORE_ID = con.STORE_ID;
-                            io3.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, "Trả lại phí thừa", txtMoreInfo.Text.Trim());
-                            io3.INOUT_DATE = DateTime.Now;
-                            io3.CREATED_BY = Session["username"].ToString();
-                            io3.CREATED_DATE = DateTime.Now;
-                            io3.UPDATED_BY = Session["username"].ToString();
-                            io3.UPDATED_DATE = DateTime.Now;
-
-                            db.InOuts.Add(io3);
+                            var item = db.InOutTypes.FirstOrDefault(s => s.NAME == "Trả gốc");
+                            io1.INOUT_TYPE_ID = item.ID;
+                            io1.MORE_INFO = txtMoreInfo.Text.Trim();
+                            io1.STORE_ID = con.STORE_ID;
+                            io1.SEARCH_TEXT = string.Format("{0} {1} {2} {3} {4}", con.CONTRACT_NO, con.CUSTOMER_NAME, con.STORE_NAME, closedContractName, txtMoreInfo.Text.Trim());
+                            io1.INOUT_DATE = DateTime.Now;
+                            io1.CREATED_BY = Session["username"].ToString();
+                            io1.CREATED_DATE = DateTime.Now;
+                            io1.UPDATED_BY = Session["username"].ToString();
+                            io1.UPDATED_DATE = DateTime.Now;
+                            db.InOuts.Add(io1);
                         }
                     }
                     db.SaveChanges();

@@ -69,6 +69,7 @@
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="FormInOutAndPeriodUpdate.aspx" />
     <Content Include="FormPrincipalPayment.aspx" />
     <Content Include="MasterPage.Master" />
     <Content Include="packages.config" />
@@ -344,6 +345,13 @@
     </Compile>
     <Compile Include="FormIncomeOutcomeSummary.aspx.designer.cs">
       <DependentUpon>FormIncomeOutcomeSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormInOutAndPeriodUpdate.aspx.cs">
+      <DependentUpon>FormInOutAndPeriodUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormInOutAndPeriodUpdate.aspx.designer.cs">
+      <DependentUpon>FormInOutAndPeriodUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormPrincipalPayment.aspx.cs">
       <DependentUpon>FormPrincipalPayment.aspx</DependentUpon>

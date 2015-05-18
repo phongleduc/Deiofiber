@@ -42,69 +42,66 @@ namespace Deiofiber
                         {
                             int contractId = Helper.parseInt(id);
                             var contract = db.Contracts.Where(c => c.ID == contractId && c.CONTRACT_STATUS == true).FirstOrDefault();
-                            if (contract != null)
+                            IsNewContract = false;
+                            ContractID = id;
+                            List<CONTRACT_FULL_VW> lst;
+                            int contractid = Convert.ToInt32(id);
+
+                            Store stor = new Store();
+                            stor = db.Stores.FirstOrDefault(s => s.ID == storeId);
+
+                            var st = from s in db.CONTRACT_FULL_VW
+                                     where s.ID == contractid
+                                     select s;
+
+                            lst = st.ToList<CONTRACT_FULL_VW>();
+                            bool bAdmin = CheckAdminPermission();
+                            if (bAdmin)
                             {
-                                IsNewContract = false;
-                                ContractID = id;
-                                List<CONTRACT_FULL_VW> lst;
-                                int contractid = Convert.ToInt32(id);
-
-                                Store stor = new Store();
-                                stor = db.Stores.FirstOrDefault(s => s.ID == storeId);
-
-                                var st = from s in db.CONTRACT_FULL_VW
-                                         where s.ID == contractid
-                                         select s;
-
-                                lst = st.ToList<CONTRACT_FULL_VW>();
-                                bool bAdmin = CheckAdminPermission();
-                                if (bAdmin)
-                                {
-                                    storeId = lst[0].STORE_ID;
-                                }
-                                ddlStore.SelectedValue = storeId.ToString();
-                                if (!bAdmin)
-                                {
-                                    ddlStore.SelectedValue = storeId.ToString();
-                                    ddlStore.Enabled = false;
-                                }
-                                pnlTable.Enabled = lst[0].CONTRACT_STATUS;
-                                rptPayFeeSchedule.Visible = lst[0].CONTRACT_STATUS;
-
-                                CONTRACT_FULL_VW cntrct = lst[0];
-                                txtLicenseNumber.Text = cntrct.LICENSE_NO;
-                                txtCustomerName.Text = cntrct.CUSTOMER_NAME;
-                                if (cntrct.BIRTH_DAY.HasValue)
-                                    txtBirthDay.Text = string.Format("{0:dd/MM/yyyy}", cntrct.BIRTH_DAY);
-                                if (cntrct.LICENSE_RANGE_DATE.HasValue)
-                                    txtRangeDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.LICENSE_RANGE_DATE);
-                                txtPlaceDate.Text = cntrct.LICENSE_RANGE_PLACE;
-                                txtPhone.Text = cntrct.PHONE;
-                                txtPermanentResidence.Text = cntrct.PERMANENT_RESIDENCE;
-                                txtCurrentResidence.Text = cntrct.CURRENT_RESIDENCE;
-                                txtContractNo.Text = cntrct.CONTRACT_NO;
-                                var rentType = db.RentTypes.Where(c => c.NAME == cntrct.RENT_TYPE_NAME).FirstOrDefault();
-                                ddlRentType.SelectedValue = rentType.ID.ToString();
-                                RentTypeID = cntrct.RENT_TYPE_ID;
-                                txtAmount.Text = string.Format("{0:0,0}", cntrct.CONTRACT_AMOUNT);
-                                txtFeePerDay.Text = string.Format("{0:0,0}", cntrct.FEE_PER_DAY);
-                                txtRentDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.RENT_DATE);
-                                txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.END_DATE);
-                                txtNote.Text = cntrct.NOTE;
-
-                                txtReferencePerson.Text = cntrct.REFERENCE_NAME;
-                                txtItemName.Text = cntrct.ITEM_TYPE;
-                                txtItemLicenseNo.Text = cntrct.ITEM_LICENSE_NO;
-                                txtSerial1.Text = cntrct.SERIAL_1;
-                                txtSerial2.Text = cntrct.SERIAL_2;
-                                txtImplementer.Text = cntrct.IMPLEMENTER;
-                                txtBackDocument.Text = cntrct.BACK_TO_DOCUMENTS;
-                                txtItemDetail.Text = cntrct.DETAIL;
-
-                                txtContractNo.Enabled = ddlRentType.Enabled = txtAmount.Enabled = txtFeePerDay.Enabled = txtRentDate.Enabled = txtEndDate.Enabled = false;
-                                BuildPhotoLibrary(cntrct);
-                                LoadPayFeeSchedule();
+                                storeId = lst[0].STORE_ID;
                             }
+                            ddlStore.SelectedValue = storeId.ToString();
+                            if (!bAdmin)
+                            {
+                                ddlStore.SelectedValue = storeId.ToString();
+                                ddlStore.Enabled = false;
+                            }
+                            if (!lst[0].CONTRACT_STATUS || lst[0].UNABLE_PAY_INTEREST)
+                                pnlTable.Enabled = false;
+
+                            CONTRACT_FULL_VW cntrct = lst[0];
+                            txtLicenseNumber.Text = cntrct.LICENSE_NO;
+                            txtCustomerName.Text = cntrct.CUSTOMER_NAME;
+                            if (cntrct.BIRTH_DAY.HasValue)
+                                txtBirthDay.Text = string.Format("{0:dd/MM/yyyy}", cntrct.BIRTH_DAY);
+                            if (cntrct.LICENSE_RANGE_DATE.HasValue)
+                                txtRangeDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.LICENSE_RANGE_DATE);
+                            txtPlaceDate.Text = cntrct.LICENSE_RANGE_PLACE;
+                            txtPhone.Text = cntrct.PHONE;
+                            txtPermanentResidence.Text = cntrct.PERMANENT_RESIDENCE;
+                            txtCurrentResidence.Text = cntrct.CURRENT_RESIDENCE;
+                            txtContractNo.Text = cntrct.CONTRACT_NO;
+                            var rentType = db.RentTypes.Where(c => c.NAME == cntrct.RENT_TYPE_NAME).FirstOrDefault();
+                            ddlRentType.SelectedValue = rentType.ID.ToString();
+                            RentTypeID = cntrct.RENT_TYPE_ID;
+                            txtAmount.Text = string.Format("{0:0,0}", cntrct.CONTRACT_AMOUNT);
+                            txtFeePerDay.Text = string.Format("{0:0,0}", cntrct.FEE_PER_DAY);
+                            txtRentDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.RENT_DATE);
+                            txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", cntrct.END_DATE);
+                            txtNote.Text = cntrct.NOTE;
+
+                            txtReferencePerson.Text = cntrct.REFERENCE_NAME;
+                            txtItemName.Text = cntrct.ITEM_TYPE;
+                            txtItemLicenseNo.Text = cntrct.ITEM_LICENSE_NO;
+                            txtSerial1.Text = cntrct.SERIAL_1;
+                            txtSerial2.Text = cntrct.SERIAL_2;
+                            txtImplementer.Text = cntrct.IMPLEMENTER;
+                            txtBackDocument.Text = cntrct.BACK_TO_DOCUMENTS;
+                            txtItemDetail.Text = cntrct.DETAIL;
+
+                            txtContractNo.Enabled = ddlRentType.Enabled = txtAmount.Enabled = txtFeePerDay.Enabled = txtRentDate.Enabled = txtEndDate.Enabled = false;
+                            BuildPhotoLibrary(cntrct);
+                            LoadPayFeeSchedule();
                         }
                     }
                     else // NEW
@@ -112,6 +109,7 @@ namespace Deiofiber
                         IsNewContract = true;
                         btnFinishContract.Visible = false;
                         txtContractNo.Visible = false;
+                        btnPrincipalPay.Visible = false;
                         using (var db = new DeiofiberEntities())
                         {
                             Store stor = new Store();
@@ -783,64 +781,27 @@ namespace Deiofiber
             string id = Request.QueryString["ID"];
             if (!string.IsNullOrEmpty(id))
             {
-                int contractID = Convert.ToInt32(id);
-                List<PayPeriod> lst;
                 using (var db = new DeiofiberEntities())
                 {
-                    var st = from s in db.PayPeriods
-                             where s.CONTRACT_ID == contractID
-                             select s;
-
-                    lst = st.ToList<PayPeriod>();
-
-                    foreach (PayPeriod pp in lst)
+                    int contractID = Convert.ToInt32(id);
+                    List<PayPeriod> payList = db.PayPeriods.Where(c => c.CONTRACT_ID == contractID).ToList();
+                    decimal totalPaid = payList.Select(c => c.ACTUAL_PAY).DefaultIfEmpty(0).Sum();
+                    for (int i = 0; i < payList.Count; i++)
                     {
-                        var payList = db.InOuts.Where(s => s.PERIOD_ID == pp.ID);
-                        if (pp != null)
-                        {
-                            var sumPay = payList.Select(c => c.IN_AMOUNT).DefaultIfEmpty(0).Sum();
-                            if (sumPay > 0)
-                            {
-                                pp.ACTUAL_PAY = sumPay;
-                                db.SaveChanges();
-                            }
-                        }
+                        if (totalPaid < payList[i].AMOUNT_PER_PERIOD)
+                            payList[i].ACTUAL_PAY = totalPaid;
+                        else
+                            payList[i].ACTUAL_PAY = payList[i].AMOUNT_PER_PERIOD;
+
+                        totalPaid -= payList[i].AMOUNT_PER_PERIOD;
+
+                        if (totalPaid <= 0)
+                            break;
                     }
 
-                    lst = (from s in db.PayPeriods
-                           where s.CONTRACT_ID == contractID
-                           select s).ToList();
-
-
-                    for (int i = 0; i < lst.Count; i++)
-                    {
-                        if (lst[i].ACTUAL_PAY > lst[i].AMOUNT_PER_PERIOD)
-                        {
-                            lst[i + 1].ACTUAL_PAY += lst[i].ACTUAL_PAY - lst[i].AMOUNT_PER_PERIOD;
-                        }
-                    }
+                    rptPayFeeSchedule.DataSource = payList;
+                    rptPayFeeSchedule.DataBind();
                 }
-
-                rptPayFeeSchedule.DataSource = lst;
-                rptPayFeeSchedule.DataBind();
-
-            }
-            else
-            {
-                List<PayPeriod> lst = new List<PayPeriod>();
-                PayPeriod p1 = new PayPeriod();
-                p1.PAY_DATE = DateTime.Now;
-                PayPeriod p2 = new PayPeriod();
-                p2.PAY_DATE = DateTime.Now.AddDays(9);
-                PayPeriod p3 = new PayPeriod();
-                p3.PAY_DATE = DateTime.Now.AddDays(19);
-
-                lst.Add(p1);
-                lst.Add(p2);
-                lst.Add(p3);
-
-                rptPayFeeSchedule.DataSource = lst;
-                rptPayFeeSchedule.DataBind();
             }
         }
 
@@ -972,6 +933,14 @@ namespace Deiofiber
             if (actualPay > 0 && amountPer > actualPay)
                 return true;
             return false;
+        }
+
+        public string GetDayPayFee(DateTime period, int index)
+        {
+            if (index == 1)
+                return "Trả phí ngày " + period.ToString("dd/MM/yyyy") + " đến " + period.AddDays(9).ToString("dd/MM/yyyy");
+            else
+                return "Trả phí ngày " + period.AddDays(1).ToString("dd/MM/yyyy") + " đến " + period.AddDays(10).ToString("dd/MM/yyyy");
         }
     }
 }

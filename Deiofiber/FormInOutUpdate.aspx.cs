@@ -63,13 +63,13 @@ namespace Deiofiber
                             inoutType = 15;
                             break;
                         case 3:
-                            inoutType = 25;
+                            inoutType = 28;
                             break;
                         case 4:
-                            inoutType = 26;
+                            inoutType = 30;
                             break;
                         default:
-                            inoutType = 23;
+                            inoutType = 16;
                             break;
                     }
 
@@ -80,6 +80,10 @@ namespace Deiofiber
                     ddInOutType.DataValueField = "ID";
                     ddInOutType.DataBind();
                     ddInOutType.SelectedValue = inoutType.ToString();
+
+                    //txtIncome.Text = pp.ACTUAL_PAY.ToString();
+
+                    //
                 }
             }
         }
@@ -101,42 +105,47 @@ namespace Deiofiber
         {
             // SAVE INOUT
             int periodId = Convert.ToInt32(Request.QueryString["ID"]);
-            PayPeriod pp = new PayPeriod();
             using (var db = new DeiofiberEntities())
             {
-                var item = db.PayPeriods.FirstOrDefault(s => s.ID == periodId);
-                item.ACTUAL_PAY = Convert.ToDecimal(txtIncome.Text);
-                pp = item;
-                db.SaveChanges();
+                if (!string.IsNullOrEmpty(txtIncome.Text))
+                {
+                    var pp = db.PayPeriods.FirstOrDefault(s => s.ID == periodId);
+                    pp.ACTUAL_PAY = Convert.ToDecimal(txtIncome.Text);
+                    db.SaveChanges();
+
+                    var contract = db.Contracts.FirstOrDefault(c => c.ID == pp.CONTRACT_ID && c.CONTRACT_STATUS == true);
+                    List<PayPeriod> payList = db.PayPeriods.Where(c => c.CONTRACT_ID == pp.CONTRACT_ID).ToList();
+                    decimal totalActualPay = payList.Select(c => c.ACTUAL_PAY).DefaultIfEmpty(0).Sum();
+                    decimal totalPlanPay = payList.Select(c => c.AMOUNT_PER_PERIOD).DefaultIfEmpty(0).Sum();
+
+                    if (totalActualPay > totalPlanPay)
+                    {
+                        CommonList.CreateOneMorePayPeriod(db, contract, payList.LastOrDefault().PAY_DATE, false);
+                    }
+
+                    InOut io = new InOut();
+                    io.IN_AMOUNT = Convert.ToDecimal(txtIncome.Text);
+                    io.OUT_AMOUNT = 0;
+                    io.CONTRACT_ID = pp.CONTRACT_ID;
+                    io.PERIOD_ID = pp.ID;
+                    io.RENT_TYPE_ID = contract.RENT_TYPE_ID;
+                    io.INOUT_TYPE_ID = Convert.ToInt32(ddInOutType.SelectedValue);
+                    io.PERIOD_DATE = pp.PAY_DATE;
+                    io.MORE_INFO = txtMoreInfo.Text.Trim();
+                    io.STORE_ID = Convert.ToInt32(Session["store_id"]);
+                    io.SEARCH_TEXT = string.Format("{0} ", io.MORE_INFO);
+                    io.INOUT_DATE = DateTime.Now;
+                    io.CREATED_BY = Session["username"].ToString();
+                    io.CREATED_DATE = DateTime.Now;
+                    io.UPDATED_BY = Session["username"].ToString();
+                    io.UPDATED_DATE = DateTime.Now;
+
+                    db.InOuts.Add(io);
+                    db.SaveChanges();
+
+                    Response.Redirect("FormContractUpdate.aspx?ID=" + pp.CONTRACT_ID, false);
+                }
             }
-
-            using (var db = new DeiofiberEntities())
-            {
-                var contract = db.Contracts.FirstOrDefault(c => c.ID == pp.CONTRACT_ID && c.CONTRACT_STATUS == true);
-                InOut io = new InOut();
-                io.IN_AMOUNT = Convert.ToDecimal(txtIncome.Text);
-                io.OUT_AMOUNT = 0;
-                io.CONTRACT_ID = pp.CONTRACT_ID;
-                io.PERIOD_ID = pp.ID;
-                io.RENT_TYPE_ID = contract.RENT_TYPE_ID;
-                io.INOUT_TYPE_ID = Convert.ToInt32(ddInOutType.SelectedValue);
-                io.PERIOD_DATE = pp.PAY_DATE;
-                io.MORE_INFO = txtMoreInfo.Text.Trim();
-                io.STORE_ID = Convert.ToInt32(Session["store_id"]);
-                io.SEARCH_TEXT = string.Format("{0} ", io.MORE_INFO);
-                io.INOUT_DATE = DateTime.Now;
-                io.CREATED_BY = Session["username"].ToString();
-                io.CREATED_DATE = DateTime.Now;
-                io.UPDATED_BY = Session["username"].ToString();
-                io.UPDATED_DATE = DateTime.Now;
-
-                db.InOuts.Add(io);
-                db.SaveChanges();
-            }
-
-            //LoadGrid(pp);
-            //LoadPaidAmountAndTheLeft(pp.CONTRACT_ID, pp.ID);
-            Response.Redirect("FormContractUpdate.aspx?ID=" + pp.CONTRACT_ID);
         }
 
         private void LoadPaidAmountAndTheLeft(PayPeriod pp)
@@ -146,7 +155,7 @@ namespace Deiofiber
             decimal total = 0;
             decimal remain = 0;
             decimal amountLeft = 0;
-
+            decimal totalAmountLeft = 0;
             using (var db = new DeiofiberEntities())
             {
                 var result = db.InOuts.Where(itm => itm.CONTRACT_ID == pp.CONTRACT_ID && itm.PERIOD_ID == pp.ID).ToList();
@@ -178,11 +187,15 @@ namespace Deiofiber
                         if (totalActualPay > totalPerAmount)
                             remain = totalActualPay - totalPerAmount;
                     }
+
+                    decimal totalAmountPeriod = lstPeriod.Where(c => c.PAY_DATE <= DateTime.Today).Select(c => c.AMOUNT_PER_PERIOD).DefaultIfEmpty(0).Sum();
+                    decimal totalAmoutPaid = lstPeriod.Where(c => c.PAY_DATE <= DateTime.Today).Select(c => c.ACTUAL_PAY).DefaultIfEmpty(0).Sum();
+                    totalAmountLeft = totalAmountPeriod - totalAmoutPaid <= 0 ? 0 : totalAmountPeriod - totalAmoutPaid;
                 }
 
                 if (pp.AMOUNT_PER_PERIOD - total > 0)
                 {
-                    amountLeft = pp.AMOUNT_PER_PERIOD - total - remain;
+                    amountLeft = pp.AMOUNT_PER_PERIOD - total - remain <= 0 ? 0 : pp.AMOUNT_PER_PERIOD - total - remain;
                 }
             }
 
@@ -193,7 +206,9 @@ namespace Deiofiber
             Label lblAmountRemain = (Label)rptContractInOut.Controls[rptContractInOut.Controls.Count - 1].Controls[0].FindControl("lblAmountRemain");
             lblAmountRemain.Text = string.Format("{0:0,0}", remain);
             Label lblAmountLeft = (Label)rptContractInOut.Controls[rptContractInOut.Controls.Count - 1].Controls[0].FindControl("lblAmountLeft");
-            lblAmountLeft.Text = string.Format("{0:0,0}", amountLeft);
+            lblAmountLeft.Text = txtIncome.Text = string.Format("{0:0,0}", amountLeft);
+            Label lblTotalAmoutLeft = (Label)rptContractInOut.Controls[rptContractInOut.Controls.Count - 1].Controls[0].FindControl("lblTotalAmoutLeft");
+            lblTotalAmoutLeft.Text = string.Format("{0:0,0}", totalAmountLeft);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
