@@ -43,6 +43,7 @@
     <EntitySetMapping Name="Contracts">
       <EntityTypeMapping TypeName="DeiofiberModel.Contract">
         <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="UNABLE_PAY_INTEREST" ColumnName="UNABLE_PAY_INTEREST" />
           <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />
@@ -259,6 +260,7 @@
     <EntitySetMapping Name="CONTRACT_FULL_VW">
       <EntityTypeMapping TypeName="DeiofiberModel.CONTRACT_FULL_VW">
         <MappingFragment StoreEntitySet="CONTRACT_FULL_VW">
+          <ScalarProperty Name="UNABLE_PAY_INTEREST" ColumnName="UNABLE_PAY_INTEREST" />
           <ScalarProperty Name="FEE_PER_DAY" ColumnName="FEE_PER_DAY" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="RENT_TYPE_ID" ColumnName="RENT_TYPE_ID" />

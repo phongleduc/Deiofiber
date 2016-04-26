@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Hệ thống quản lý cho thuê - TSolution</title>
+    <title>Hệ thống quản lý cho thuê - Deiofiber</title>
     <link rel="stylesheet" type="text/css" href="App_Themes/Theme1/css/stylesheet.css?d=20150517" />
     <link rel="stylesheet" type="text/css" href="App_Themes/Theme1/css/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="App_Themes/Theme1/css/bootstrap.min.css" />

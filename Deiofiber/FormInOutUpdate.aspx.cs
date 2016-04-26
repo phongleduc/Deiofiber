@@ -110,7 +110,7 @@ namespace Deiofiber
                 if (!string.IsNullOrEmpty(txtIncome.Text))
                 {
                     var pp = db.PayPeriods.FirstOrDefault(s => s.ID == periodId);
-                    pp.ACTUAL_PAY = Convert.ToDecimal(txtIncome.Text);
+                    pp.ACTUAL_PAY = Convert.ToDecimal(txtIncome.Text) + pp.ACTUAL_PAY;
                     db.SaveChanges();
 
                     var contract = db.Contracts.FirstOrDefault(c => c.ID == pp.CONTRACT_ID && c.CONTRACT_STATUS == true);

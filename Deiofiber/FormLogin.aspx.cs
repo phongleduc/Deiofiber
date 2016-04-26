@@ -25,6 +25,14 @@ namespace Deiofiber
                     }
                     else
                     {
+                        HttpCookie uCookie = new HttpCookie("UserName");
+                        uCookie.Expires = DateTime.Now.AddDays(-1d);
+                        Response.Cookies.Add(uCookie);
+
+                        HttpCookie pCookie = new HttpCookie("Password");
+                        pCookie.Expires = DateTime.Now.AddDays(-1d);
+                        Response.Cookies.Add(pCookie);
+
                         Response.Redirect("FormLogin.aspx", false);
                     }
                 }
@@ -38,19 +46,25 @@ namespace Deiofiber
             {
                 if (LoadUser(txtUsername.Text.Trim(), CommonList.EncryptPassword(txtPassword.Text.Trim())))
                 {
+                    HttpCookie uCookie = new HttpCookie("UserName");
+                    HttpCookie pCookie = new HttpCookie("Password");
+
                     if (chkRememberMe.Checked)
                     {
-                        Response.Cookies["UserName"].Expires = DateTime.MaxValue;
-                        Response.Cookies["Password"].Expires = DateTime.MaxValue;
+                        uCookie.Expires = DateTime.MaxValue;
+                        pCookie.Expires = DateTime.MaxValue;
+
+                        uCookie.Value = txtUsername.Text.Trim();
+                        pCookie.Value = CommonList.EncryptPassword(txtPassword.Text.Trim());
                     }
                     else
                     {
-                        Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
-                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
-
+                        uCookie.Expires = DateTime.Now.AddDays(-1);
+                        pCookie.Expires = DateTime.Now.AddDays(-1);
                     }
-                    Response.Cookies["UserName"].Value = txtUsername.Text.Trim();
-                    Response.Cookies["Password"].Value = CommonList.EncryptPassword(txtPassword.Text.Trim());
+
+                    Response.Cookies.Add(uCookie);
+                    Response.Cookies.Add(pCookie);
 
                     WriteLog(CommonList.ACTION_LOGIN, false);
                     Response.Redirect("FormWarning.aspx", false);

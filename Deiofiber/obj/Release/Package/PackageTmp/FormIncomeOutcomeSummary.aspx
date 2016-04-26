@@ -2,6 +2,23 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>TỔNG HỢP THU CHI</h2>
+        <table class="table table-striped table-hover ">
+        <tbody>
+            <tr>
+                <td style="width:50%;">
+                    <div class="col-lg-6">
+                        <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control input-md" placeholder="Ngày bắt đầu"></asp:TextBox>
+                    </div>
+                    <div class="col-lg-6">
+                        <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control input-md" placeholder="Ngày kết thúc"></asp:TextBox>
+                    </div>
+                </td>
+
+                <td>
+                    <asp:Button ID="btnSearch" runat="server" Text="Tìm kiếm" CssClass="btn btn-primary" OnClick="btnSearch_Click" OnClientClick="return validateSearch();"/></td>
+            </tr>
+        </tbody>
+    </table>
     <asp:Repeater ID="rptInOut" runat="server">
         <HeaderTemplate>
             <table class="table table-striped table-hover ">
@@ -211,7 +228,7 @@
                 <td>
                     <asp:DropDownList ID="ddlStore" runat="server" CssClass="form-control"></asp:DropDownList></td>
                 <td>
-                    <asp:Button ID="btnSearch" runat="server" Text="Xem" CssClass="btn btn-primary" OnClick="btnSearch_Click" /></td>
+                    <asp:Button ID="btnSearch1" runat="server" Text="Xem" CssClass="btn btn-primary" OnClick="btnSearch1_Click" /></td>
             </tr>
         </tbody>
     </table>
@@ -281,6 +298,8 @@
         $(function () {
             $("#txtViewDate").datepicker();
             $('.fancybox').fancybox();
+            $('#<%=txtStartDate.ClientID %>').datepicker();
+            $('#<%=txtEndDate.ClientID %>').datepicker();
 
             var options = {};
             $('a.print').click(function (e) {
@@ -289,10 +308,36 @@
 
             $('#<%=txtViewDate.ClientID %>').keypress(function (e) {
                 if (e.which == 13) {
-                    $('#<%=btnSearch.ClientID %>').click();
+                    $('#<%=btnSearch1.ClientID %>').click();
                             return false;
                         }
             });
+
+            $('#<%=txtStartDate.ClientID %>').keypress(function (e) {
+                if (e.which == 13) {
+                    if (validateSearch()) {
+                        $('#<%=btnSearch.ClientID %>').click();
+                        return false;
+                    }
+                }
+            });
+
+            $('#<%=txtEndDate.ClientID %>').keypress(function (e) {
+                if (e.which == 13) {
+                    if (validateSearch()) {
+                        $('#<%=btnSearch.ClientID %>').click();
+                        return false;
+                    }
+                }
+            });
         });
+
+        function validateSearch() {
+            if (new Date($('#<%=txtEndDate.ClientID %>').val()) < new Date($('#<%=txtStartDate.ClientID %>').val())) {
+                alert("Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.");
+                return false;
+            }
+            return true;
+        }
     </script>
 </asp:Content>

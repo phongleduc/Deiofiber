@@ -4,12 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Hệ thống quản lý cho thuê - TSolution</title>
-    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\stylesheet.css" />
-    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="\script\fancybox\jquery.fancybox.css" />
-    <link rel="stylesheet" type="text/css" href="\App_Themes\Theme1\css\PrintArea.css" />
+    <title>Hệ thống quản lý cho thuê - Deiofiber</title>
+    <link rel="stylesheet" type="text/css" href="App_Themes/Theme1/css/stylesheet.css?d=20150517" />
+    <link rel="stylesheet" type="text/css" href="App_Themes/Theme1/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="App_Themes/Theme1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="script/fancybox/jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="App_Themes/Theme1/css/PrintArea.css" />
 
     <script src="script/jquery-1.10.2.min.js"></script>
     <script src="script/jquery-ui.js"></script>
@@ -88,7 +88,7 @@
                 <h5 class="text-center">Hotline: 090.904.2666</h5>
             </div>
             <div class="no-margin">
-                <h5 class="text-center">Copyright © 2014 TSolution.</h5>
+                <h5 class="text-center">Copyright © 2015 Deiofiber.</h5>
             </div>
         </div>
     </form>

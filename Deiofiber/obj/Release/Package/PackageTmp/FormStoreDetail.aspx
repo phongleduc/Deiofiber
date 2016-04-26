@@ -117,6 +117,7 @@
     </table>
     <script>
         $(function () {
+            $('#<%=txtStartCapital.ClientID %>').priceFormat({ prefix: '', suffix: '', centsLimit: 0 });
 <%--            $("#txtApplyDate").datepicker();
             $("#txtRegisterDate").datepicker();
             $('input').keypress(function (e) {

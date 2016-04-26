@@ -1,4 +1,3 @@
-D:\Projects\Others\Deiofiber\Deiofiber\obj\Debug\Deiofiber.csprojResolveAssemblyReference.cache
 D:\Projects\Others\Deiofiber\Deiofiber\bin\Deiofiber.dll.config
 D:\Projects\Others\Deiofiber\Deiofiber\bin\Deiofiber.dll
 D:\Projects\Others\Deiofiber\Deiofiber\bin\Deiofiber.pdb
@@ -6,5 +5,6 @@ D:\Projects\Others\Deiofiber\Deiofiber\bin\EntityFramework.dll
 D:\Projects\Others\Deiofiber\Deiofiber\bin\EntityFramework.SqlServer.dll
 D:\Projects\Others\Deiofiber\Deiofiber\bin\EntityFramework.xml
 D:\Projects\Others\Deiofiber\Deiofiber\bin\EntityFramework.SqlServer.xml
+D:\Projects\Others\Deiofiber\Deiofiber\obj\Debug\Deiofiber.csprojResolveAssemblyReference.cache
 D:\Projects\Others\Deiofiber\Deiofiber\obj\Debug\Deiofiber.dll
 D:\Projects\Others\Deiofiber\Deiofiber\obj\Debug\Deiofiber.pdb

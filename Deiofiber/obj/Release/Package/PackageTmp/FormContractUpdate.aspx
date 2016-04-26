@@ -168,7 +168,7 @@
                         <asp:Repeater ID="rptPayFeeSchedule" runat="server">
                             <ItemTemplate>
                                 <div style="display: inline-block">
-                                    <a href="FormInOutUpdate.aspx?ID=<%# Eval("ID")%>">Trả phí ngày <%# String.Format("{0:dd/MM/yyyy}", Eval("PAY_DATE"))%></a>
+                                    <a href="FormInOutUpdate.aspx?ID=<%# Eval("ID")%>"><%# GetDayPayFee(Convert.ToDateTime(Eval("PAY_DATE")), Container.ItemIndex + 1)%></a>
                                     <asp:Label ID="lblBlue" runat="server" Visible='<%# ShowBlueImage(Convert.ToDecimal(Eval("AMOUNT_PER_PERIOD")), Convert.ToDecimal(Eval("ACTUAL_PAY"))) %>'>
                                             &nbsp;&nbsp;&nbsp;<img src="App_Themes/Theme1/image/tick-blue.png" />
                                             &nbsp;Đã trả phí
@@ -260,7 +260,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="btnSave" runat="server" Text="Lưu & thoát" CssClass="btn btn-primary" OnClick="btnSave_Click" />&nbsp;<asp:Button ID="btnFinishContract" runat="server" Text="Thanh lý HĐ" CssClass="btn btn-primary" OnClick="btnFinishContract_Click" />&nbsp;<asp:Button ID="btnCancel" runat="server" Text="Quay lại" CssClass="btn btn-primary" OnClick="btnCancel_Click" />
+                        <asp:Button ID="btnSave" runat="server" Text="Lưu & thoát" CssClass="btn btn-primary" OnClick="btnSave_Click" />&nbsp;<asp:Button ID="btnFinishContract" runat="server" Text="Thanh lý HĐ" CssClass="btn btn-primary" OnClick="btnFinishContract_Click" />&nbsp;<asp:Button ID="btnPrincipalPay" runat="server" Text="Trả gốc" CssClass="btn btn-primary" OnClick="btnPrincipalPay_Click" />&nbsp;<asp:Button ID="btnCancel" runat="server" Text="Quay lại" CssClass="btn btn-primary" OnClick="btnCancel_Click" />
                     </td>
                 </tr>
             </tbody>

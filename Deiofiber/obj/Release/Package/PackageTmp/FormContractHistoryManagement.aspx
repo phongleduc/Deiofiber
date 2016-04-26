@@ -25,6 +25,7 @@
                         <th class="text-center">Ngày thuê</th>
                         <th class="text-center">Ngày kết thúc</th>
                         <th class="text-center">Ngày thanh lý</th>
+                        <th>Xem lại</th>
                         <th>Sao chép</th>
                     </tr>
                 </thead>
@@ -41,6 +42,8 @@
                 <td class="text-center"><%# String.Format("{0:dd/MM/yyyy}", Eval("RENT_DATE"))%></td>
                 <td class="text-center"><%# String.Format("{0:dd/MM/yyyy}", Eval("END_DATE"))%></td>
                 <td class="text-center"><%# String.Format("{0:dd/MM/yyyy}", Eval("CLOSE_CONTRACT_DATE"))%></td>
+                <td>
+                    <asp:HyperLink ID="hplContractView" runat="server" Text="Xem lại" NavigateUrl='<%# Eval("CONTRACT_ID","FormContractUpdate.aspx?ID={0}") %>'></asp:HyperLink></td>
                 <td>
                     <asp:HyperLink ID="hplContractUpdate" runat="server" Text="Sao chép" NavigateUrl='<%# Eval("CONTRACT_ID","FormContractUpdate.aspx?ID={0}&copy=1") %>'></asp:HyperLink></td>
             </tr>

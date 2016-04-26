@@ -66,7 +66,7 @@ namespace Deiofiber
                                 ddlStore.SelectedValue = storeId.ToString();
                                 ddlStore.Enabled = false;
                             }
-                            if (!lst[0].CONTRACT_STATUS || lst[0].UNABLE_PAY_INTEREST)
+                            if (!lst[0].CONTRACT_STATUS)
                                 pnlTable.Enabled = false;
 
                             CONTRACT_FULL_VW cntrct = lst[0];
@@ -415,6 +415,27 @@ namespace Deiofiber
                             lblMessage.Text = result;
                             return;
                         }
+
+                        //Contract contract = CommonList.GetContractByLicenseNo(txtLicenseNumber.Text.Trim());
+                        //if (contract != null)
+                        //{
+                        //    // Initialize StringWriter instance.
+                        //    StringWriter stringWriter = new StringWriter();
+                        //    // Put HtmlTextWriter in using block because it needs to call Dispose.
+                        //    using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
+                        //    {
+                        //        writer.Write("Số CMTND/GPLX này hiện tại đã đăng ký hợp đồng ");
+                        //        writer.AddAttribute(HtmlTextWriterAttribute.Href, string.Format("FormContractUpdate.aspx?ID={0}", contract.ID));
+                        //        writer.RenderBeginTag(HtmlTextWriterTag.A); // Start of A
+                        //        writer.Write(contract.CONTRACT_NO);
+                        //        writer.RenderEndTag();  //End of A
+
+                        //        lblMessage.Text = stringWriter.ToString();
+                        //        return;
+                        //    }
+
+                        //}
+
                         using (var db = new DeiofiberEntities())
                         {
                             bool IsNewCust = false;
@@ -502,40 +523,13 @@ namespace Deiofiber
                         {
                             db.Contracts.Add(item);
                             db.SaveChanges();
-                        }
 
-                        DateTime periodTime = DateTime.Now;
-                        if (!string.IsNullOrEmpty(txtRentDate.Text))
-                        {
-                            periodTime = DateTime.ParseExact(txtRentDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                        }
-                        PayPeriod pp1 = new PayPeriod();
-                        pp1.CONTRACT_ID = item.ID;
-                        pp1.PAY_DATE = periodTime;
-                        pp1.AMOUNT_PER_PERIOD = item.FEE_PER_DAY * 10;
-                        pp1.STATUS = true;
-                        pp1.ACTUAL_PAY = 0;
-
-                        PayPeriod pp2 = new PayPeriod();
-                        pp2.CONTRACT_ID = item.ID;
-                        pp2.PAY_DATE = periodTime.AddDays(9);
-                        pp2.AMOUNT_PER_PERIOD = item.FEE_PER_DAY * 10;
-                        pp2.STATUS = true;
-                        pp2.ACTUAL_PAY = 0;
-
-                        PayPeriod pp3 = new PayPeriod();
-                        pp3.CONTRACT_ID = item.ID;
-                        pp3.PAY_DATE = periodTime.AddDays(19);
-                        pp3.AMOUNT_PER_PERIOD = item.FEE_PER_DAY * 10;
-                        pp3.STATUS = true;
-                        pp3.ACTUAL_PAY = 0;
-
-                        using (var rbdb = new DeiofiberEntities())
-                        {
-                            rbdb.PayPeriods.Add(pp1);
-                            rbdb.PayPeriods.Add(pp2);
-                            rbdb.PayPeriods.Add(pp3);
-                            rbdb.SaveChanges();
+                            DateTime periodTime = DateTime.Now;
+                            if (!string.IsNullOrEmpty(txtRentDate.Text))
+                            {
+                                periodTime = DateTime.ParseExact(txtRentDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            }
+                            CommonList.CreateOneMorePayPeriod(db, item, periodTime, true);
                         }
 
                         InOut io = new InOut();
@@ -589,6 +583,8 @@ namespace Deiofiber
                         {
                             rbdb.InOuts.Add(io);
                             rbdb.SaveChanges();
+
+                            CommonList.AutoExtendPeriod(rbdb, item.ID);
                         }
 
                         WriteLog(CommonList.ACTION_CREATE_CONTRACT, false);
@@ -788,15 +784,22 @@ namespace Deiofiber
                     decimal totalPaid = payList.Select(c => c.ACTUAL_PAY).DefaultIfEmpty(0).Sum();
                     for (int i = 0; i < payList.Count; i++)
                     {
-                        if (totalPaid < payList[i].AMOUNT_PER_PERIOD)
-                            payList[i].ACTUAL_PAY = totalPaid;
-                        else
-                            payList[i].ACTUAL_PAY = payList[i].AMOUNT_PER_PERIOD;
+                        bool bCheck = false;
+                        if (totalPaid > 0)
+                        {
+                            if (totalPaid < payList[i].AMOUNT_PER_PERIOD)
+                            {
+                                payList[i].ACTUAL_PAY = totalPaid;
+                                bCheck = true;
+                            }
+                            else
+                                payList[i].ACTUAL_PAY = payList[i].AMOUNT_PER_PERIOD;
+                        }
 
                         totalPaid -= payList[i].AMOUNT_PER_PERIOD;
 
-                        if (totalPaid <= 0)
-                            break;
+                        if (totalPaid < 0 && !bCheck)
+                            payList[i].ACTUAL_PAY = 0;
                     }
 
                     rptPayFeeSchedule.DataSource = payList;
@@ -938,7 +941,7 @@ namespace Deiofiber
         public string GetDayPayFee(DateTime period, int index)
         {
             if (index == 1)
-                return "Trả phí ngày " + period.ToString("dd/MM/yyyy") + " đến " + period.AddDays(9).ToString("dd/MM/yyyy");
+                return "Trả phí ngày " + period.ToString("dd/MM/yyyy") + " đến " + period.AddDays(9).ToString("dd/MM/yyyy"); 
             else
                 return "Trả phí ngày " + period.AddDays(1).ToString("dd/MM/yyyy") + " đến " + period.AddDays(10).ToString("dd/MM/yyyy");
         }

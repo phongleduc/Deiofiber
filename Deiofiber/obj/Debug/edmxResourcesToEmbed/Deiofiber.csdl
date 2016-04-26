@@ -79,6 +79,7 @@
     <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
     <Property Name="FEE_PER_DAY" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="UNABLE_PAY_INTEREST" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="ContractHistory">
     <Key>
@@ -222,7 +223,7 @@
     <Property Name="START_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="CURRENT_CAPITAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="APPLY_DATE" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="REVENUE_BEFORE_APPLY" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="TOTAL_COST_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="TOTAL_INVESMENT_BEFORE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="REGISTER_DATE" Type="DateTime" Nullable="false" Precision="0" />
@@ -258,6 +259,7 @@
       <PropertyRef Name="ADDRESS" />
       <PropertyRef Name="STORE_NAME" />
       <PropertyRef Name="FEE_PER_DAY" />
+      <PropertyRef Name="UNABLE_PAY_INTEREST" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="RENT_TYPE_ID" Type="Int32" Nullable="false" />
@@ -311,6 +313,7 @@
     <Property Name="UPDATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
     <Property Name="FEE_PER_DAY" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="UNABLE_PAY_INTEREST" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="CONTRACT_HISTORY_FULL_VW">
     <Key>

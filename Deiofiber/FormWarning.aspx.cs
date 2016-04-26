@@ -73,7 +73,7 @@ namespace Deiofiber
                 {
                     c.PAYED_TIME = 0;
                     c.PAY_DATE = c.RENT_DATE;
-                    c.OVER_DATE = DateTime.Now.Subtract(c.PAY_DATE).Days;
+                    c.OVER_DATE = 0;
 
                     string contactId = c.ID.ToString();
                     var tmpLstPeriod = lstPeriod.Where(s => s.CONTRACT_ID == c.ID).ToList();

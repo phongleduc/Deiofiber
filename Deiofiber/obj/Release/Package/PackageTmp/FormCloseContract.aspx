@@ -26,16 +26,29 @@
                 <td>
                     <asp:TextBox ID="txtPayFee" ClientIDMode="Static" runat="server" Enabled="false" CssClass="form-control input-sm text-right"></asp:TextBox></td>
             </tr>--%>
-            <tr>
-                <td class="text-right">Thừa phí</td>
-                <td>
-                    <asp:TextBox ID="txtReduceAmount" ClientIDMode="Static" runat="server" CssClass="form-control input-sm text-right" onChange="ComputeCosts();"></asp:TextBox></td>
-            </tr>
-            <tr>
-                <td class="text-right">Thực thu</td>
-                <td>
-                    <asp:TextBox ID="txtRealIncome" ClientIDMode="Static" runat="server" CssClass="form-control input-sm text-right" AutoPostBack="true"></asp:TextBox></td>
-            </tr>
+            <%if(!UnablePayInterest) { %>
+                <tr>
+                    <td class="text-right">Thừa phí</td>
+                    <td>
+                        <asp:TextBox ID="txtReduceAmount" ClientIDMode="Static" runat="server" CssClass="form-control input-sm text-right"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="text-right">Thực thu</td>
+                    <td>
+                        <asp:TextBox ID="txtRealIncome" ClientIDMode="Static" runat="server" CssClass="form-control input-sm text-right" AutoPostBack="true"></asp:TextBox></td>
+                </tr>
+            <%} else { %>
+                <tr>
+                    <td class="text-right">Tiền gốc đã trả</td>
+                    <td>
+                        <asp:TextBox ID="txtPaidInterest" ClientIDMode="Static" runat="server" CssClass="form-control input-sm text-right"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="text-right">Số tiền còn thiếu</td>
+                    <td>
+                        <asp:TextBox ID="txtRemainInterest" ClientIDMode="Static" runat="server" CssClass="form-control input-sm text-right"></asp:TextBox></td>
+                </tr>
+            <%} %>
             <tr>
                 <td class="text-right">Ghi chú</td>
                 <td>

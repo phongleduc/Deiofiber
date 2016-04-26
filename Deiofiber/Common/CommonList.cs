@@ -121,7 +121,7 @@ namespace Deiofiber.Common
                 var listPayPeriod = db.PayPeriods.Where(c => c.CONTRACT_ID == contract.ID).ToList();
                 PayPeriod lastPayPeriod = listPayPeriod.LastOrDefault();
 
-                DateTime extendEndDate = contract.EXTEND_END_DATE == null ? lastPayPeriod.PAY_DATE : contract.EXTEND_END_DATE.Value;
+                DateTime extendEndDate = (contract.EXTEND_END_DATE == null || contract.EXTEND_END_DATE == contract.END_DATE) ? contract.END_DATE.AddDays(-10) : lastPayPeriod.PAY_DATE;
 
                 int overDate = DateTime.Today.Subtract(extendEndDate).Days;
                 if (overDate >= 0)
@@ -187,6 +187,23 @@ namespace Deiofiber.Common
             return pp3;
         }
 
+        public static Contract GetContractByLicenseNo(string licenseNo)
+        {
+            using (var db = new DeiofiberEntities())
+            {
+                var customer = db.Customers.FirstOrDefault(c => c.LICENSE_NO == licenseNo);
+                if (customer != null)
+                {
+                    Contract contract = db.Contracts.FirstOrDefault(c => c.CUSTOMER_ID == customer.ID && c.CONTRACT_STATUS == true);
+                    if (contract != null)
+                    {
+                        return contract;
+                    }
+                }
+            }
+            return null;
+        }
+
         public static void AutoExtendContract()
         {
             using (var db = new DeiofiberEntities())
@@ -196,6 +213,31 @@ namespace Deiofiber.Common
                 {
                     CommonList.AutoExtendPeriod(db, contract.ID);
                 }
+            }
+        }
+
+        public static void UpdatePeriodDate()
+        {
+            using (var db = new DeiofiberEntities())
+            {
+                var contracts = db.Contracts.Where(c => c.CONTRACT_STATUS == true).ToList();
+                foreach (var contract in contracts)
+                {
+                    List<PayPeriod> lstPay = db.PayPeriods.Where(c => c.CONTRACT_ID == contract.ID).ToList();
+                    PayPeriod firstPay = lstPay.FirstOrDefault();
+                    for(int i = 1; i < lstPay.Count(); i ++)
+                    {
+                        if(i == 1)
+                        {
+                            lstPay[i].PAY_DATE = firstPay.PAY_DATE.AddDays(9);
+                        }
+                        else
+                        {
+                            lstPay[i].PAY_DATE = lstPay[i - 1].PAY_DATE.AddDays(10);
+                        }
+                    }
+                }
+                db.SaveChanges();
             }
         }
     }
