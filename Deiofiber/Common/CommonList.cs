@@ -211,7 +211,7 @@ namespace Deiofiber.Common
                 var contracts = db.Contracts.Where(c => c.CONTRACT_STATUS == true).ToList();
                 foreach (var contract in contracts)
                 {
-                    CommonList.AutoExtendPeriod(db, contract.ID);
+                    AutoExtendPeriod(db, contract.ID);
                 }
             }
         }

@@ -51,8 +51,8 @@ namespace Deiofiber
                     //}
 
                 }
-                catch (Exception ex)
-                { }
+                catch 
+                {; }
             }
         }
 
@@ -101,7 +101,7 @@ namespace Deiofiber
             {
                 WriteLog(CommonList.ACTION_LOGOUT, false);
             }
-            catch (Exception ex)
+            catch 
             {
                 WriteLog(CommonList.ACTION_LOGOUT, true);
             }
@@ -168,7 +168,7 @@ namespace Deiofiber
                     db.SaveChanges();
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 WriteLog(CommonList.ACTION_LOGOUT, true);
             }

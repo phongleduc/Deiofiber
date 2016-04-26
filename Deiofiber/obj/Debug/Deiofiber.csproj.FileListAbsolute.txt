@@ -8,3 +8,12 @@ D:\Projects\Others\Deiofiber\Deiofiber\bin\EntityFramework.SqlServer.xml
 D:\Projects\Others\Deiofiber\Deiofiber\obj\Debug\Deiofiber.csprojResolveAssemblyReference.cache
 D:\Projects\Others\Deiofiber\Deiofiber\obj\Debug\Deiofiber.dll
 D:\Projects\Others\Deiofiber\Deiofiber\obj\Debug\Deiofiber.pdb
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Common.Logging.Core.dll
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Common.Logging.dll
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Quartz.dll
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Common.Logging.pdb
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Common.Logging.xml
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Common.Logging.Core.pdb
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Common.Logging.Core.xml
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Quartz.pdb
+D:\Projects\Others\Deiofiber\Deiofiber\bin\Quartz.xml

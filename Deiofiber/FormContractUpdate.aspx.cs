@@ -583,8 +583,6 @@ namespace Deiofiber
                         {
                             rbdb.InOuts.Add(io);
                             rbdb.SaveChanges();
-
-                            CommonList.AutoExtendPeriod(rbdb, item.ID);
                         }
 
                         WriteLog(CommonList.ACTION_CREATE_CONTRACT, false);

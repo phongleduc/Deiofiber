@@ -1,6 +1,7 @@
 ﻿using Deiofiber.Common;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
@@ -508,7 +509,7 @@ namespace Deiofiber
         private List<Contract> GetContractFeeByDay(DateTime date, DeiofiberEntities db)
         {
             var data = from d in db.Contracts
-                       where EntityFunctions.TruncateTime(d.RENT_DATE) == EntityFunctions.TruncateTime(date)
+                       where DbFunctions.TruncateTime(d.RENT_DATE) == DbFunctions.TruncateTime(date)
                        select d;
             return data.ToList();
         }
@@ -517,7 +518,7 @@ namespace Deiofiber
         {
             var data = from d in db.Contracts
                        where d.RENT_TYPE_ID == rentType
-                       && EntityFunctions.TruncateTime(d.RENT_DATE) == EntityFunctions.TruncateTime(date)
+                       && DbFunctions.TruncateTime(d.RENT_DATE) == DbFunctions.TruncateTime(date)
                        select d;
             if (data.Any())
             {
@@ -737,7 +738,7 @@ namespace Deiofiber
                 {
                     DateTime sDate = Convert.ToDateTime(searchDate);
                     totalRecord = (from c in db.InOuts
-                                   where EntityFunctions.TruncateTime(c.INOUT_DATE) == EntityFunctions.TruncateTime(sDate) && c.STORE_ID == storeid
+                                   where DbFunctions.TruncateTime(c.INOUT_DATE) == DbFunctions.TruncateTime(sDate) && c.STORE_ID == storeid
                                    select c).Count();
                 }
                 else
@@ -771,7 +772,7 @@ namespace Deiofiber
                 {
                     DateTime sDate = Convert.ToDateTime(searchDate);
                     var st = from s in db.INOUT_FULL_VW
-                             where EntityFunctions.TruncateTime(s.INOUT_DATE) == EntityFunctions.TruncateTime(sDate) && s.STORE_ID == storeid
+                             where DbFunctions.TruncateTime(s.INOUT_DATE) == DbFunctions.TruncateTime(sDate) && s.STORE_ID == storeid
                              orderby s.ID descending
                              select s;
                     dataList = st.Skip(skip).Take(pageSize).ToList();

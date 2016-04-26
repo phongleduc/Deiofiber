@@ -10,7 +10,6 @@ namespace Deiofiber
 {
     public partial class ContractManagement : System.Web.UI.Page
     {
-        int pageSize = 20;
         private decimal TotalFeeBike = 0;
         private decimal TotalFeeEquip = 0;
         private decimal TotalFeeOther = 0;

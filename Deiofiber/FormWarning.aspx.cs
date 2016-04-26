@@ -12,7 +12,6 @@ namespace Deiofiber
 {
     public partial class FormWarning : System.Web.UI.Page
     {
-        int pageSize = 20;
         int storeId = 0;
         public string SearchDate { get; set; }
         protected void Page_Load(object sender, EventArgs e)
