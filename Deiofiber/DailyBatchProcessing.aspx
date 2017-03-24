@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DailyBatchProcessing.aspx.cs" Inherits="Deiofiber.DailyBatchProcessing" %>

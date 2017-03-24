@@ -240,5 +240,37 @@ namespace Deiofiber.Common
                 db.SaveChanges();
             }
         }
+
+        public static void BackUp()
+        {
+            try
+            {
+                using (var db = new DeiofiberEntities())
+                {
+                    string dataTime = db.Database.Connection.Database + "_" + DateTime.Now.ToString("yyyyMMddHHmm");
+                    string directory = HttpContext.Current.Server.MapPath("~/") + "/backups/";
+                    string fileName = directory + dataTime + ".bak";
+
+                    if (!System.IO.Directory.Exists(directory))
+                        System.IO.Directory.CreateDirectory(directory);
+
+                    System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(directory);
+                    var files = directoryInfo.GetFiles();
+                    if (files.Any() && files.Count() >= 7)
+                    {
+                        files.OrderBy(c => c.Name).FirstOrDefault().Delete();
+                    }
+
+                    // Here the procedure is called and executes successfully
+                    db.Database.ExecuteSqlCommand(System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction, "EXEC [dbo].[BackUp] @path = N'" + fileName + "'");
+                    //db.BackUp(fileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+
+        }
     }
 }

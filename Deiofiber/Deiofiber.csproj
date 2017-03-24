@@ -82,6 +82,7 @@
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="App_Themes\Theme1\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="DailyBatchProcessing.aspx" />
     <Content Include="FormInOutAndPeriodUpdate.aspx" />
     <Content Include="FormPrincipalPayment.aspx" />
     <Content Include="MasterPage.Master" />
@@ -236,6 +237,8 @@
     </Compile>
     <Compile Include="Common\ContractUpdateJob.cs" />
     <Compile Include="Common\JobScheduler.cs" />
+    <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\Singleton.cs" />
     <Compile Include="Contract.cs">
       <DependentUpon>Deiofiber.tt</DependentUpon>
     </Compile>
@@ -250,6 +253,13 @@
     </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>Deiofiber.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DailyBatchProcessing.aspx.cs">
+      <DependentUpon>DailyBatchProcessing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DailyBatchProcessing.aspx.designer.cs">
+      <DependentUpon>DailyBatchProcessing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Deiofiber.Context.cs">
       <AutoGen>True</AutoGen>

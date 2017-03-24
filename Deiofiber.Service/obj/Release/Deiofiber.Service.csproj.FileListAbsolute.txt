@@ -1,0 +1,8 @@
+D:\Projects\Others\Deiofiber\Deiofiber.Service\obj\Release\Deiofiber.Service.csprojResolveAssemblyReference.cache
+D:\Projects\Others\Deiofiber\Deiofiber.Service\obj\Release\Deiofiber.Service.ProjectInstaller.resources
+D:\Projects\Others\Deiofiber\Deiofiber.Service\obj\Release\Deiofiber.Service.csproj.GenerateResource.Cache
+D:\Projects\Others\Deiofiber\Deiofiber.Service\bin\Release\Deiofiber.Service.exe.config
+D:\Projects\Others\Deiofiber\Deiofiber.Service\bin\Release\Deiofiber.Service.exe
+D:\Projects\Others\Deiofiber\Deiofiber.Service\bin\Release\Deiofiber.Service.pdb
+D:\Projects\Others\Deiofiber\Deiofiber.Service\obj\Release\Deiofiber.Service.exe
+D:\Projects\Others\Deiofiber\Deiofiber.Service\obj\Release\Deiofiber.Service.pdb
